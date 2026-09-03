@@ -2,32 +2,32 @@
 
 <style>
 .create-shipment-scope {
-  --blue: #079df2;
-  --cyan: #2bdcff;
-  --ink: #102038;
-  --muted: #71839a;
-  --line: #dfe8f0;
-  --shadow: 0 20px 55px rgba(8,25,48,.08);
+  --blue: #EA580C;
+  --cyan: #FB923C;
+  --ink: #0F172A;
+  --muted: #64748B;
+  --line: #E2E8F0;
+  --shadow: 0 10px 30px rgba(15,23,42,.05);
 }
 
-.create-shipment-scope .breadcrumb { font-size: 10px; color: #7890a7; margin-bottom: 9px; }
-.create-shipment-scope .breadcrumb span { color: #0795e7; font-weight: 800; }
+.create-shipment-scope .breadcrumb { font-size: 10px; color: #64748B; margin-bottom: 9px; }
+.create-shipment-scope .breadcrumb span { color: #EA580C; font-weight: 800; }
 .create-shipment-scope .heading { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 21px; }
-.create-shipment-scope .heading h2 { font-size: 22px; letter-spacing: -.05em; color: var(--n2, #0a1a31); }
+.create-shipment-scope .heading h2 { font-size: 22px; letter-spacing: -.05em; color: var(--n2, #0F172A); }
 .create-shipment-scope .heading p { font-size: 10px; color: var(--muted); margin-top: 5px; }
-.create-shipment-scope .secure { font-size: 9px; color: #078fd8; background: #eaf8ff; border: 1px solid #c9edff; border-radius: 20px; padding: 7px 12px; font-weight: 800; }
+.create-shipment-scope .secure { font-size: 9px; color: #EA580C; background: #FFF7ED; border: 1px solid #FFEDD5; border-radius: 20px; padding: 7px 12px; font-weight: 800; }
 
 .create-shipment-scope .layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px; align-items: start; }
 .create-shipment-scope .formShell { background: #fff; border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); overflow: hidden; }
 
 /* 5-Step Header */
-.create-shipment-scope .stepper { display: flex; background: linear-gradient(135deg,#07172c,#0a213b); padding: 18px 24px; gap: 5px; }
-.create-shipment-scope .step { flex: 1; display: flex; align-items: center; gap: 8px; color: #718aa2; font-size: 9px; font-weight: 850; position: relative; }
-.create-shipment-scope .step:not(:last-child):after { content: ""; height: 1px; background: #31506c; flex: 1; margin-left: 4px; }
+.create-shipment-scope .stepper { display: flex; background: #0F172A; padding: 18px 24px; gap: 5px; }
+.create-shipment-scope .step { flex: 1; display: flex; align-items: center; gap: 8px; color: #94A3B8; font-size: 9px; font-weight: 850; position: relative; }
+.create-shipment-scope .step:not(:last-child):after { content: ""; height: 1px; background: #334155; flex: 1; margin-left: 4px; }
 .create-shipment-scope .step.done, .create-shipment-scope .step.current { color: #fff; }
-.create-shipment-scope .num { width: 27px; height: 27px; border-radius: 50%; display: grid; place-items: center; background: #132c47; border: 1px solid #31506c; color: #8ba5bc; font-size: 10px; flex: none; }
-.create-shipment-scope .current .num { background: linear-gradient(135deg,#10adff,#075fd6); border-color: #2bdcff; box-shadow: 0 0 20px rgba(7,157,242,0.4); color: #fff; }
-.create-shipment-scope .done .num { background: #123e39; border-color: #20d0a4; color: #31e0b5; }
+.create-shipment-scope .num { width: 27px; height: 27px; border-radius: 50%; display: grid; place-items: center; background: #1E293B; border: 1px solid #334155; color: #94A3B8; font-size: 10px; flex: none; }
+.create-shipment-scope .current .num { background: linear-gradient(135deg,#EA580C,#C2410C); border-color: #FB923C; box-shadow: 0 0 16px rgba(234,88,12,0.4); color: #fff; }
+.create-shipment-scope .done .num { background: #16A34A; border-color: #BBF7D0; color: #fff; }
 
 .create-shipment-scope .formBody { padding: 25px; }
 .create-shipment-scope .section { padding-bottom: 27px; margin-bottom: 25px; border-bottom: 1px solid #edf1f5; }

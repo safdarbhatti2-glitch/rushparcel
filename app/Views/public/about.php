@@ -2,34 +2,35 @@
 
 <style>
 .about-scope {
-  --navy:#030914;--navy2:#07172d;--ink:#071426;--muted:#71839a;--blue:#079df2;--cyan:#2bdcff;--violet:#995cff;--green:#26d4aa;--bg:#f4f7fb;--white:#fff;--line:#dfe7ef;--shadow:0 24px 70px rgba(4,20,42,.12);
+  --navy:#0F172A;--navy2:#1E293B;--ink:#0F172A;--muted:#64748B;--blue:#EA580C;--cyan:#EA580C;--violet:#0284C7;--green:#16A34A;--bg:#F8FAFC;--white:#fff;--line:#E2E8F0;--shadow:0 10px 30px rgba(15,23,42,.06);
   margin: -1.5rem -1.25rem -5rem -1.25rem;
   background: var(--bg);
   color: var(--ink);
 }
 .about-scope .container { width: min(1180px, calc(100% - 40px)); margin: auto; }
 .about-scope .hero {
-  position: relative; overflow: hidden; min-height: 650px; padding: 60px 0 70px;
-  background: linear-gradient(135deg,#030914 0%,#06152a 62%,#071f39); color: #fff;
+  position: relative; overflow: hidden; min-height: 520px; padding: 60px 0 70px;
+  background: linear-gradient(135deg,#FFFFFF 0%,#F8FAFC 62%,#FFF7ED); color: #0F172A;
+  border-bottom: 1px solid #E2E8F0;
 }
 .about-scope .hero:before {
   content: ""; position: absolute; inset: 0;
-  background-image: linear-gradient(#2bdcff09 1px,transparent 1px),linear-gradient(90deg,#2bdcff09 1px,transparent 1px);
+  background-image: linear-gradient(#EA580C09 1px,transparent 1px),linear-gradient(90deg,#EA580C09 1px,transparent 1px);
   background-size: 52px 52px; mask-image: linear-gradient(#000,transparent 92%);
 }
 .about-scope .heroGlow {
   position: absolute; width: 650px; height: 650px; border-radius: 50%; right: -250px; top: -170px;
-  background: radial-gradient(circle,#079df21b,transparent 62%); filter: blur(5px);
+  background: radial-gradient(circle,#EA580C14,transparent 62%); filter: blur(5px);
 }
 .about-scope .heroGrid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr .95fr; gap: 60px; align-items: center; }
 .about-scope .eyebrow {
-  display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 99px; background: #06243a;
-  border: 1px solid #1aa8e950; color: #32dcff; font-size: 8px; font-weight: 950; letter-spacing: .15em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 99px; background: #FFF7ED;
+  border: 1px solid #FFEDD5; color: #EA580C; font-size: 8px; font-weight: 950; letter-spacing: .15em; text-transform: uppercase;
 }
 .about-scope .eyebrow i { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
-.about-scope .hero h1 { font-size: 62px; line-height: .94; letter-spacing: -.075em; margin-top: 16px; color: #FFF; }
-.about-scope .hero h1 span { color: var(--cyan); }
-.about-scope .heroCopy { max-width: 560px; color: #899cb2; font-size: 13px; line-height: 1.8; margin-top: 16px; }
+.about-scope .hero h1 { font-size: 56px; line-height: 1.0; letter-spacing: -.05em; margin-top: 16px; color: #0F172A; }
+.about-scope .hero h1 span { color: #EA580C; }
+.about-scope .heroCopy { max-width: 560px; color: #475569; font-size: 14px; line-height: 1.8; margin-top: 16px; }
 .about-scope .heroActions { display: flex; gap: 9px; margin-top: 24px; }
 .about-scope .heroFacts { display: flex; gap: 25px; margin-top: 31px; }
 .about-scope .heroFacts strong { font-size: 18px; display: block; color: #FFF; }

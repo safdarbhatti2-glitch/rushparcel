@@ -6,20 +6,20 @@
 <title>Tax Invoice — <?= e($invoice['invoice_number']) ?></title>
 <style>
 :root {
-  --blue-primary: #079df2;
-  --blue-dark: #0764d7;
-  --blue-gradient: linear-gradient(135deg, #0daafc, #0764d7);
-  --blue-light: #e0f2fe;
-  --blue-light-bg: #f0f9ff;
-  --blue-text: #0369a1;
-  --navy: #040b18;
-  --navy2: #091a30;
-  --ink: #0f172a;
-  --muted: #64748b;
-  --line: #e2e8f0;
-  --gold-bg: #fffbeb;
-  --gold-border: #fde68a;
-  --gold-text: #92400e;
+  --blue-primary: #EA580C;
+  --blue-dark: #C2410C;
+  --blue-gradient: linear-gradient(135deg, #EA580C, #C2410C);
+  --blue-light: #FFF7ED;
+  --blue-light-bg: #FFF7ED;
+  --blue-text: #EA580C;
+  --navy: #0F172A;
+  --navy2: #1E293B;
+  --ink: #0F172A;
+  --muted: #64748B;
+  --line: #E2E8F0;
+  --gold-bg: #FEF3C7;
+  --gold-border: #FDE68A;
+  --gold-text: #92400E;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }

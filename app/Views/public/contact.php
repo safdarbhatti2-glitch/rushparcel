@@ -2,37 +2,38 @@
 
 <style>
 .contact-scope {
-  --navy:#030914;--navy2:#07182e;--ink:#071426;--muted:#71839a;--blue:#079df2;--cyan:#2bdcff;--violet:#995cff;--green:#27d5aa;--pink:#ff4c9b;--bg:#f4f7fb;--white:#fff;--line:#dfe7ef;--shadow:0 24px 70px rgba(4,20,42,.12);
+  --navy:#0F172A;--navy2:#1E293B;--ink:#0F172A;--muted:#64748B;--blue:#EA580C;--cyan:#EA580C;--violet:#0284C7;--green:#16A34A;--pink:#EA580C;--bg:#F8FAFC;--white:#fff;--line:#E2E8F0;--shadow:0 10px 30px rgba(15,23,42,.06);
   margin: -1.5rem -1.25rem -5rem -1.25rem;
   background: var(--bg);
   color: var(--ink);
 }
 .contact-scope .container { width: min(1180px, calc(100% - 40px)); margin: auto; }
 .contact-scope .hero {
-  position: relative; overflow: hidden; min-height: 500px; padding: 60px 0 68px;
-  background: linear-gradient(135deg,#030914,#06172c 65%,#071f3a); color: #fff;
+  position: relative; overflow: hidden; min-height: 440px; padding: 60px 0 68px;
+  background: linear-gradient(135deg,#FFFFFF,#F8FAFC 65%,#FFF7ED); color: #0F172A;
+  border-bottom: 1px solid #E2E8F0;
 }
 .contact-scope .hero:before {
   content: ""; position: absolute; inset: 0;
-  background-image: linear-gradient(#2bdcff09 1px,transparent 1px),linear-gradient(90deg,#2bdcff09 1px,transparent 1px);
+  background-image: linear-gradient(#EA580C09 1px,transparent 1px),linear-gradient(90deg,#EA580C09 1px,transparent 1px);
   background-size: 52px 52px; mask-image: linear-gradient(#000,transparent 90%);
 }
 .contact-scope .heroGlow {
   position: absolute; width: 650px; height: 650px; right: -270px; top: -250px; border-radius: 50%;
-  background: radial-gradient(circle,#079df21a,transparent 63%);
+  background: radial-gradient(circle,#EA580C14,transparent 63%);
 }
 .contact-scope .heroGrid { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr .75fr; gap: 65px; align-items: center; }
 .contact-scope .eyebrow {
-  display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 99px; background: #06243a;
-  border: 1px solid #1aa8e950; color: #32dcff; font-size: 8px; font-weight: 950; letter-spacing: .15em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 99px; background: #FFF7ED;
+  border: 1px solid #FFEDD5; color: #EA580C; font-size: 8px; font-weight: 950; letter-spacing: .15em; text-transform: uppercase;
 }
 .contact-scope .eyebrow i { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
-.contact-scope .hero h1 { font-size: 58px; line-height: .96; letter-spacing: -.07em; margin-top: 16px; color: #FFF; }
-.contact-scope .hero h1 span { color: var(--cyan); }
-.contact-scope .hero p { max-width: 590px; color: #899cb2; font-size: 13px; line-height: 1.8; margin-top: 15px; }
+.contact-scope .hero h1 { font-size: 56px; line-height: 1.0; letter-spacing: -.05em; margin-top: 16px; color: #0F172A; }
+.contact-scope .hero h1 span { color: #EA580C; }
+.contact-scope .hero p { max-width: 590px; color: #475569; font-size: 14px; line-height: 1.8; margin-top: 15px; }
 .contact-scope .heroStats { display: flex; gap: 28px; margin-top: 28px; }
-.contact-scope .heroStats strong { display: block; font-size: 18px; color: #FFF; }
-.contact-scope .heroStats small { display: block; color: #627d97; font-size: 8px; letter-spacing: .1em; margin-top: 3px; }
+.contact-scope .heroStats strong { display: block; font-size: 18px; color: #0F172A; }
+.contact-scope .heroStats small { display: block; color: #64748B; font-size: 8px; letter-spacing: .1em; margin-top: 3px; }
 
 /* Contact Command Visual */
 .contact-scope .command { height: 300px; position: relative; display: grid; place-items: center; }
