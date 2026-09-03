@@ -2,24 +2,25 @@
 
 <style>
 .quote-page {
-  --navy:#071225;--navy2:#0c1b33;--blue:#079af2;--cyan:#27d7ff;--purple:#8b5cf6;
-  --ink:#071426;--muted:#718198;--line:#dfe7f0;--bg:#f5f8fc;--white:#fff;
-  --green:#18c997;--shadow:0 22px 65px rgba(7,25,52,.12);
+  --navy:#0F172A;--navy2:#1E293B;--blue:#EA580C;--cyan:#EA580C;--purple:#0284C7;
+  --ink:#0F172A;--muted:#64748B;--line:#E2E8F0;--bg:#F8FAFC;--white:#fff;
+  --green:#16A34A;--shadow:0 10px 30px rgba(15,23,42,.06);
   background: var(--bg);
   color: var(--ink);
 }
 .quote-page .hero {
   padding-top: 50px;
-  padding-bottom: 76px;
+  padding-bottom: 56px;
   position: relative;
   overflow: hidden;
-  background: radial-gradient(circle at 70% 50%,#0ba7ff0e,transparent 30%),linear-gradient(#f8fbfe,#f5f8fc);
+  background: radial-gradient(circle at 70% 50%,#EA580C0e,transparent 30%),linear-gradient(#FFFFFF,#F8FAFC);
+  border-bottom: 1px solid #E2E8F0;
 }
 .quote-page .hero:before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(#0a74bc08 1px,transparent 1px),linear-gradient(90deg,#0a74bc08 1px,transparent 1px);
+  background-image: linear-gradient(#EA580C08 1px,transparent 1px),linear-gradient(90deg,#EA580C08 1px,transparent 1px);
   background-size: 52px 52px;
   mask-image: linear-gradient(#000,transparent 80%);
 }
@@ -28,42 +29,43 @@
   display: inline-flex;
   padding: 7px 12px;
   border-radius: 99px;
-  background: #eaf8ff;
-  color: #0794e9;
-  border: 1px solid #bde9ff;
+  background: #FFF7ED;
+  color: #EA580C;
+  border: 1px solid #FFEDD5;
   font-size: 9px;
   font-weight: 900;
   letter-spacing: .13em;
   text-transform: uppercase;
 }
 .quote-page .hero h1 { font-size: 40px; letter-spacing: -.055em; line-height: 1.08; margin-top: 12px; color: var(--navy); }
-.quote-page .heroHead p { font-size: 12px; color: #71839a; max-width: 650px; margin: 7px auto 0; line-height: 1.65; }
+.quote-page .heroHead p { font-size: 12px; color: #64748B; max-width: 650px; margin: 7px auto 0; line-height: 1.65; }
 
 .quote-page .quoteWrap { position: relative; z-index: 3; width: min(900px, 100%); margin: 34px auto 0; }
-.quote-page .quoteCard { background: #fff; border: 1px solid #dce6ef; border-radius: 17px; box-shadow: var(--shadow); padding: 28px 34px; }
+.quote-page .quoteCard { background: #fff; border: 1px solid #E2E8F0; border-radius: 17px; box-shadow: var(--shadow); padding: 28px 34px; }
 .quote-page .sectionTitle { font-size: 16px; font-weight: 900; padding-bottom: 12px; border-bottom: 1px solid var(--line); margin-bottom: 17px; color: var(--navy); }
-.quote-page .sectionTitle span { color: #079af2; margin-right: 7px; }
+.quote-page .sectionTitle span { color: #EA580C; margin-right: 7px; }
 
 .quote-page .formSection { margin-bottom: 28px; }
 .quote-page .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 .quote-page .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.quote-page .field label { display: block; font-size: 9px; font-weight: 800; margin-bottom: 7px; color: #14233a; }
-.quote-page .required { color: #ef476f; }
+.quote-page .field label { display: block; font-size: 9px; font-weight: 800; margin-bottom: 7px; color: #0F172A; }
+.quote-page .required { color: #DC2626; }
 .quote-page .field input, .quote-page .field select {
-  width: 100%; height: 43px; border: 1px solid #dce5ee; border-radius: 9px; background: #fff; color: #31425a; padding: 0 13px; outline: none; font-size: 10px; transition: .2s;
+  width: 100%; height: 43px; border: 1px solid #E2E8F0; border-radius: 99px; background: #fff; color: #0F172A; padding: 0 16px; outline: none; font-size: 11px; font-weight: 600; transition: .2s; box-shadow: var(--shadow-xs);
 }
-.quote-page .field input::placeholder { color: #9aa8b8; }
-.quote-page .field input:focus, .quote-page .field select:focus { border-color: #0c9df3; box-shadow: 0 0 0 3px #0c9df318; }
+.quote-page .field input::placeholder { color: #94A3B8; font-weight: 400; }
+.quote-page .field input:focus, .quote-page .field select:focus { border-color: #EA580C; box-shadow: 0 0 0 3px rgba(234,88,12,0.15); }
 
 .quote-page .serviceRow { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; align-items: end; }
 .quote-page .options { height: 43px; display: flex; align-items: center; gap: 18px; }
-.quote-page .check { display: flex; align-items: center; gap: 6px; font-size: 10px; color: #34445a; cursor: pointer; }
-.quote-page .check input { width: 14px; height: 14px; accent-color: #0b9cf1; }
+.quote-page .check { display: flex; align-items: center; gap: 6px; font-size: 10px; color: #334155; cursor: pointer; font-weight: 600; }
+.quote-page .check input { width: 14px; height: 14px; accent-color: #EA580C; }
 
 .quote-page .calculate {
   width: 100%; height: 48px; border-radius: 9px; font-size: 12px; font-weight: 850; margin-top: 2px; position: relative; overflow: hidden;
-  color: #fff; background: linear-gradient(135deg,#12a5fa,#096bdc); border: 0; cursor: pointer; box-shadow: 0 12px 28px rgba(7,141,243,.35); transition: .25s;
+  color: #fff; background: linear-gradient(135deg,#EA580C,#C2410C); border: 0; cursor: pointer; box-shadow: 0 4px 14px rgba(234,88,12,0.25); transition: .25s;
 }
+.quote-page .calculate:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(234,88,12,0.35); }
 .quote-page .calculate:hover { transform: translateY(-2px); }
 .quote-page .calculate:after {
   content: ""; position: absolute; top: 0; bottom: 0; width: 45%; left: -55%; background: linear-gradient(90deg,transparent,#ffffff44,transparent); transform: skewX(-20deg); animation: shine 3s infinite;

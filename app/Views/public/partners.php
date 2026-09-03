@@ -13,11 +13,11 @@
             <p class="text-muted" style="margin-bottom: 2rem;">Apply for a UK Business Account to unlock custom rate cards, bulk booking CSV uploads, itemised monthly VAT billing, and dedicated account dispatchers.</p>
 
             <div class="grid-2" style="gap: 1.5rem; margin-bottom: 2.5rem;">
-                <div style="background-color: var(--color-bg-light); padding: 1.25rem; border-radius: var(--radius-md);">
+                <div style="background-color: var(--color-surface-alt); padding: 1.25rem; border-radius: var(--radius-md);">
                     <h4 style="margin-bottom: 0.5rem;">💼 30-Day Monthly Credit</h4>
                     <p class="text-muted" style="font-size: 0.9rem;">Consolidate your shipping costs into a single monthly VAT invoice with flexible 30-day payment terms.</p>
                 </div>
-                <div style="background-color: var(--color-bg-light); padding: 1.25rem; border-radius: var(--radius-md);">
+                <div style="background-color: var(--color-surface-alt); padding: 1.25rem; border-radius: var(--radius-md);">
                     <h4 style="margin-bottom: 0.5rem;">📊 Volume Rate Cards</h4>
                     <p class="text-muted" style="font-size: 0.9rem;">Enjoy tiered discounts based on your weekly or monthly parcel volume commitments.</p>
                 </div>

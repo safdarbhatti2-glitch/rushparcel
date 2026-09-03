@@ -2,21 +2,21 @@
 
 <style>
 .shipment-detail-container {
-  --purple: #8b5cf6;
-  --purple-hover: #7c3aed;
-  --purple-light: #f3e8ff;
-  --purple-text: #6b21a8;
-  --ink: #0f172a;
-  --muted: #64748b;
-  --card-bg: #ffffff;
-  --bg: #f8fafc;
-  --border: #f1f5f9;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  --purple: #EA580C;
+  --purple-hover: #C2410C;
+  --purple-light: #FFF7ED;
+  --purple-text: #EA580C;
+  --ink: #0F172A;
+  --muted: #64748B;
+  --card-bg: #FFFFFF;
+  --bg: #F8FAFC;
+  --border: #E2E8F0;
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
 }
 
 .shipment-detail-container .top-header { margin-bottom: 24px; }
 .shipment-detail-container .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #475569; text-decoration: none; font-weight: 600; transition: 0.2s; margin-bottom: 6px; }
-.shipment-detail-container .back-link:hover { color: var(--purple); }
+.shipment-detail-container .back-link:hover { color: #EA580C; }
 .shipment-detail-container .page-title { font-size: 26px; font-weight: 800; color: var(--ink); letter-spacing: -0.03em; margin: 0; }
 .shipment-detail-container .tracking-id { font-size: 13px; color: var(--muted); font-weight: 600; margin-top: 4px; }
 
@@ -25,22 +25,22 @@
 
 /* Cards */
 .shipment-detail-container .card {
-  background: var(--card-bg); border-radius: 16px; border: 1px solid #f1f5f9; box-shadow: var(--shadow); padding: 24px; margin-bottom: 24px;
+  background: var(--card-bg); border-radius: 16px; border: 1px solid #E2E8F0; box-shadow: var(--shadow); padding: 24px; margin-bottom: 24px;
 }
 .shipment-detail-container .card:last-child { margin-bottom: 0; }
 .shipment-detail-container .card-title { font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 20px; letter-spacing: -0.02em; }
 
 /* Left Column: Shipment Info Grid */
 .shipment-detail-container .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; }
-.shipment-detail-container .info-item label { display: block; font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: capitalize; margin-bottom: 4px; }
+.shipment-detail-container .info-item label { display: block; font-size: 11px; font-weight: 700; color: #64748B; text-transform: capitalize; margin-bottom: 4px; }
 .shipment-detail-container .info-item b { display: block; font-size: 14px; font-weight: 800; color: var(--ink); }
 
 .shipment-detail-container .status-badge {
-  display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: lowercase; background: #8b5cf6; color: #fff;
+  display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: lowercase; background: #EA580C; color: #fff;
 }
-.shipment-detail-container .status-badge.delivered { background: #10b981; }
-.shipment-detail-container .status-badge.in_transit { background: #f59e0b; }
-.shipment-detail-container .status-badge.out_for_delivery { background: #ec4899; }
+.shipment-detail-container .status-badge.delivered { background: #16A34A; }
+.shipment-detail-container .status-badge.in_transit { background: #D97706; }
+.shipment-detail-container .status-badge.out_for_delivery { background: #0284C7; }
 
 /* Forms */
 .shipment-detail-container .field { margin-bottom: 16px; }
@@ -48,15 +48,15 @@
 .shipment-detail-container .field label { display: block; font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 6px; }
 .shipment-detail-container .field input,
 .shipment-detail-container .field select {
-  width: 100%; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; font-size: 13px; color: var(--ink); background: #f8fafc; outline: none; transition: 0.2s;
+  width: 100%; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px 14px; font-size: 13px; color: var(--ink); background: #F8FAFC; outline: none; transition: 0.2s;
 }
 .shipment-detail-container .field input:focus,
 .shipment-detail-container .field select:focus {
-  border-color: var(--purple); background: #fff; box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+  border-color: #EA580C; background: #fff; box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
 }
 
 .shipment-detail-container .purple-btn {
-  width: 100%; border: none; background: #7c3aed; color: #fff; border-radius: 10px; padding: 13px; font-size: 13px; font-weight: 800; cursor: pointer; transition: 0.2s; box-shadow: 0 8px 20px rgba(124, 58, 237, 0.25);
+  width: 100%; border: none; background: linear-gradient(135deg, #EA580C, #C2410C); color: #fff; border-radius: 10px; padding: 13px; font-size: 13px; font-weight: 800; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 14px rgba(234, 88, 12, 0.25);
 }
 .shipment-detail-container .purple-btn:hover { background: #6d28d9; transform: translateY(-1px); }
 

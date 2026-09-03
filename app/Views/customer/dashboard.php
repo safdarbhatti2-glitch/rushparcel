@@ -20,13 +20,13 @@
         <div class="grid-3" style="margin-bottom: 2.5rem;">
             <div class="card">
                 <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase;">Active Shipments</span>
-                <div style="font-size: 2rem; font-weight: 800; color: var(--color-accent-blue); margin-top: 0.25rem;">
+                <div style="font-size: 2rem; font-weight: 800; color: #EA580C; margin-top: 0.25rem;">
                     <?= count($shipments) ?>
                 </div>
             </div>
             <div class="card">
                 <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase;">Saved Quotes</span>
-                <div style="font-size: 2rem; font-weight: 800; color: var(--color-royal-blue); margin-top: 0.25rem;">
+                <div style="font-size: 2rem; font-weight: 800; color: #0284C7; margin-top: 0.25rem;">
                     <?= count($quotes) ?>
                 </div>
             </div>

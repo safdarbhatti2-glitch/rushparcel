@@ -4,7 +4,7 @@
     <div class="container" style="max-width: 550px;">
         <div class="card" style="padding: 2.5rem;">
             <div class="text-center" style="margin-bottom: 2rem;">
-                <div class="brand-icon" style="margin: 0 auto 1rem auto; width: 3.5rem; height: 3.5rem; font-size: 1.5rem;">UK</div>
+                <div class="brand-icon" style="margin: 0 auto 1rem auto; width: 3.75rem; height: 3.75rem; font-size: 1.5rem; background: linear-gradient(135deg, #EA580C, #C2410C); color: #FFF; border-radius: 14px; display: grid; place-items: center; font-weight: 900; box-shadow: 0 4px 14px rgba(234,88,12,0.25);">RP</div>
                 <h2>Create Account</h2>
                 <p class="text-muted" style="font-size: 0.9rem;">Register for an individual or business account to unlock fast courier bookings.</p>
             </div>

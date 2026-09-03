@@ -4,7 +4,7 @@
     <div class="container" style="max-width: 480px;">
         <div class="card" style="padding: 2.5rem;">
             <div class="text-center" style="margin-bottom: 2rem;">
-                <div class="brand-icon" style="margin: 0 auto 1rem auto; width: 3.5rem; height: 3.5rem; font-size: 1.5rem;">UK</div>
+                <div class="brand-icon" style="margin: 0 auto 1rem auto; width: 3.75rem; height: 3.75rem; font-size: 1.5rem; background: linear-gradient(135deg, #EA580C, #C2410C); color: #FFF; border-radius: 14px; display: grid; place-items: center; font-weight: 900; box-shadow: 0 4px 14px rgba(234,88,12,0.25);">RP</div>
                 <h2>Account Login</h2>
                 <p class="text-muted" style="font-size: 0.9rem;">Access your UK courier portal to manage bookings, track shipments, and view invoices.</p>
             </div>
@@ -21,13 +21,13 @@
                 </div>
             <?php endif; ?>
 
-            <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 11px; padding: 14px 16px; margin-bottom: 1.5rem; font-size: 0.85rem; color: #0369a1; display: flex; justify-content: space-between; align-items: center;">
+            <div style="background: #FFF7ED; border: 1px solid #FFEDD5; border-radius: 11px; padding: 14px 16px; margin-bottom: 1.5rem; font-size: 0.85rem; color: #9A3412; display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                    <strong style="display: block; font-weight: 800; color: #0284c7; margin-bottom: 4px;">🔑 Demo Admin Account:</strong>
-                    Email: <code style="background:#e0f2fe; padding:2px 6px; border-radius:4px; font-weight:700;">admin@rushparcel.co.uk</code><br>
-                    Password: <code style="background:#e0f2fe; padding:2px 6px; border-radius:4px; font-weight:700;">admin123</code>
+                    <strong style="display: block; font-weight: 800; color: #EA580C; margin-bottom: 4px;">🔑 Demo Admin Account:</strong>
+                    Email: <code style="background:#FFEDD5; padding:2px 6px; border-radius:4px; font-weight:700; color:#9A3412;">admin@rushparcel.co.uk</code><br>
+                    Password: <code style="background:#FFEDD5; padding:2px 6px; border-radius:4px; font-weight:700; color:#9A3412;">admin123</code>
                 </div>
-                <button type="button" onclick="fillAdminCreds()" style="background: #0284c7; color: #fff; border: 0; border-radius: 8px; padding: 8px 12px; font-size: 0.78rem; font-weight: 900; cursor: pointer;">
+                <button type="button" onclick="fillAdminCreds()" style="background: #EA580C; color: #fff; border: 0; border-radius: 8px; padding: 8px 14px; font-size: 0.78rem; font-weight: 900; cursor: pointer; box-shadow: 0 2px 8px rgba(234,88,12,0.25);">
                     Auto-Fill &rarr;
                 </button>
             </div>
