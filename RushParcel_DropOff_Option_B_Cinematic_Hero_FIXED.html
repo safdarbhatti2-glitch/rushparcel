@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RushParcel — Drop-off Locations — Option B — Cinematic Full-Width Hero</title><style>
+:root{
+  --navy:#101a33;--navy2:#09233f;--orange:#f45b0b;--orange2:#ff7618;
+  --blue:#16a7ef;--green:#19a55b;--ink:#172033;--muted:#68778d;
+  --line:#dfe7ef;--bg:#f6f9fc;--white:#fff;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+a{text-decoration:none;color:inherit}.topbar{height:30px;background:var(--navy);color:#dbe7f4;font-size:12px;display:flex;align-items:center}.wrap{width:min(1100px,calc(100% - 36px));margin:auto}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center}.toplinks{display:flex;gap:22px}
+.nav{height:76px;background:#fff;border-bottom:1px solid #e9eef4;display:flex;align-items:center}.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:25px}
+.logo{font-weight:900;font-size:24px;letter-spacing:-1.5px;color:var(--navy)}.logo span{color:var(--orange)}
+.menu{display:flex;gap:25px;align-items:center;font-size:14px;font-weight:750;color:#435067}.menu a:hover{color:var(--orange)}
+.portal{background:var(--orange);color:#fff;padding:12px 18px;border-radius:12px;font-weight:850;box-shadow:0 8px 18px rgba(244,91,11,.2)}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#fff 0%,#f8fbfe 62%,#eef8fd 100%);padding:62px 0 54px}
+.hero:before{content:"";position:absolute;width:440px;height:440px;border-radius:50%;right:-160px;top:-210px;background:rgba(22,167,239,.10)}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;position:relative;z-index:1}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;color:var(--orange);font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.eyebrow:before{content:"";width:28px;height:3px;background:var(--orange);border-radius:5px}
+h1{font-size:clamp(42px,5vw,68px);line-height:.98;letter-spacing:-3px;margin:16px 0 20px;color:var(--navy)}
+h1 em{font-style:normal;color:var(--orange)}.lead{font-size:17px;line-height:1.7;color:var(--muted);max-width:570px;margin:0 0 28px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}.btn{padding:14px 20px;border-radius:13px;font-weight:850;font-size:14px}.primary{background:var(--navy);color:#fff}.secondary{background:#fff;border:1px solid #d7e1eb;color:var(--navy)}
+.stats{display:flex;gap:30px;margin-top:30px}.stat strong{display:block;font-size:23px;color:var(--navy)}.stat span{font-size:12px;color:var(--muted)}
+.slider{position:relative;height:350px;border-radius:24px;overflow:hidden;background:#dfe7ef;box-shadow:0 25px 55px rgba(16,26,51,.16)}
+.slide{position:absolute;inset:0;opacity:0;animation:fade 15s infinite}.slide:nth-child(1){animation-delay:0s}.slide:nth-child(2){animation-delay:5s}.slide:nth-child(3){animation-delay:10s}
+.slide img{width:100%;height:100%;object-fit:cover;display:block}.slide:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,20,40,.05),rgba(8,20,40,.62))}
+@keyframes fade{0%,30%{opacity:1}36%,100%{opacity:0}}
+.photo-copy{position:absolute;z-index:2;left:22px;right:22px;bottom:22px;color:#fff}.photo-copy small{font-weight:800;letter-spacing:.1em;text-transform:uppercase}.photo-copy h3{margin:7px 0 0;font-size:25px}
+.badge{position:absolute;z-index:3;top:18px;left:18px;background:rgba(255,255,255,.94);color:var(--navy);padding:9px 12px;border-radius:12px;font-size:12px;font-weight:900;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.dots{position:absolute;z-index:4;right:20px;bottom:23px;display:flex;gap:6px}.dot{width:7px;height:7px;background:#fff;border-radius:50%;opacity:.55}.dot:nth-child(1){animation:dot1 15s infinite}.dot:nth-child(2){animation:dot2 15s infinite}.dot:nth-child(3){animation:dot3 15s infinite}
+@keyframes dot1{0%,30%{opacity:1;transform:scale(1.3)}36%,100%{opacity:.55;transform:scale(1)}}@keyframes dot2{0%,30%{opacity:.55}36%,63%{opacity:1;transform:scale(1.3)}70%,100%{opacity:.55;transform:scale(1)}}@keyframes dot3{0%,63%{opacity:.55}70%,96%{opacity:1;transform:scale(1.3)}100%{opacity:.55}}
+.search{background:#fff;padding:24px 0;border-bottom:1px solid var(--line)}.searchbox{display:flex;gap:12px;align-items:center;background:#f7f9fc;border:1px solid var(--line);border-radius:16px;padding:8px}.searchbox input{border:0;background:transparent;outline:0;flex:1;padding:10px;font-size:14px}.searchbox button{border:0;background:var(--blue);color:#fff;padding:12px 18px;border-radius:11px;font-weight:850}
+.section{padding:68px 0}.section-head{text-align:center;max-width:680px;margin:0 auto 38px}.section-head .eyebrow{justify-content:center}.section-head h2{font-size:38px;letter-spacing:-1.8px;color:var(--navy);margin:13px 0}.section-head p{color:var(--muted);line-height:1.7}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:23px;box-shadow:0 10px 28px rgba(16,26,51,.05)}.num{width:36px;height:36px;border-radius:10px;background:#eaf7fd;color:var(--blue);display:grid;place-items:center;font-weight:950}.step h3{margin:18px 0 8px;color:var(--navy)}.step p{font-size:13px;line-height:1.6;color:var(--muted);margin:0}
+.network{background:var(--navy);color:#fff;border-radius:26px;padding:42px;display:grid;grid-template-columns:1fr 1fr;gap:30px;overflow:hidden;position:relative}.network:after{content:"";position:absolute;width:360px;height:360px;border:1px solid rgba(22,167,239,.3);border-radius:50%;right:-100px;top:-120px}.network h2{font-size:39px;letter-spacing:-1.8px;margin:8px 0 15px}.network p{color:#b9c7d8;line-height:1.7}.mini-map{min-height:230px;border-radius:18px;background:linear-gradient(145deg,#102846,#0a1c34);position:relative;overflow:hidden}.route{position:absolute;left:15%;top:55%;width:70%;height:3px;background:linear-gradient(90deg,var(--orange),var(--blue));transform:rotate(-12deg);box-shadow:0 0 20px rgba(22,167,239,.5)}.pin{position:absolute;width:13px;height:13px;border-radius:50%;background:#fff;border:4px solid var(--orange);box-shadow:0 0 0 7px rgba(244,91,11,.14)}.p1{left:18%;top:60%}.p2{left:50%;top:45%}.p3{right:16%;top:31%}
+.cta{padding:58px 0}.cta-box{background:linear-gradient(135deg,var(--orange),#ff7c1f);color:#fff;border-radius:24px;padding:38px;display:flex;align-items:center;justify-content:space-between;gap:25px}.cta h2{font-size:32px;letter-spacing:-1.2px;margin:0 0 8px}.cta p{margin:0;color:#ffe9dc}.cta .btn{background:#fff;color:var(--navy)}
+footer{background:var(--navy);color:#b8c7d8;padding:45px 0}.foot{display:flex;justify-content:space-between;gap:30px}.foot .logo{color:#fff}.foot p{max-width:430px;font-size:13px;line-height:1.7}.copyright{border-top:1px solid rgba(255,255,255,.1);margin-top:25px;padding-top:18px;font-size:11px}
+@media(max-width:850px){.menu{display:none}.hero-grid,.network{grid-template-columns:1fr}.slider{height:310px}.steps{grid-template-columns:1fr 1fr}.foot{flex-direction:column}.cta-box{flex-direction:column;align-items:flex-start}}
+@media(max-width:540px){.wrap{width:min(100% - 24px,1100px)}.hero{padding-top:42px}.stats{gap:17px}.slider{height:270px}.steps{grid-template-columns:1fr}.network{padding:28px}.cta-box{padding:28px}h1{letter-spacing:-2px}}
+@media(prefers-reduced-motion:reduce){.slide,.dot{animation:none!important}.slide:first-child{opacity:1}}
+
+
+</style></head><body>
+<div class="topbar"><div class="wrap"><span>UK parcel network • Drop-off & collection</span><div class="toplinks"><span>Help</span><span>Track parcel</span><span>Business</span></div></div></div>
+<nav class="nav"><div class="wrap"><div class="logo">RUSH<span>PARCEL</span></div><div class="menu"><a href="#">Track</a><a href="#">Send</a><a href="#">Drop-off</a><a href="#">Prices</a><a href="#">Help</a></div><a class="portal" href="#">Customer Portal</a></div></nav>
+
+
+<section class="hero" style="padding:34px 0 58px">
+<div class="wrap">
+<div class="slider" style="height:455px;border-radius:28px">
+<div class="slide"><img src="https://images.pexels.com/photos/6169129/pexels-photo-6169129.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Courier driving a delivery van" loading="eager" onerror="this.src='https://katzg.com/assets/img/services/delivery/rd.jpg'"><div class="photo-copy" style="left:42px;bottom:38px;max-width:650px"><small>DROP-OFF LOCATIONS</small><h3 style="font-size:42px;line-height:1.05">Your parcel’s next stop — <span style="color:#ff9a61">closer than you think.</span></h3><p style="max-width:560px;line-height:1.6;color:#e9f0f7">Find a convenient point, hand over your parcel and stay connected through every stage.</p><a class="btn" style="display:inline-block;background:#fff;color:var(--navy);margin-top:8px" href="#">Find a drop-off point</a></div></div>
+<div class="slide"><img src="https://katzg.com/assets/img/services/delivery/rd.jpg" alt="Courier unloading packages from a van" loading="eager" onerror="this.src='https://images.pexels.com/photos/6868177/pexels-photo-6868177.jpeg?auto=compress&cs=tinysrgb&w=1600'"><div class="photo-copy" style="left:42px;bottom:38px;max-width:650px"><small>SMART HANDOFF</small><h3 style="font-size:42px;line-height:1.05">Drop it off. <span style="color:#ff9a61">We’ll take it from here.</span></h3><p style="max-width:560px;line-height:1.6;color:#e9f0f7">Professional handling with clear confirmation at the point of handover.</p></div></div>
+<div class="slide"><img src="https://images.pexels.com/photos/6868177/pexels-photo-6868177.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Courier delivering a parcel" loading="eager" onerror="this.src='https://images.pexels.com/photos/6169129/pexels-photo-6169129.jpeg?auto=compress&cs=tinysrgb&w=1600'"><div class="photo-copy" style="left:42px;bottom:38px;max-width:650px"><small>LAST MILE</small><h3 style="font-size:42px;line-height:1.05">A connected journey from <span style="color:#ff9a61">point to doorstep.</span></h3><p style="max-width:560px;line-height:1.6;color:#e9f0f7">Track your parcel with confidence after it leaves your local RushParcel point.</p></div></div>
+<div class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
+</div>
+<div style="display:flex;gap:28px;flex-wrap:wrap;margin-top:22px"><div class="stat"><strong>1,240+</strong><span>UK connected points</span></div><div class="stat"><strong>24/7</strong><span>Tracking visibility</span></div><div class="stat"><strong>Fast</strong><span>Local handoff</span></div></div>
+</div></section>
+
+
+<section class="search"><div class="wrap"><div class="searchbox"><input placeholder="Enter postcode, town or location to find your nearest drop-off point"><button>Find a location</button></div></div></section>
+
+<section class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">Simple from start to finish</div><h2>Drop off in four easy steps.</h2><p>Find a convenient point, prepare your parcel, hand it over and get moving. RushParcel keeps every handoff clear and connected.</p></div>
+<div class="steps">
+<div class="step"><div class="num">01</div><h3>Find</h3><p>Search your postcode and choose the most convenient nearby point.</p></div>
+<div class="step"><div class="num">02</div><h3>Prepare</h3><p>Securely pack and label your parcel before arriving.</p></div>
+<div class="step"><div class="num">03</div><h3>Drop off</h3><p>Hand your parcel to the location team and receive confirmation.</p></div>
+<div class="step"><div class="num">04</div><h3>Track</h3><p>Follow the parcel through the RushParcel network from collection to delivery.</p></div>
+</div></div></section>
+
+<section class="section" style="padding-top:0"><div class="wrap"><div class="network"><div><div class="eyebrow" style="color:#ff9a61">Connected network</div><h2>Closer to where life happens.</h2><p>Thousands of convenient collection and drop-off points connect local streets to the wider RushParcel network.</p><div class="stats"><div class="stat"><strong style="color:#fff">1,240+</strong><span style="color:#9fb0c3">Connected points</span></div><div class="stat"><strong style="color:#fff">24/7</strong><span style="color:#9fb0c3">Tracking visibility</span></div></div></div><div class="mini-map"><div class="route"></div><i class="pin p1"></i><i class="pin p2"></i><i class="pin p3"></i></div></div></div></section>
+
+<section class="cta"><div class="wrap"><div class="cta-box"><div><h2>Ready to send something?</h2><p>Find a nearby RushParcel drop-off point and get your parcel on its way.</p></div><a class="btn" href="#">Find a drop-off point</a></div></div></section>
+<footer><div class="wrap"><div class="foot"><div><div class="logo">RUSH<span>PARCEL</span></div><p>Fast, connected parcel delivery built around simple customer experiences and a dependable local network.</p></div><div><b style="color:#fff">Drop-off</b><p>Locations • Opening hours • Parcel preparation • Tracking</p></div></div><div class="copyright">© 2026 RushParcel. Demo front-end concept.</div></div></footer>
+</body></html>
