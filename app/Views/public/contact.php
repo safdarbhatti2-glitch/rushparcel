@@ -1,347 +1,538 @@
 <?php ob_start(); ?>
 
 <style>
-.contact-scope {
-  --navy:#0F172A;--navy2:#1E293B;--ink:#0F172A;--muted:#64748B;--blue:#EA580C;--cyan:#EA580C;--violet:#0284C7;--green:#16A34A;--pink:#EA580C;--bg:#F8FAFC;--white:#fff;--line:#E2E8F0;--shadow:0 10px 30px rgba(15,23,42,.06);
+.contact-page {
+  --navy:#101a33;
+  --orange:#f45b0b;
+  --orange-dark:#dc4d06;
+  --blue:#1689e8;
+  --green:#18a45b;
+  --ink:#172033;
+  --muted:#637289;
+  --line:#dfe6ee;
+  --bg:#f6f9fc;
+  --orange-soft:#fff2e9;
+  --blue-soft:#eef8ff;
   margin: -1.5rem -1.25rem -5rem -1.25rem;
   background: var(--bg);
   color: var(--ink);
+  font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
 }
-.contact-scope .container { width: min(1180px, calc(100% - 40px)); margin: auto; }
-.contact-scope .hero {
-  position: relative; overflow: hidden; min-height: 440px; padding: 60px 0 68px;
-  background: linear-gradient(135deg,#FFFFFF,#F8FAFC 65%,#FFF7ED); color: #0F172A;
-  border-bottom: 1px solid #E2E8F0;
+
+/* HERO SECTION */
+.contact-page .hero {
+  background:
+    radial-gradient(circle at 76% 45%,rgba(22,137,232,.10),transparent 24%),
+    radial-gradient(circle at 94% 80%,rgba(244,91,11,.07),transparent 27%),
+    linear-gradient(135deg,#fff 0%,#fbfdff 63%,#fff9f5 100%);
+  border-bottom:1px solid var(--line);
 }
-.contact-scope .hero:before {
-  content: ""; position: absolute; inset: 0;
-  background-image: linear-gradient(#EA580C09 1px,transparent 1px),linear-gradient(90deg,#EA580C09 1px,transparent 1px);
-  background-size: 52px 52px; mask-image: linear-gradient(#000,transparent 90%);
+.contact-page .hero-inner{
+  width:min(1080px,100%);
+  min-height:405px;
+  margin:0 auto;
+  padding:42px 20px 34px;
+  display:grid;
+  grid-template-columns:minmax(0, 56%) minmax(0, 44%);
+  align-items:center;
 }
-.contact-scope .heroGlow {
-  position: absolute; width: 650px; height: 650px; right: -270px; top: -250px; border-radius: 50%;
-  background: radial-gradient(circle,#EA580C14,transparent 63%);
+.contact-page .hero-copy{
+  min-width:0;
+  width:100%;
+  padding:0 30px 0 10px;
 }
-.contact-scope .heroGrid { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr .75fr; gap: 65px; align-items: center; }
-.contact-scope .eyebrow {
-  display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 99px; background: #FFF7ED;
-  border: 1px solid #FFEDD5; color: #EA580C; font-size: 8px; font-weight: 950; letter-spacing: .15em; text-transform: uppercase;
+.contact-page .eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 12px;border-radius:999px;
+  background:var(--orange-soft);
+  border:1px solid #ffd7bf;
+  color:#c94b08;
+  font-size:8px;font-weight:900;
+  letter-spacing:1px;text-transform:uppercase
 }
-.contact-scope .eyebrow i { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
-.contact-scope .hero h1 { font-size: 56px; line-height: 1.0; letter-spacing: -.05em; margin-top: 16px; color: #0F172A; }
-.contact-scope .hero h1 span { color: #EA580C; }
-.contact-scope .hero p { max-width: 590px; color: #475569; font-size: 14px; line-height: 1.8; margin-top: 15px; }
-.contact-scope .heroStats { display: flex; gap: 28px; margin-top: 28px; }
-.contact-scope .heroStats strong { display: block; font-size: 18px; color: #0F172A; }
-.contact-scope .heroStats small { display: block; color: #64748B; font-size: 8px; letter-spacing: .1em; margin-top: 3px; }
-
-/* Contact Command Visual */
-.contact-scope .command { height: 300px; position: relative; display: grid; place-items: center; }
-.contact-scope .pulseRing { width: 205px; height: 205px; border-radius: 50%; border: 1px solid #2bdcff30; box-shadow: 0 0 70px #079df218,inset 0 0 50px #079df20b; position: relative; }
-.contact-scope .pulseRing:before, .contact-scope .pulseRing:after { content: ""; position: absolute; inset: 18px; border-radius: 50%; border: 1px solid #995cff24; animation: pulseRing 3.5s ease-in-out infinite; }
-.contact-scope .pulseRing:after { inset: 39px; border-color: #2bdcff1b; animation-delay: 1s; }
-@keyframes pulseRing { 50% { transform: scale(1.08); opacity: .35; } }
-.contact-scope .commandCore { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 76px; height: 76px; border-radius: 22px; background: linear-gradient(135deg,#11a9fb,#0758d2); display: grid; place-items: center; font-size: 25px; font-weight: 950; box-shadow: 0 0 55px #079fff55; color: #FFF; }
-.contact-scope .beam { position: absolute; width: 270px; height: 1px; background: linear-gradient(90deg,transparent,#2bdcff,#995cff,transparent); box-shadow: 0 0 15px #2bdcff; }
-.contact-scope .b1 { transform: rotate(25deg); }
-.contact-scope .b2 { transform: rotate(-25deg); }
-.contact-scope .status { position: absolute; padding: 10px 12px; background: #071a30e8; border: 1px solid #1d4669; border-radius: 10px; backdrop-filter: blur(12px); box-shadow: 0 15px 35px #0006; }
-.contact-scope .status small { display: block; color: #607994; font-size: 7px; }
-.contact-scope .status strong { display: block; font-size: 11px; margin-top: 3px; color: #FFF; }
-.contact-scope .st1 { right: 0; top: 8%; }
-.contact-scope .st1 strong { color: var(--green); }
-.contact-scope .st2 { left: 0; bottom: 9%; }
-.contact-scope .st2 strong { color: var(--cyan); }
-
-/* Main Contact Section */
-.contact-scope .contactSection { padding: 78px 0 90px; background: var(--bg); }
-.contact-scope .intro { text-align: center; max-width: 700px; margin: 0 auto 38px; }
-.contact-scope .intro .eyebrow { color: #078fdd; background: #edfaff; border-color: #c4edff; }
-.contact-scope .intro h2 { font-size: 33px; letter-spacing: -.055em; margin-top: 10px; color: var(--ink); }
-.contact-scope .intro p { font-size: 11px; color: #7b8b9d; margin-top: 7px; }
-.contact-scope .contactGrid { display: grid; grid-template-columns: 1.05fr .8fr; gap: 18px; align-items: start; }
-
-.contact-scope .formCard, .contact-scope .infoCard { background: #fff; border: 1px solid var(--line); border-radius: 17px; box-shadow: var(--shadow); }
-.contact-scope .formCard { padding: 28px; }
-.contact-scope .cardTitle { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; margin-bottom: 20px; }
-.contact-scope .cardTitle h3 { font-size: 19px; letter-spacing: -.03em; color: var(--ink); }
-.contact-scope .cardTitle p { font-size: 9px; color: #8795a5; margin-top: 4px; }
-.contact-scope .secure { font-size: 8px; color: #078fdd; background: #edfaff; border: 1px solid #c9efff; padding: 6px 8px; border-radius: 7px; white-space: nowrap; font-weight: 800; }
-
-.contact-scope .form { display: grid; gap: 14px; }
-.contact-scope .row { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
-.contact-scope .field { display: grid; gap: 6px; }
-.contact-scope .field label { font-size: 9px; font-weight: 850; color: var(--ink); }
-.contact-scope .field input, .contact-scope .field select, .contact-scope .field textarea {
-  width: 100%; border: 1px solid #dce5ed; border-radius: 9px; background: #fbfdff; color: var(--ink); outline: 0; padding: 12px; font-size: 10px; transition: .2s;
+.contact-page .eyebrow:before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 0 4px #def6e8
 }
-.contact-scope .field textarea { min-height: 125px; resize: vertical; }
-.contact-scope .field input:focus, .contact-scope .field select:focus, .contact-scope .field textarea:focus { border-color: #62c8fa; box-shadow: 0 0 0 3px rgba(7,157,242,0.08); }
-.contact-scope .formBtn {
-  width: 100%; height: 48px; margin-top: 2px; font-size: 11px; font-weight: 900; border-radius: 9px; border: 0; cursor: pointer; color: #fff; background: linear-gradient(135deg,#10a9fb,#075fd6); box-shadow: 0 12px 30px #008fff3b; transition: .25s;
+.contact-page .hero h1{
+  margin:17px 0 13px;
+  max-width:580px;
+  color:var(--navy);
+  font-size:clamp(46px,5.5vw,68px);
+  line-height:.95;
+  letter-spacing:-3px;
+  font-weight:900;
 }
-.contact-scope .formBtn:hover { transform: translateY(-2px); }
-.contact-scope .formNote { font-size: 8px; color: #8a98a7; text-align: center; }
-.contact-scope .formNote a { color: #078fdd; }
-
-.contact-scope .infoStack { display: grid; gap: 13px; }
-.contact-scope .infoCard { padding: 22px; }
-.contact-scope .infoIcon { width: 37px; height: 37px; border-radius: 10px; display: grid; place-items: center; background: #edfaff; color: #078fdd; font-size: 17px; }
-.contact-scope .infoCard h3 { font-size: 14px; margin-top: 12px; color: var(--ink); }
-.contact-scope .infoCard p { font-size: 10px; color: #71849a; line-height: 1.75; margin-top: 5px; }
-.contact-scope .infoCard a { color: #078fdd; font-weight: 850; }
-.contact-scope .hours { display: grid; gap: 5px; margin-top: 11px; border-top: 1px solid #edf1f5; padding-top: 11px; }
-.contact-scope .hours div { display: flex; justify-content: space-between; font-size: 9px; color: #71849a; }
-.contact-scope .hours b { color: var(--ink); }
-.contact-scope .online { color: #09ae8e !important; font-weight: 800; }
-
-/* Support Strip */
-.contact-scope .supportSection { padding: 0 0 85px; background: var(--bg); }
-.contact-scope .supportGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
-.contact-scope .supportCard { padding: 21px; background: linear-gradient(135deg,#07182e,#0a2038); border: 1px solid #183d5d; border-radius: 14px; color: #fff; }
-.contact-scope .supportCard .icon { font-size: 20px; color: var(--cyan); }
-.contact-scope .supportCard h3 { font-size: 13px; margin-top: 10px; color: #FFF; }
-.contact-scope .supportCard p { font-size: 9px; line-height: 1.7; color: #8297ad; margin-top: 5px; }
-.contact-scope .supportCard a { display: inline-block; color: var(--cyan); font-size: 9px; font-weight: 900; margin-top: 10px; }
-
-/* Office Hub Visual */
-.contact-scope .officeSection { padding: 80px 0; background: #fff; }
-.contact-scope .officeGrid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 40px; align-items: center; }
-.contact-scope .officeText .eyebrow { color: #078fdd; background: #edfaff; border-color: #c4edff; }
-.contact-scope .officeText h2 { font-size: 34px; letter-spacing: -.055em; margin-top: 11px; color: var(--ink); }
-.contact-scope .officeText p { font-size: 11px; color: #788a9d; line-height: 1.8; margin-top: 8px; }
-.contact-scope .address { margin-top: 19px; padding: 17px; border: 1px solid var(--line); border-radius: 12px; background: #f9fbfd; }
-.contact-scope .address b { font-size: 11px; color: var(--ink); }
-.contact-scope .address p { font-size: 9px; line-height: 1.7; margin-top: 5px; color: #788a9d; }
-
-.contact-scope .officeVisual { height: 285px; border-radius: 17px; background: linear-gradient(135deg,#040f20,#09243d); border: 1px solid #1b4667; position: relative; overflow: hidden; box-shadow: 0 22px 60px rgba(7,26,50,0.08); }
-.contact-scope .officeVisual:before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(#2bdcff0b 1px,transparent 1px),linear-gradient(90deg,#2bdcff0b 1px,transparent 1px); background-size: 37px 37px; }
-.contact-scope .building { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 200px; height: 135px; background: linear-gradient(145deg,#0c3554,#092640); border: 1px solid #2bdcff44; clip-path: polygon(10% 28%,90% 28%,100% 100%,0 100%); }
-.contact-scope .building:before { content: ""; position: absolute; left: 50%; top: -45px; transform: translateX(-50%); border-left: 100px solid transparent; border-right: 100px solid transparent; border-bottom: 48px solid #0c3554; }
-.contact-scope .building:after { content: "RP"; position: absolute; left: 50%; top: 48%; transform: translate(-50%,-50%); color: #2bdcff; font-weight: 950; font-size: 20px; text-shadow: 0 0 18px #2bdcff; }
-.contact-scope .pin { position: absolute; left: 50%; top: 29%; width: 14px; height: 14px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 25px var(--cyan); animation: float 2.8s ease-in-out infinite; }
-@keyframes float { 50% { transform: translateY(-9px); } }
-.contact-scope .routeLine { position: absolute; width: 210px; height: 1px; left: 20%; top: 57%; background: linear-gradient(90deg,transparent,#2bdcff,#995cff,transparent); transform: rotate(-19deg); box-shadow: 0 0 13px #2bdcff; }
-
-/* CTA Section */
-.contact-scope .cta { padding: 60px 0; background: #f4f7fb; }
-.contact-scope .ctaBox { padding: 31px 35px; border-radius: 17px; background: linear-gradient(120deg,#07182e,#0b2542); border: 1px solid #1d4d73; color: #fff; display: flex; align-items: center; justify-content: space-between; }
-.contact-scope .ctaBox h2 { font-size: 23px; letter-spacing: -.04em; color: #FFF; }
-.contact-scope .ctaBox p { font-size: 10px; color: #8298ad; margin-top: 5px; }
-
-@media(max-width:950px){
-  .contact-scope .heroGrid, .contact-scope .contactGrid, .contact-scope .officeGrid { grid-template-columns: 1fr; }
-  .contact-scope .command { order: -1; height: 300px; }
-  .contact-scope .supportGrid { grid-template-columns: 1fr 1fr; }
+.contact-page .hero h1 span{color:var(--orange)}
+.contact-page .hero-description{
+  display:block;
+  width:100%;
+  max-width:570px;
+  margin:0;
+  color:#56657a;
+  font-size:13px;
+  line-height:1.7;
 }
-@media(max-width:620px){
-  .contact-scope .hero { padding-top: 30px; }
-  .contact-scope .hero h1 { font-size: 42px; }
-  .contact-scope .row { grid-template-columns: 1fr; }
-  .contact-scope .formCard { padding: 21px; }
-  .contact-scope .supportGrid { grid-template-columns: 1fr; }
-  .contact-scope .officeVisual { height: 250px; }
-  .contact-scope .ctaBox { display: block; }
+.contact-page .hero-stats{
+  display:flex;
+  align-items:flex-start;
+  gap:36px;
+  margin-top:25px;
+}
+.contact-page .stat strong{
+  display:block;color:var(--navy);
+  font-size:16px;line-height:1.15;
+  white-space:nowrap;
+  font-weight:800;
+}
+.contact-page .stat small{
+  display:block;margin-top:4px;color:#77859a;
+  font-size:7px;letter-spacing:.8px;
+  text-transform:uppercase;
+  font-weight:700;
+}
+
+/* HERO VISUAL GRAPHIC */
+.contact-page .hero-visual{
+  position:relative;
+  width:100%;
+  height:330px;
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.contact-page .halo{
+  position:absolute;width:315px;height:315px;border-radius:50%;
+  background:radial-gradient(circle,rgba(22,137,232,.13),rgba(22,137,232,.035) 50%,transparent 70%)
+}
+.contact-page .ring{
+  position:absolute;width:205px;height:205px;border-radius:50%;
+  border:1px solid rgba(22,137,232,.29);
+  box-shadow:
+    0 0 0 23px rgba(22,137,232,.045),
+    0 0 0 47px rgba(22,137,232,.03),
+    0 0 0 70px rgba(244,91,11,.018)
+}
+.contact-page .ring-inner{
+  width:151px;height:151px;
+  border:1px solid rgba(244,91,11,.25);
+  box-shadow:none
+}
+.contact-page .beam{
+  position:absolute;width:410px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(22,137,232,.40),transparent);
+  transform:rotate(-19deg)
+}
+.contact-page .beam.two{
+  transform:rotate(20deg);
+  background:linear-gradient(90deg,transparent,rgba(244,91,11,.25),transparent)
+}
+.contact-page .core{
+  position:relative;z-index:5;
+  width:80px;height:80px;border-radius:20px;
+  background:linear-gradient(145deg,#2798f4,#0870ce);
+  border:4px solid #fff;
+  display:grid;place-items:center;
+  color:#fff;font-size:22px;font-weight:950;
+  box-shadow:
+    0 18px 38px rgba(8,112,206,.30),
+    0 0 0 10px rgba(22,137,232,.07)
+}
+.contact-page .node{
+  position:absolute;z-index:6;
+  width:10px;height:10px;border-radius:50%;
+  border:3px solid #fff;background:var(--orange);
+  box-shadow:0 4px 12px rgba(244,91,11,.28)
+}
+.contact-page .node.a{left:12%;top:38%}
+.contact-page .node.b{right:10%;top:23%;background:var(--green)}
+.contact-page .node.c{right:18%;bottom:18%;background:var(--blue)}
+.contact-page .badge{
+  position:absolute;z-index:8;
+  min-width:112px;padding:10px 13px;
+  background:#fff;border:1px solid #d9e2eb;
+  border-radius:10px;
+  box-shadow:0 13px 28px rgba(16,26,51,.14)
+}
+.contact-page .badge small{
+  display:block;margin-bottom:4px;
+  color:#8b98aa;font-size:7px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.5px
+}
+.contact-page .badge strong{font-size:9px;color:var(--orange)}
+.contact-page .badge.available strong{color:var(--green)}
+.contact-page .badge.top{right:1%;top:7%}
+.contact-page .badge.bottom{left:0;bottom:16%}
+.contact-page .phone{
+  position:absolute;right:17%;bottom:7%;
+  z-index:8;width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;
+  color:var(--orange);background:var(--orange-soft);
+  border:1px solid #ffd7bf;font-size:13px
+}
+
+/* CONTACT CENTRE */
+.contact-page .contact-section{
+  background:#f5f8fc;padding:62px 20px 72px
+}
+.contact-page .contact-wrap{max-width:1080px;margin:auto}
+.contact-page .center{text-align:center}
+.contact-page .blue-pill{
+  display:inline-block;padding:7px 12px;border-radius:999px;
+  color:#0879bf;background:var(--blue-soft);
+  border:1px solid #d3edff;font-size:8px;
+  font-weight:900;letter-spacing:1px
+}
+.contact-page .center h2{
+  margin:12px 0 5px;color:var(--navy);
+  font-size:32px;letter-spacing:-1.5px;font-weight:900
+}
+.contact-page .center p{margin:0;color:var(--muted);font-size:12px}
+.contact-page .content-grid{
+  display:grid;grid-template-columns:1.1fr .75fr;
+  gap:16px;margin-top:27px
+}
+.contact-page .card{
+  background:#fff;border:1px solid var(--line);
+  border-radius:16px;box-shadow:0 10px 28px rgba(16,26,51,.04)
+}
+.contact-page .form-card{padding:26px}
+.contact-page .form-head{display:flex;align-items:center;justify-content:space-between}
+.contact-page .form-head h3{margin:0;font-size:16px;color:var(--navy);font-weight:800}
+.contact-page .secure{
+  color:var(--green);background:#edfaf2;
+  border:1px solid #d2efdd;padding:6px 11px;
+  border-radius:99px;font-size:8px;font-weight:800
+}
+.contact-page .fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.contact-page .field.full{grid-column:1/-1}
+.contact-page .field label{display:block;margin-bottom:6px;font-size:9px;font-weight:800;color:#44536a}
+.contact-page .field input,.contact-page .field select,.contact-page .field textarea{
+  width:100%;border:1px solid #dce4ec;border-radius:9px;
+  background:#fbfcfe;padding:11px 12px;outline:0;
+  color:var(--ink);font-size:11px;font-weight:600;transition:.2s
+}
+.contact-page .field input:focus,.contact-page .field select:focus,.contact-page .field textarea:focus{
+  border-color:var(--orange);box-shadow:0 0 0 3px rgba(244,91,11,.12);background:#fff
+}
+.contact-page .field textarea{height:100px;resize:vertical}
+.contact-page .submit{
+  width:100%;margin-top:14px;border:0;border-radius:10px;
+  background:linear-gradient(135deg,var(--orange),var(--orange-dark));
+  color:#fff;padding:13px;font-size:12px;font-weight:900;cursor:pointer;
+  box-shadow:0 8px 18px rgba(244,91,11,.2);transition:.2s
+}
+.contact-page .submit:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(244,91,11,.3)}
+
+/* SIDE CARDS */
+.contact-page .side{display:grid;gap:12px}
+.contact-page .side-card{padding:20px}
+.contact-page .side-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:grid;place-items:center;
+  color:var(--blue);background:var(--blue-soft);
+  margin-bottom:12px;font-weight:900;font-size:16px
+}
+.contact-page .side-card h3{margin:0 0 6px;color:var(--navy);font-size:13px;font-weight:800}
+.contact-page .side-card p{margin:0;color:var(--muted);font-size:11px;line-height:1.6}
+.contact-page .side-card a{color:var(--blue);font-weight:800}
+
+/* ACTION CARDS */
+.contact-page .actions{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:12px;margin-top:28px
+}
+.contact-page .action{
+  padding:20px;border-radius:14px;
+  background:#0d2340;border:1px solid #23496d;color:#fff
+}
+.contact-page .action span{font-size:18px;color:#ff7720}
+.contact-page .action b{display:block;margin:8px 0 4px;font-size:12px;font-weight:800}
+.contact-page .action p{margin:0;color:#b6c9dd;font-size:10px;line-height:1.55}
+.contact-page .action a{display:inline-block;margin-top:12px;color:#ff7720;font-size:10px;font-weight:900}
+
+/* OPERATIONS SECTION WITH ANIMATED CITY & VAN */
+.contact-page .operations{
+  background:#fff;padding:70px 20px;border-top:1px solid var(--line)
+}
+.contact-page .operations-inner{
+  max-width:1080px;margin:auto;
+  display:grid;grid-template-columns:.72fr 1fr;
+  gap:28px;align-items:center
+}
+.contact-page .operations h2{
+  margin:13px 0 8px;color:var(--navy);
+  font-size:32px;line-height:1.05;letter-spacing:-1.5px;font-weight:900
+}
+.contact-page .operations p{max-width:390px;color:var(--muted);font-size:12px;line-height:1.7}
+.contact-page .address{
+  margin-top:16px;padding:15px;
+  background:#f8fafc;border:1px solid var(--line);border-radius:12px
+}
+.contact-page .address strong{display:block;font-size:11px;color:var(--navy);font-weight:800}
+.contact-page .address span{display:block;margin-top:4px;color:var(--muted);font-size:10px;line-height:1.5}
+.contact-page .op-art{
+  height:245px;border:1px solid #dce7f0;border-radius:18px;
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 38%,rgba(22,137,232,.15),transparent 25%),
+    linear-gradient(145deg,#eef8ff,#fff,#fff7f1);
+  box-shadow:0 18px 45px rgba(16,26,51,.08)
+}
+.contact-page .op-art:before{
+  content:"";position:absolute;inset:0;opacity:.5;
+  background-image:linear-gradient(rgba(22,137,232,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(22,137,232,.055) 1px,transparent 1px);
+  background-size:28px 28px
+}
+.contact-page .city{position:absolute;left:0;right:0;bottom:43px;height:75px;z-index:2;display:flex;align-items:end;justify-content:space-around;padding:0 55px}
+.contact-page .building{width:35px;background:#dceefa;border:1px solid #c4dff1;border-radius:3px 3px 0 0;position:relative}
+.contact-page .building:nth-child(1){height:43px}.contact-page .building:nth-child(2){height:65px}.contact-page .building:nth-child(3){height:51px}.contact-page .building:nth-child(4){height:72px}.contact-page .building:nth-child(5){height:35px}
+.contact-page .building:after{content:"";position:absolute;inset:7px;background:repeating-linear-gradient(0deg,transparent 0 9px,#a7d0ed 9px 11px)}
+.contact-page .route{position:absolute;left:8%;right:8%;bottom:42px;height:3px;background:linear-gradient(90deg,var(--blue),var(--orange));z-index:4}
+.contact-page .road{position:absolute;left:-3%;right:-3%;bottom:0;height:47px;background:#dce3ea;border-top:2px solid #c8d3df;z-index:3;transform:skewY(-2deg)}
+.contact-page .road:after{content:"";position:absolute;left:0;right:0;top:20px;height:4px;background:repeating-linear-gradient(90deg,#fff 0 35px,transparent 35px 70px)}
+.contact-page .van{position:absolute;z-index:6;bottom:29px;left:-105px;width:95px;height:38px;animation:drive 6s linear infinite;filter:drop-shadow(0 7px 5px rgba(16,26,51,.18))}
+.contact-page .vbody{position:absolute;left:0;bottom:5px;width:65px;height:26px;border:2px solid #b9c8d5;border-radius:5px;background:#fff}
+.contact-page .vcab{position:absolute;right:0;bottom:5px;width:35px;height:24px;border:2px solid #b9c8d5;border-left:0;border-radius:2px 6px 3px 2px;background:#f5f8fb}
+.contact-page .vwindow{position:absolute;right:4px;top:4px;width:20px;height:10px;border-radius:2px 4px 1px 1px;background:#bfe6fb;border:1px solid #90c9e9}
+.contact-page .vstripe{position:absolute;left:3px;top:10px;width:56px;height:5px;background:var(--orange)}
+.contact-page .vlogo{position:absolute;left:7px;top:2px;font-size:5px;font-weight:950;color:var(--navy)}
+.contact-page .wheel{position:absolute;bottom:0;width:13px;height:13px;border-radius:50%;background:#172033;border:3px solid #adb9c6}
+.contact-page .w1{left:9px}.contact-page .w2{right:8px}
+@keyframes drive{0%{left:-105px}100%{left:110%}}
+.contact-page .pin{position:absolute;z-index:7;width:12px;height:12px;border-radius:50%;border:3px solid #fff;background:var(--orange);box-shadow:0 4px 12px rgba(244,91,11,.3);top:27%;left:31%}.contact-page .pin.two{left:69%;top:36%;background:var(--green)}
+
+/* CTA BOX SECTION */
+.contact-page .cta{background:#f5f8fc;padding:32px 20px 45px;border-top:1px solid var(--line)}
+.contact-page .cta-box{
+  max-width:900px;margin:auto;padding:26px 30px;
+  border-radius:16px;background:#0d2340;border:1px solid #23496d;
+  color:#fff;display:flex;justify-content:space-between;align-items:center
+}
+.contact-page .cta-box h3{margin:0 0 4px;font-size:18px;font-weight:900}.contact-page .cta-box p{margin:0;color:#b7c9dd;font-size:11px}
+.contact-page .cta-box a.cta-btn{border:0;border-radius:10px;background:var(--orange);color:#fff;padding:12px 18px;font-size:11px;font-weight:900;text-decoration:none;display:inline-block;transition:.2s}
+.contact-page .cta-box a.cta-btn:hover{background:#e04f03;transform:translateY(-1px)}
+
+/* RESPONSIVE */
+@media(max-width:850px){
+  .contact-page .hero-inner{grid-template-columns:1fr;text-align:center}
+  .contact-page .hero-copy{padding:0;max-width:650px;margin:auto}
+  .contact-page .hero-description{margin:auto}
+  .contact-page .hero h1{margin-left:auto;margin-right:auto}
+  .contact-page .hero-stats{justify-content:center}
+  .contact-page .hero-visual{height:310px}
+  .contact-page .content-grid,.contact-page .operations-inner{grid-template-columns:1fr}
+  .contact-page .actions{grid-template-columns:1fr 1fr}
+}
+@media(max-width:540px){
+  .contact-page .hero-inner{padding:35px 16px 12px}
+  .contact-page .hero h1{font-size:42px;letter-spacing:-2px}
+  .contact-page .hero-description{font-size:12px}
+  .contact-page .hero-stats{gap:18px}
+  .contact-page .stat strong{font-size:14px}
+  .contact-page .hero-visual{height:275px}
+  .contact-page .halo{width:275px;height:275px}
+  .contact-page .ring{width:175px;height:175px}.contact-page .ring-inner{width:130px;height:130px}
+  .contact-page .beam{width:320px}
+  .contact-page .badge{transform:scale(.86)}.contact-page .badge.top{right:-2%}.contact-page .badge.bottom{left:-2%}
+  .contact-page .fields{grid-template-columns:1fr}.contact-page .field.full{grid-column:auto}
+  .contact-page .actions{grid-template-columns:1fr}
+  .contact-page .cta-box{flex-direction:column;align-items:flex-start;gap:14px}
+  .contact-page .cta-box a.cta-btn{width:100%;text-align:center}
 }
 </style>
 
-<div class="contact-scope">
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="heroGlow"></div>
-        <div class="container heroGrid">
-            <div>
-                <div class="eyebrow"><i></i> Get in Touch</div>
-                <h1>Let's move<br><span>things forward.</span></h1>
-                <p>Contact Rush Parcel Support & Sales — Whether you need help with a shipment, want to discuss business logistics or simply have a question, the Rush Parcel team is ready to help.</p>
-                <div class="heroStats">
-                    <div>
-                        <strong>0800 123 4567</strong>
-                        <small>UK SUPPORT</small>
-                    </div>
-                    <div>
-                        <strong>24/7</strong>
-                        <small>ONLINE PLATFORM</small>
-                    </div>
-                    <div>
-                        <strong>UK</strong>
-                        <small>OPERATIONS</small>
-                    </div>
-                </div>
-            </div>
-
-            <div class="command">
-                <div class="beam b1"></div>
-                <div class="beam b2"></div>
-                <div class="pulseRing">
-                    <div class="commandCore">RP</div>
-                </div>
-                <div class="status st1"><small>SUPPORT STATUS</small><strong>● AVAILABLE</strong></div>
-                <div class="status st2"><small>RESPONSE CHANNEL</small><strong>DIRECT</strong></div>
-            </div>
+<div class="contact-page">
+  <!-- CONTACT HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="eyebrow">Get in touch</div>
+        <h1>Let's move<br><span>things forward.</span></h1>
+        <p class="hero-description">
+          Contact Rush Parcel Support &amp; Sales — Whether you need help with a
+          shipment, want to discuss business logistics or simply have a question,
+          the Rush Parcel team is ready to help.
+        </p>
+        <div class="hero-stats">
+          <div class="stat"><strong>0800 123 4567</strong><small>UK Support</small></div>
+          <div class="stat"><strong>24/7</strong><small>Online Platform</small></div>
+          <div class="stat"><strong>UK</strong><small>Operations</small></div>
         </div>
-    </section>
+      </div>
 
-    <!-- Main Contact Form & Info Cards -->
-    <section class="contactSection">
-        <div class="container">
-            <div class="intro">
-                <div class="eyebrow">Contact Centre</div>
-                <h2>How can we help?</h2>
-                <p>Send us a message and we'll route your enquiry to the right Rush Parcel team.</p>
-            </div>
+      <div class="hero-visual">
+        <div class="halo"></div>
+        <div class="ring"></div>
+        <div class="ring ring-inner"></div>
+        <div class="beam"></div><div class="beam two"></div>
+        <div class="node a"></div><div class="node b"></div><div class="node c"></div>
+        <div class="core">RP</div>
 
-            <div class="contactGrid">
-                <!-- Form Card -->
-                <div class="formCard">
-                    <div class="cardTitle">
-                        <div>
-                            <h3>Send us a message</h3>
-                            <p>Typical response during support hours: as soon as possible.</p>
-                        </div>
-                        <span class="secure">🔒 SECURE FORM</span>
-                    </div>
-
-                    <form class="form" action="<?= url('/contact') ?>" method="POST">
-                        <?= csrf_field() ?>
-
-                        <div class="row">
-                            <div class="field">
-                                <label for="name">Full Name *</label>
-                                <input type="text" id="name" name="name" required placeholder="e.g. Sarah Jenkins">
-                            </div>
-                            <div class="field">
-                                <label for="company">Company</label>
-                                <input type="text" id="company" name="company" placeholder="Company name (optional)">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="field">
-                                <label for="email">Email Address *</label>
-                                <input type="email" id="email" name="email" required placeholder="you@example.co.uk">
-                            </div>
-                            <div class="field">
-                                <label for="phone">Phone Number</label>
-                                <input type="text" id="phone" name="phone" placeholder="e.g. 07700 900123">
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label for="subject">What can we help with? *</label>
-                            <select id="subject" name="subject" required>
-                                <option value="">Select an enquiry type</option>
-                                <option value="Parcel / Delivery Support">Parcel / Delivery Support</option>
-                                <option value="Get a Quote">Get a Quote</option>
-                                <option value="Business / Corporate Account">Business / Corporate Account</option>
-                                <option value="Tracking Support">Tracking Support</option>
-                                <option value="Billing / Invoice">Billing / Invoice</option>
-                                <option value="General Enquiry">General Enquiry</option>
-                            </select>
-                        </div>
-
-                        <div class="field">
-                            <label for="message">Message *</label>
-                            <textarea id="message" name="message" required placeholder="Tell us how we can help..."></textarea>
-                        </div>
-
-                        <button class="formBtn" type="submit">Send Message &rarr;</button>
-                        <div class="formNote">By submitting this form you agree to our <a href="<?= url('/privacy') ?>">Privacy Policy</a>.</div>
-                    </form>
-                </div>
-
-                <!-- Info Cards Stack -->
-                <div class="infoStack">
-                    <div class="infoCard">
-                        <div class="infoIcon">☎</div>
-                        <h3>Phone Support</h3>
-                        <p>Speak directly with our UK customer support team.</p>
-                        <p><a href="tel:08001234567">0800 123 4567</a></p>
-                        <div class="hours">
-                            <div><span>Mon – Fri</span><b>07:30 – 19:00</b></div>
-                            <div><span>Saturday</span><b>08:00 – 13:00</b></div>
-                            <div><span>Sunday</span><b>Online support</b></div>
-                        </div>
-                    </div>
-
-                    <div class="infoCard">
-                        <div class="infoIcon">✉</div>
-                        <h3>Email Support</h3>
-                        <p>Customer Services: <a href="mailto:support@rushparcel.co.uk">support@rushparcel.co.uk</a></p>
-                        <p>Corporate Accounts: <a href="mailto:sales@rushparcel.co.uk">sales@rushparcel.co.uk</a></p>
-                    </div>
-
-                    <div class="infoCard">
-                        <div class="infoIcon">⌖</div>
-                        <h3>Operations Hub</h3>
-                        <p>Rush Parcel Platform Logistics Centre<br>100 Express Way, Park Royal<br>London NW10 7XQ<br>United Kingdom</p>
-                        <p class="online">● UK operations hub</p>
-                    </div>
-                </div>
-            </div>
+        <div class="badge available top">
+          <small>Support Status</small><strong>● AVAILABLE</strong>
         </div>
-    </section>
-
-    <!-- Support Strip -->
-    <section class="supportSection">
-        <div class="container">
-            <div class="supportGrid">
-                <div class="supportCard">
-                    <div class="icon">⚡</div>
-                    <h3>Need a quick quote?</h3>
-                    <p>Get a server-verified UK delivery price in minutes.</p>
-                    <a href="<?= url('/quote') ?>">Get a Quote &rarr;</a>
-                </div>
-                <div class="supportCard">
-                    <div class="icon">◎</div>
-                    <h3>Looking for a parcel?</h3>
-                    <p>Enter your shipment reference and see the latest status.</p>
-                    <a href="<?= url('/track') ?>">Track Parcel &rarr;</a>
-                </div>
-                <div class="supportCard">
-                    <div class="icon">▣</div>
-                    <h3>Business logistics?</h3>
-                    <p>Talk to our team about recurring shipments and corporate solutions.</p>
-                    <a href="#contactForm">Speak to Sales &rarr;</a>
-                </div>
-            </div>
+        <div class="badge bottom">
+          <small>Response Channel</small><strong>DIRECT</strong>
         </div>
-    </section>
+        <div class="phone">☎</div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Office Hub Location Section -->
-    <section class="officeSection">
-        <div class="container officeGrid">
-            <div class="officeText">
-                <div class="eyebrow">UK Operations</div>
-                <h2>Built close to the action.</h2>
-                <p>Our UK-focused operation is designed around responsive customer support and dependable courier coordination.</p>
-                <div class="address">
-                    <b>Rush Parcel Platform Logistics Centre</b>
-                    <p>100 Express Way, Park Royal<br>London NW10 7XQ<br>United Kingdom</p>
-                </div>
+  <!-- MAIN CONTACT CENTRE -->
+  <section class="contact-section">
+    <div class="contact-wrap">
+      <div class="center">
+        <span class="blue-pill">CONTACT CENTRE</span>
+        <h2>How can we help?</h2>
+        <p>Send us a message and we'll route your enquiry to the right Rush Parcel team.</p>
+      </div>
+
+      <?php if (\App\Core\Session::has('success')): ?>
+          <div style="background: #edf9f2; border: 1px solid #c9ecd8; color: #16834d; padding: 14px 18px; border-radius: 12px; margin-top: 20px; font-weight: 700; font-size: 13px;">
+              ✓ <?= e(\App\Core\Session::getFlash('success')) ?>
+          </div>
+      <?php endif; ?>
+
+      <?php if (\App\Core\Session::has('error')): ?>
+          <div style="background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; padding: 14px 18px; border-radius: 12px; margin-top: 20px; font-weight: 700; font-size: 13px;">
+              ⚠️ <?= e(\App\Core\Session::getFlash('error')) ?>
+          </div>
+      <?php endif; ?>
+
+      <div class="content-grid">
+        <!-- Contact Form Card -->
+        <div class="card form-card" id="contactForm">
+          <div class="form-head">
+            <h3>Send us a message</h3>
+            <span class="secure">● SECURE FORM</span>
+          </div>
+
+          <form action="<?= url('/contact') ?>" method="POST">
+            <?= csrf_field() ?>
+
+            <div class="fields">
+              <div class="field">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required placeholder="e.g. Sarah Jenkins">
+              </div>
+              <div class="field">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" placeholder="Company name (optional)">
+              </div>
+              <div class="field">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required placeholder="you@example.co.uk">
+              </div>
+              <div class="field">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" placeholder="e.g. 07700 900123">
+              </div>
+              <div class="field full">
+                <label for="subject">What can we help with? *</label>
+                <select id="subject" name="subject" required>
+                  <option value="">Select an enquiry type</option>
+                  <option value="Parcel / Delivery Support">Shipment support</option>
+                  <option value="Business / Corporate Account">Business logistics</option>
+                  <option value="Get a Quote">Get a quote</option>
+                  <option value="General Enquiry">General enquiry</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" required placeholder="Tell us how we can help..."></textarea>
+              </div>
             </div>
 
-            <div class="officeVisual">
-                <div class="routeLine"></div>
-                <div class="pin"></div>
-                <div class="building"></div>
-            </div>
+            <button type="submit" class="submit">Send Message →</button>
+          </form>
         </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <div class="ctaBox">
-                <div>
-                    <h2>Prefer to start online?</h2>
-                    <p>Get your UK courier price or track an existing shipment instantly.</p>
-                    <a class="btn primary" href="<?= url('/quote') ?>">Get an Instant Quote &rarr;</a>
-                </div>
-                <div style="font-size: 55px; color: #2bdcff; text-shadow: 0 0 30px #2bdcff77;">✦</div>
-            </div>
+        <!-- Side Info Cards Stack -->
+        <div class="side">
+          <div class="card side-card">
+            <div class="side-icon">☎</div>
+            <h3>Phone Support</h3>
+            <p>Speak directly with our UK customer support team.</p>
+            <p style="margin-top:7px"><a href="tel:08001234567">0800 123 4567</a></p>
+            <p style="margin-top:8px">Mon–Fri　07:30–19:00<br>Sat　08:00–13:00<br>Sunday　Online support</p>
+          </div>
+          <div class="card side-card">
+            <div class="side-icon">✉</div>
+            <h3>Email Support</h3>
+            <p>Customer Service: <a href="mailto:support@rushparcel.co.uk">support@rushparcel.co.uk</a></p>
+            <p style="margin-top:6px">Corporate Accounts: <a href="mailto:sales@rushparcel.co.uk">sales@rushparcel.co.uk</a></p>
+          </div>
+          <div class="card side-card">
+            <div class="side-icon">⌖</div>
+            <h3>Operations Hub</h3>
+            <p>Rush Parcel Platform Logistics Centre<br>100 Express Way, Park Royal<br>London NW10 7XW<br>United Kingdom</p>
+          </div>
         </div>
-    </section>
+      </div>
+
+      <!-- Quick Actions Grid -->
+      <div class="actions">
+        <div class="action">
+          <span>⚡</span>
+          <b>Need a quick quote?</b>
+          <p>Get a server-verified UK delivery price in minutes.</p>
+          <a href="<?= url('/quote') ?>">Get a Quote →</a>
+        </div>
+        <div class="action">
+          <span>◉</span>
+          <b>Looking for a parcel?</b>
+          <p>Enter your shipment reference and see the latest status.</p>
+          <a href="<?= url('/track') ?>">Track Parcel →</a>
+        </div>
+        <div class="action">
+          <span>▣</span>
+          <b>Business logistics?</b>
+          <p>Talk to our team about recurring shipments and corporate solutions.</p>
+          <a href="#contactForm">Speak to Sales →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UK OPERATIONS WITH ANIMATED VAN & CITY -->
+  <section class="operations">
+    <div class="operations-inner">
+      <div>
+        <div class="eyebrow">UK Operations</div>
+        <h2>Built close to the action.</h2>
+        <p>Our UK-focused operation is designed around responsive customer support and dependable courier coordination.</p>
+        <div class="address">
+          <strong>Rush Parcel Platform Logistics Centre</strong>
+          <span>100 Express Way, Park Royal<br>London NW10 7XW<br>United Kingdom</span>
+        </div>
+      </div>
+
+      <div class="op-art">
+        <div class="pin"></div><div class="pin two"></div>
+        <div class="city"><i class="building"></i><i class="building"></i><i class="building"></i><i class="building"></i><i class="building"></i></div>
+        <div class="route"></div><div class="road"></div>
+        <div class="van">
+          <span class="vbody"><span class="vlogo">RUSHPARCEL</span><span class="vstripe"></span></span>
+          <span class="vcab"><span class="vwindow"></span></span>
+          <span class="wheel w1"></span><span class="wheel w2"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta">
+    <div class="cta-box">
+      <div>
+        <h3>Prefer to start online?</h3>
+        <p>Get your UK courier price or track an existing shipment instantly.</p>
+      </div>
+      <a href="<?= url('/quote') ?>" class="cta-btn">Get an Instant Quote →</a>
+    </div>
+  </section>
 </div>
 
 <?php $content = ob_get_clean(); ?>
