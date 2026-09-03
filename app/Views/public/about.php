@@ -15,7 +15,7 @@
   --white:#fff;
   --page:#f7f9fc;
   --shadow:0 18px 45px rgba(16,26,51,.10);
-  margin: -1.5rem -1.25rem -5rem -1.25rem;
+  margin: -1.5rem -1.25rem 0 -1.25rem;
   background: var(--page);
   color: var(--text);
   font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;

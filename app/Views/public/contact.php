@@ -13,7 +13,7 @@
   --bg:#f6f9fc;
   --orange-soft:#fff2e9;
   --blue-soft:#eef8ff;
-  margin: -1.5rem -1.25rem -5rem -1.25rem;
+  margin: -1.5rem -1.25rem 0 -1.25rem;
   background: var(--bg);
   color: var(--ink);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;

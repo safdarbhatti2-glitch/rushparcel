@@ -16,7 +16,7 @@
   --blue-pale:#eff8ff;
   --white:#fff;
   --shadow:0 18px 55px rgba(23,32,51,.08);
-  margin: -1.5rem -1.25rem -5rem -1.25rem;
+  margin: -1.5rem -1.25rem 0 -1.25rem;
   background: var(--soft);
   color: var(--ink);
   font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
