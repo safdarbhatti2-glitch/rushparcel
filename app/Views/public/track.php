@@ -51,7 +51,6 @@
 .track-page .track-btn{border:0;background:var(--orange);color:#fff;border-radius:13px;padding:0 24px;font-weight:850;font-size:13px;box-shadow:0 8px 18px rgba(244,91,11,.2);transition:.2s;cursor:pointer}
 .track-page .track-btn:hover{background:#e04f03;transform:translateY(-1px)}
 .track-page .helper{font-size:10px;color:#98a3b3;margin-top:8px;display:flex;justify-content:space-between}
-.track-page .demo-link{color:var(--orange);font-weight:800;cursor:pointer;text-decoration:underline}
 
 /* STATUS SECTION */
 .track-page .status{margin-top:24px;border-top:1px solid var(--line);padding-top:23px}
@@ -147,60 +146,62 @@
 </style>
 
 <?php
-  // Dynamic Calculation Logic
-  $isDelivered = (!empty($shipment['status']) && $shipment['status'] === 'delivered') ||
-                 (!empty($shipment['scheduled_delivery_at']) && strtotime($shipment['scheduled_delivery_at']) <= time() && !in_array($shipment['status'] ?? '', ['cancelled', 'on_hold']));
+  // Dynamic Calculation Logic for Active Shipment
+  if (!empty($shipment)) {
+      $isDelivered = (!empty($shipment['status']) && $shipment['status'] === 'delivered') ||
+                     (!empty($shipment['scheduled_delivery_at']) && strtotime($shipment['scheduled_delivery_at']) <= time() && !in_array($shipment['status'] ?? '', ['cancelled', 'on_hold']));
 
-  if (!empty($history)) {
-      foreach ($history as $h) {
-          if (($h['new_status'] ?? '') === 'delivered') {
-              $isDelivered = true;
-              break;
+      if (!empty($history)) {
+          foreach ($history as $h) {
+              if (($h['new_status'] ?? '') === 'delivered') {
+                  $isDelivered = true;
+                  break;
+              }
           }
       }
-  }
 
-  $effectiveStatus = $isDelivered ? 'delivered' : ($shipment['status'] ?? 'in_transit');
+      $effectiveStatus = $isDelivered ? 'delivered' : ($shipment['status'] ?? 'in_transit');
 
-  $senderCity = !empty($shipment['pickup_address']['city']) ? $shipment['pickup_address']['city'] : (!empty($shipment['pickup_address']['town']) ? $shipment['pickup_address']['town'] : 'London');
-  $senderPostcode = !empty($shipment['pickup_address']['postcode']) ? $shipment['pickup_address']['postcode'] : 'SW1A 1AA';
+      $senderCity = !empty($shipment['pickup_address']['city']) ? $shipment['pickup_address']['city'] : (!empty($shipment['pickup_address']['town']) ? $shipment['pickup_address']['town'] : 'London');
+      $senderPostcode = !empty($shipment['pickup_address']['postcode']) ? $shipment['pickup_address']['postcode'] : 'SW1A 1AA';
 
-  $receiverCity = !empty($shipment['delivery_address']['city']) ? $shipment['delivery_address']['city'] : (!empty($shipment['delivery_address']['town']) ? $shipment['delivery_address']['town'] : 'Manchester');
-  $receiverPostcode = !empty($shipment['delivery_address']['postcode']) ? $shipment['delivery_address']['postcode'] : 'M1 1AE';
+      $receiverCity = !empty($shipment['delivery_address']['city']) ? $shipment['delivery_address']['city'] : (!empty($shipment['delivery_address']['town']) ? $shipment['delivery_address']['town'] : 'Manchester');
+      $receiverPostcode = !empty($shipment['delivery_address']['postcode']) ? $shipment['delivery_address']['postcode'] : 'M1 1AE';
 
-  $bookedEventDate = null;
-  if (!empty($history)) {
-      foreach ($history as $h) {
-          if (($h['new_status'] ?? '') === 'booking_confirmed') {
-              $bookedEventDate = $h['created_at'];
-              break;
+      $bookedEventDate = null;
+      if (!empty($history)) {
+          foreach ($history as $h) {
+              if (($h['new_status'] ?? '') === 'booking_confirmed') {
+                  $bookedEventDate = $h['created_at'];
+                  break;
+              }
+          }
+          if (!$bookedEventDate && !empty($history)) {
+              $earliest = end($history);
+              if (!empty($earliest['created_at'])) {
+                  $bookedEventDate = $earliest['created_at'];
+              }
           }
       }
-      if (!$bookedEventDate && !empty($history)) {
-          $earliest = end($history);
-          if (!empty($earliest['created_at'])) {
-              $bookedEventDate = $earliest['created_at'];
-          }
+      if (!$bookedEventDate && !empty($shipment['scheduled_pickup_at'])) {
+          $bookedEventDate = date('Y-m-d H:i:s', strtotime($shipment['scheduled_pickup_at'] . ' -2 hours'));
       }
-  }
-  if (!$bookedEventDate && !empty($shipment['scheduled_pickup_at'])) {
-      $bookedEventDate = date('Y-m-d H:i:s', strtotime($shipment['scheduled_pickup_at'] . ' -2 hours'));
-  }
-  if (!$bookedEventDate && !empty($shipment['created_at'])) {
-      $bookedEventDate = $shipment['created_at'];
-  }
+      if (!$bookedEventDate && !empty($shipment['created_at'])) {
+          $bookedEventDate = $shipment['created_at'];
+      }
 
-  $progressPercent = '72%';
-  $progressMilestones = '3 of 4 milestones';
-  if ($isDelivered) {
-      $progressPercent = '100%';
-      $progressMilestones = '4 of 4 milestones';
-  } else if ($effectiveStatus === 'booking_confirmed') {
-      $progressPercent = '25%';
-      $progressMilestones = '1 of 4 milestones';
-  } else if ($effectiveStatus === 'collection_scheduled' || $effectiveStatus === 'collected') {
-      $progressPercent = '50%';
-      $progressMilestones = '2 of 4 milestones';
+      $progressPercent = '72%';
+      $progressMilestones = '3 of 4 milestones';
+      if ($isDelivered) {
+          $progressPercent = '100%';
+          $progressMilestones = '4 of 4 milestones';
+      } else if ($effectiveStatus === 'booking_confirmed') {
+          $progressPercent = '25%';
+          $progressMilestones = '1 of 4 milestones';
+      } else if ($effectiveStatus === 'collection_scheduled' || $effectiveStatus === 'collected') {
+          $progressPercent = '50%';
+          $progressMilestones = '2 of 4 milestones';
+      }
   }
 ?>
 
@@ -224,21 +225,21 @@
    <form action="<?= url('/track') ?>" method="GET" class="search-row">
     <div class="search-box">
      <span class="prefix">RP / UK</span>
-     <input id="tracking" name="tracking_number" value="<?= e($search_tracking ?? 'UK9823410574') ?>" aria-label="Tracking reference" placeholder="Enter tracking reference — e.g. UK9823410574" required>
+     <input id="tracking" name="tracking_number" value="<?= e($search_tracking ?? '') ?>" aria-label="Tracking reference" placeholder="Enter tracking reference — e.g. UK9823410574" required>
     </div>
     <button class="track-btn" type="submit">Track Shipment →</button>
    </form>
 
    <div class="helper">
     <span>Tracking references are case-insensitive · Your tracking information is updated as new scans are received.</span>
-    <span class="demo-link" id="demoBtn">Load demo shipment</span>
    </div>
 
+   <?php if (!empty($shipment)): ?>
    <div class="status">
     <div class="status-head">
      <div>
       <div class="status-kicker">Current shipment status</div>
-      <div class="status-title"><?= !empty($shipment) ? e(ucwords(str_replace('_', ' ', $effectiveStatus))) : 'In Transit' ?></div>
+      <div class="status-title"><?= e(ucwords(str_replace('_', ' ', $effectiveStatus))) ?></div>
       <div class="status-description">
        <?= $isDelivered 
            ? 'Your parcel has been successfully delivered and signed for at the destination address.' 
@@ -251,12 +252,12 @@
     <div class="metrics">
      <div class="metric">
       <label>Tracking reference</label>
-      <b id="ref"><?= !empty($shipment) ? e($shipment['tracking_number']) : 'UK9823410574' ?></b>
+      <b id="ref"><?= e($shipment['tracking_number']) ?></b>
       <span>Updated just now</span>
      </div>
      <div class="metric">
       <label>Service</label>
-      <b><?= !empty($shipment['service_name']) ? e($shipment['service_name']) : 'Next-Day' ?></b>
+      <b><?= e($shipment['service_name'] ?? 'Next-Day Express') ?></b>
       <span>Express delivery</span>
      </div>
      <div class="metric">
@@ -283,7 +284,7 @@
          <b>Booked</b>
          <p>Shipment created and confirmed</p>
         </div>
-        <time><?= !empty($bookedEventDate) ? date('d M · H:i', strtotime($bookedEventDate)) : '01 Sep · 08:10' ?></time>
+        <time><?= !empty($bookedEventDate) ? date('d M · H:i', strtotime($bookedEventDate)) : 'Recent' ?></time>
        </div>
 
        <div class="event <?= ($isDelivered || in_array($effectiveStatus, ['collected', 'in_transit', 'out_for_delivery', 'delivered'])) ? 'done' : 'current' ?>">
@@ -293,7 +294,7 @@
          <b>Collected</b>
          <p><?= e($senderCity) ?> Hub Dispatch</p>
         </div>
-        <time><?= !empty($bookedEventDate) ? date('d M · H:i', strtotime($bookedEventDate . ' +2 hours')) : '01 Sep · 10:42' ?></time>
+        <time><?= !empty($bookedEventDate) ? date('d M · H:i', strtotime($bookedEventDate . ' +2 hours')) : 'Recent' ?></time>
        </div>
 
        <div class="event <?= $isDelivered ? 'done' : (($effectiveStatus === 'in_transit' || $effectiveStatus === 'out_for_delivery') ? 'current' : '') ?>">
@@ -303,7 +304,7 @@
          <b>In Transit</b>
          <p><?= e($receiverCity) ?> Regional Hub Scan</p>
         </div>
-        <time><?= !empty($bookedEventDate) ? date('d M · H:i', strtotime($bookedEventDate . ' +5 hours')) : 'Today · 12:18' ?></time>
+        <time><?= !empty($bookedEventDate) ? date('d M · H:i', strtotime($bookedEventDate . ' +5 hours')) : 'Active' ?></time>
        </div>
 
        <div class="event <?= $isDelivered ? 'done' : '' ?>">
@@ -348,11 +349,11 @@
        </div>
        <div class="detail-row">
         <span>Service</span>
-        <b><?= !empty($shipment['service_name']) ? e($shipment['service_name']) : 'Next-Day Express' ?></b>
+        <b><?= e($shipment['service_name'] ?? 'Next-Day Express') ?></b>
        </div>
        <div class="detail-row">
         <span>Booked</span>
-        <b><?= !empty($bookedEventDate) ? date('d M · H:i', strtotime($bookedEventDate)) : '01 Sep · 08:10' ?></b>
+        <b><?= !empty($bookedEventDate) ? date('d M · H:i', strtotime($bookedEventDate)) : 'Recent' ?></b>
        </div>
        <div class="detail-row">
         <span>Estimated arrival</span>
@@ -373,6 +374,7 @@
      </aside>
     </div>
    </div>
+   <?php endif; ?>
   </section>
  </main>
 
@@ -415,12 +417,6 @@
   </div>
  </section>
 </div>
-
-<script>
-document.getElementById('demoBtn').addEventListener('click', function() {
-    document.getElementById('tracking').value = 'UK9823410574';
-});
-</script>
 
 <?php $content = ob_get_clean(); ?>
 <?php include APP_PATH . '/Views/layouts/main.php'; ?>
