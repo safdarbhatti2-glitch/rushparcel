@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>RushParcel — About Us Slider</title>
+<style>
+:root{
+  --orange:#f45b0b;
+  --orange2:#ff7a18;
+  --orange-light:#fff2e9;
+  --orange-line:#ffd8c0;
+  --navy:#101a33;
+  --blue:#1684dc;
+  --green:#16a05a;
+  --text:#172033;
+  --muted:#66758b;
+  --line:#e3e9f0;
+  --white:#fff;
+  --page:#f7f9fc;
+  --shadow:0 18px 45px rgba(16,26,51,.10);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--page);color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+button{font:inherit;cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+/* Header */
+.topbar{height:30px;background:var(--navy);color:#dbe5f1;font-size:10px}
+.topbar-inner{
+  max-width:1180px;height:100%;margin:auto;padding:0 22px;
+  display:flex;align-items:center;justify-content:space-between
+}
+.topbar strong{color:#68b9ff}
+header{height:74px;background:#fff;border-bottom:1px solid var(--line)}
+.nav{
+  max-width:1180px;height:100%;margin:auto;padding:0 22px;
+  display:flex;align-items:center;gap:45px
+}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.5px;color:var(--navy);white-space:nowrap}
+.logo-mark{
+  width:38px;height:38px;border-radius:11px;background:var(--orange);color:#fff;
+  display:grid;place-items:center;font-size:11px;box-shadow:0 8px 18px rgba(244,91,11,.22)
+}
+.links{display:flex;align-items:center;gap:27px;flex:1;color:#657287;font-size:12px;font-weight:700}
+.links a:hover,.links .active{color:var(--orange)}
+.portal{border:0;background:var(--orange);color:#fff;border-radius:11px;padding:11px 18px;font-size:11px;font-weight:850}
+
+/* Intro */
+.hero{
+  background:
+    radial-gradient(circle at 18% 5%,rgba(244,91,11,.08),transparent 28%),
+    radial-gradient(circle at 85% 15%,rgba(22,132,220,.07),transparent 30%),#fff;
+  padding:48px 20px 34px;text-align:center
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:999px;
+  background:var(--orange-light);border:1px solid var(--orange-line);
+  color:#ca4c0a;text-transform:uppercase;letter-spacing:1px;font-size:9px;font-weight:900
+}
+.hero h1{margin:15px 0 9px;color:var(--navy);font-size:clamp(38px,5vw,57px);line-height:1.03;letter-spacing:-2.8px}
+.hero h1 span{color:var(--orange)}
+.hero p{max-width:650px;margin:auto;color:var(--muted);font-size:14px}
+
+/* Slider */
+.slider-section{background:#fff;padding:18px 20px 72px}
+.slider{max-width:980px;margin:auto}
+.slider-window{
+  position:relative;overflow:hidden;border:1px solid var(--line);
+  border-radius:22px;background:#fff;box-shadow:var(--shadow)
+}
+.slides{display:flex;transition:transform .7s cubic-bezier(.22,.75,.2,1)}
+.slide{min-width:100%;display:grid;grid-template-columns:1.05fr .95fr;min-height:350px}
+
+/* Left panel */
+.slide-copy{
+  padding:45px 48px;background:#fff;display:flex;
+  flex-direction:column;justify-content:center
+}
+.slide-number{color:var(--orange);font-size:9px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:9px}
+.slide-copy h2{margin:0 0 12px;color:var(--navy);font-size:30px;line-height:1.08;letter-spacing:-1.35px}
+.slide-copy p{max-width:470px;margin:0;color:var(--muted);font-size:12px;line-height:1.7}
+.slide-copy ul{list-style:none;padding:0;margin:17px 0 0;display:grid;gap:7px}
+.slide-copy li{color:#526076;font-size:10px}
+.slide-copy li::before{content:"✓";color:var(--green);font-weight:900;margin-right:7px}
+
+/* Right visual */
+.slide-art{
+  min-height:350px;position:relative;overflow:hidden;display:flex;
+  align-items:center;justify-content:center;
+  background:
+    radial-gradient(circle at 50% 40%,rgba(22,132,220,.14),transparent 24%),
+    radial-gradient(circle at 50% 60%,rgba(244,91,11,.06),transparent 42%),
+    linear-gradient(145deg,#eef8ff 0%,#fff 54%,#fff7f1 100%)
+}
+.slide-art::before{
+  content:"";position:absolute;inset:0;opacity:.48;
+  background-image:linear-gradient(rgba(22,132,220,.05) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(22,132,220,.05) 1px,transparent 1px);
+  background-size:34px 34px
+}
+.orbit{
+  position:absolute;width:340px;height:110px;border:1px solid rgba(22,132,220,.2);
+  border-radius:50%;transform:rotate(-24deg)
+}
+.orbit.two{width:370px;height:120px;border-color:rgba(244,91,11,.15);transform:rotate(27deg)}
+.rp-core{
+  position:relative;z-index:3;width:76px;height:76px;border-radius:18px;
+  display:grid;place-items:center;color:#fff;font-size:21px;font-weight:950;
+  background:linear-gradient(145deg,#2195f2,#0869c7);
+  border:4px solid rgba(255,255,255,.85);
+  box-shadow:0 18px 35px rgba(22,132,220,.27),0 0 0 12px rgba(22,132,220,.06)
+}
+.float-card{
+  position:absolute;z-index:4;min-width:100px;padding:9px 12px;border-radius:9px;
+  background:#fff;border:1px solid var(--line);box-shadow:0 12px 28px rgba(16,26,51,.13);
+  color:var(--navy);font-size:8px;font-weight:900
+}
+.float-card small{display:block;margin-bottom:3px;color:#98a3b3;font-size:7px;font-weight:800;letter-spacing:.5px}
+.float-card.orange{left:10%;top:22%;border-left:3px solid var(--orange)}
+.float-card.blue{right:9%;top:14%;border-left:3px solid var(--blue)}
+.float-card.green{right:14%;bottom:18%;border-left:3px solid var(--green)}
+
+/* =========================================================
+   COURIER ROAD + VAN
+   The road is integrated into the same right-side artwork.
+   It does not alter the slider layout.
+   ========================================================= */
+.road-scene{
+  position:absolute;
+  left:0;right:0;bottom:0;height:94px;
+  z-index:2;overflow:hidden;
+}
+.road-glow{
+  position:absolute;left:0;right:0;bottom:30px;height:48px;
+  background:linear-gradient(180deg,transparent,rgba(22,132,220,.035))
+}
+.road{
+  position:absolute;left:-5%;right:-5%;bottom:13px;height:42px;
+  background:#dfe5ec;
+  border-top:2px solid #c9d2dd;
+  border-bottom:2px solid #c9d2dd;
+  transform:skewY(-2deg);
+}
+.road::before{
+  content:"";position:absolute;left:0;right:0;top:18px;height:4px;
+  background:repeating-linear-gradient(90deg,var(--orange) 0 34px,transparent 34px 68px);
+  opacity:.9;
+}
+.road-edge{
+  position:absolute;left:0;right:0;bottom:0;height:13px;background:#eef2f5;
+}
+.road-line{
+  position:absolute;left:0;right:0;bottom:7px;height:2px;background:#fff
+}
+
+/* Van */
+.van{
+  position:absolute;z-index:6;bottom:37px;left:-130px;
+  width:116px;height:47px;
+  animation:drive 6s linear infinite;
+  filter:drop-shadow(0 9px 7px rgba(16,26,51,.16));
+}
+.van-body{
+  position:absolute;left:0;bottom:8px;width:83px;height:34px;
+  border-radius:7px 5px 4px 5px;
+  background:linear-gradient(180deg,#fff,#f2f5f8);
+  border:2px solid #cbd5df;
+}
+.van-cab{
+  position:absolute;right:0;bottom:8px;width:42px;height:30px;
+  background:linear-gradient(180deg,#fff,#eef2f6);
+  border:2px solid #cbd5df;border-left:0;
+  border-radius:3px 9px 4px 3px;
+}
+.van-window{
+  position:absolute;right:5px;top:5px;width:26px;height:13px;
+  background:#ccecff;border:1px solid #9ccbea;
+  border-radius:3px 6px 2px 2px
+}
+.van-stripe{
+  position:absolute;left:4px;top:14px;width:73px;height:7px;
+  background:var(--orange);border-radius:2px
+}
+.van-logo{
+  position:absolute;left:10px;top:3px;font-size:7px;font-weight:950;color:var(--navy);
+  letter-spacing:.3px
+}
+.van-wheel{
+  position:absolute;bottom:0;width:18px;height:18px;border-radius:50%;
+  background:#172033;border:4px solid #b8c1cb
+}
+.w1{left:13px}.w2{right:13px}
+.wheel-inner{width:5px;height:5px;border-radius:50%;background:#e6ebf0;position:absolute;left:2px;top:2px}
+@keyframes drive{
+  0%{left:-135px}
+  45%{left:42%}
+  100%{left:110%}
+}
+
+/* small motion trail */
+.motion{
+  position:absolute;z-index:5;bottom:55px;left:0;width:80px;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(244,91,11,.35));
+  animation:trail 6s linear infinite
+}
+@keyframes trail{
+  0%{left:-80px;opacity:0}
+  35%{opacity:1}
+  50%{left:42%;opacity:0}
+  100%{left:100%;opacity:0}
+}
+
+/* Dots only — no arrows */
+.slider-controls{margin-top:13px;display:flex;align-items:center;justify-content:center}
+.dots{display:flex;align-items:center;gap:6px}
+.dot{
+  width:23px;height:3px;padding:0;border:0;border-radius:10px;
+  background:#dbe3ec;transition:.2s
+}
+.dot.active{width:34px;background:var(--orange)}
+
+/* Lower demo */
+.mission{background:#f3f7fb;padding:65px 20px}
+.mission-inner{max-width:980px;margin:auto}
+.center{text-align:center}
+.center h2{color:var(--navy);font-size:30px;letter-spacing:-1.4px;margin:12px 0 5px}
+.center p{color:var(--muted);font-size:12px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:25px}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px}
+.card-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:var(--orange-light);color:var(--orange);font-weight:900;margin-bottom:13px}
+.card h3{margin:0 0 5px;color:var(--navy);font-size:12px}
+.card p{margin:0;color:var(--muted);font-size:10px;line-height:1.6}
+
+/* Footer */
+footer{background:var(--navy);color:#fff;padding:40px 20px 22px}
+.footer{max-width:980px;margin:auto;display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:30px}
+.footer .logo{color:#fff}.footer .logo-mark{box-shadow:none}
+.footer p{max-width:270px;color:#aebbd0;font-size:10px;line-height:1.7}
+.footer h4{margin:0 0 12px;font-size:10px;text-transform:uppercase;letter-spacing:.7px}
+.footer a{display:block;margin:7px 0;color:#aebbd0;font-size:10px}.footer a:hover{color:#fff}
+.copyright{max-width:980px;margin:25px auto 0;padding-top:15px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;color:#8391a8;font-size:9px}
+
+/* Responsive */
+@media(max-width:800px){
+  .links{display:none}.nav{justify-content:space-between}
+  .slide{grid-template-columns:1fr}
+  .slide-art{min-height:285px;order:-1}
+  .slide-copy{padding:32px}
+  .cards{grid-template-columns:1fr 1fr}
+  .footer{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+  .topbar-inner{justify-content:center}.topbar-inner span:last-child{display:none}
+  .hero{padding:40px 16px 28px}.hero h1{font-size:39px;letter-spacing:-2px}
+  .slider-section{padding:10px 12px 55px}.slider-window{border-radius:18px}
+  .slide-art{min-height:245px}
+  .slide-copy{padding:27px 22px}.slide-copy h2{font-size:25px}
+  .rp-core{width:64px;height:64px;font-size:18px}
+  .orbit{width:280px}.float-card{transform:scale(.88)}
+  .van{transform:scale(.82);transform-origin:bottom left}
+  .mission{padding:55px 16px}.cards{grid-template-columns:1fr}
+  .footer{grid-template-columns:1fr}.copyright{flex-direction:column;gap:7px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>✦ RushParcel — UK Same-Day & Next-Day Express Courier Coverage</span>
+    <span>Customer Support: <strong>0800 123 4567</strong> · support@rushparcel.co.uk</span>
+  </div>
+</div>
+
+<header>
+<nav class="nav">
+  <a class="logo" href="#"><span class="logo-mark">RP</span>RUSHPARCEL</a>
+  <div class="links">
+    <a href="#">Home</a><a href="#">Services</a><a href="#">Get a Quote</a>
+    <a href="#">Track Parcel</a><a href="#">Drop-off Locations</a>
+    <a class="active" href="#">About Us</a><a href="#">Contact</a>
+  </div>
+  <button class="portal">My Portal</button>
+</nav>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">About RushParcel</div>
+  <h1>We move <span>what matters.</span></h1>
+  <p>Modern logistics built around reliable delivery, clear communication and a better customer experience.</p>
+</section>
+
+<section class="slider-section">
+<div class="slider">
+
+  <div class="slider-window">
+    <div class="slides" id="slides">
+
+      <!-- SLIDE 1 -->
+      <article class="slide">
+        <div class="slide-copy">
+          <div class="slide-number">01 / The Future</div>
+          <h2>Logistics should keep getting smarter.</h2>
+          <p>We are building a technology-led courier experience that removes unnecessary friction from modern delivery operations — without losing the human experience.</p>
+          <ul>
+            <li>Clearer delivery visibility</li>
+            <li>Smarter operational workflows</li>
+            <li>Technology-led infrastructure</li>
+          </ul>
+        </div>
+
+        <div class="slide-art">
+          <div class="orbit"></div>
+          <div class="orbit two"></div>
+          <div class="rp-core">RP</div>
+
+          <div class="float-card orange"><small>BUILT AROUND</small>TRUST + SPEED</div>
+          <div class="float-card blue"><small>CONNECTED</small>ONE NETWORK</div>
+          <div class="float-card green"><small>DESIGNED FOR</small>DIGITAL FIRST</div>
+
+          <div class="road-scene">
+            <div class="road-glow"></div>
+            <div class="road"></div>
+            <div class="road-edge"></div>
+            <div class="road-line"></div>
+            <div class="motion"></div>
+
+            <div class="van" aria-label="RushParcel courier van">
+              <div class="van-body">
+                <div class="van-logo">RUSHPARCEL</div>
+                <div class="van-stripe"></div>
+              </div>
+              <div class="van-cab"><div class="van-window"></div></div>
+              <div class="van-wheel w1"><span class="wheel-inner"></span></div>
+              <div class="van-wheel w2"><span class="wheel-inner"></span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 2 -->
+      <article class="slide">
+        <div class="slide-copy">
+          <div class="slide-number">02 / The Network</div>
+          <h2>Connected delivery, without the complexity.</h2>
+          <p>RushParcel brings customers, businesses and delivery operations together through one simple, connected experience.</p>
+          <ul>
+            <li>One connected delivery platform</li>
+            <li>Simple customer communication</li>
+            <li>Visibility from collection to delivery</li>
+          </ul>
+        </div>
+
+        <div class="slide-art">
+          <div class="orbit"></div>
+          <div class="orbit two"></div>
+          <div class="rp-core">RP</div>
+
+          <div class="float-card orange"><small>CONNECTED</small>ONE PLATFORM</div>
+          <div class="float-card blue"><small>VISIBLE</small>EVERY STEP</div>
+          <div class="float-card green"><small>BUILT FOR</small>BUSINESS</div>
+
+          <div class="road-scene">
+            <div class="road-glow"></div>
+            <div class="road"></div>
+            <div class="road-edge"></div>
+            <div class="road-line"></div>
+            <div class="motion"></div>
+            <div class="van">
+              <div class="van-body"><div class="van-logo">RUSHPARCEL</div><div class="van-stripe"></div></div>
+              <div class="van-cab"><div class="van-window"></div></div>
+              <div class="van-wheel w1"><span class="wheel-inner"></span></div>
+              <div class="van-wheel w2"><span class="wheel-inner"></span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 3 -->
+      <article class="slide">
+        <div class="slide-copy">
+          <div class="slide-number">03 / The Experience</div>
+          <h2>Better technology. Better delivery.</h2>
+          <p>Every part of the experience is designed around making delivery easier to understand, easier to manage and easier to trust.</p>
+          <ul>
+            <li>Customer-first experience</li>
+            <li>Reliable operational systems</li>
+            <li>Clear information at every stage</li>
+          </ul>
+        </div>
+
+        <div class="slide-art">
+          <div class="orbit"></div>
+          <div class="orbit two"></div>
+          <div class="rp-core">RP</div>
+
+          <div class="float-card orange"><small>EXPERIENCE</small>CUSTOMER FIRST</div>
+          <div class="float-card blue"><small>TECHNOLOGY</small>SMARTER TOOLS</div>
+          <div class="float-card green"><small>DELIVERY</small>BUILT BETTER</div>
+
+          <div class="road-scene">
+            <div class="road-glow"></div>
+            <div class="road"></div>
+            <div class="road-edge"></div>
+            <div class="road-line"></div>
+            <div class="motion"></div>
+            <div class="van">
+              <div class="van-body"><div class="van-logo">RUSHPARCEL</div><div class="van-stripe"></div></div>
+              <div class="van-cab"><div class="van-window"></div></div>
+              <div class="van-wheel w1"><span class="wheel-inner"></span></div>
+              <div class="van-wheel w2"><span class="wheel-inner"></span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- ONLY DOTS — ARROWS REMOVED -->
+  <div class="slider-controls">
+    <div class="dots" aria-label="Slider position">
+      <button class="dot active" aria-label="Slide 1"></button>
+      <button class="dot" aria-label="Slide 2"></button>
+      <button class="dot" aria-label="Slide 3"></button>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<section class="mission">
+<div class="mission-inner">
+  <div class="center">
+    <div class="eyebrow">Our Mission</div>
+    <h2>Technology that makes logistics feel human.</h2>
+    <p>Reliable operations with a modern digital experience.</p>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="card-icon">✓</div><h3>Customer First</h3><p>Clear and useful information at every stage of the delivery journey.</p></div>
+    <div class="card"><div class="card-icon">↗</div><h3>Smart Technology</h3><p>Digital tools designed to make logistics easier to manage.</p></div>
+    <div class="card"><div class="card-icon">◆</div><h3>Reliable Delivery</h3><p>Dependable delivery operations supported by better visibility.</p></div>
+    <div class="card"><div class="card-icon">⚡</div><h3>Built for Business</h3><p>Flexible logistics experiences designed around real business needs.</p></div>
+  </div>
+</div>
+</section>
+
+<footer>
+<div class="footer">
+  <div>
+    <a class="logo" href="#"><span class="logo-mark">RP</span>RUSHPARCEL</a>
+    <p>Premium UK courier and logistics services providing fast, secure and reliable delivery nationwide.</p>
+  </div>
+  <div><h4>Services</h4><a href="#">Parcel Delivery</a><a href="#">Business Logistics</a><a href="#">Same-Day Delivery</a><a href="#">International Shipping</a></div>
+  <div><h4>Quick Links</h4><a href="#">Get a Quote</a><a href="#">Track Your Parcel</a><a href="#">Drop-off Locations</a><a href="#">Help & FAQ</a></div>
+  <div><h4>Legal & Compliance</h4><a href="#">Terms & Conditions</a><a href="#">Privacy Policy & GDPR</a><a href="#">Cookie Policy</a><a href="#">Delivery & Claims</a></div>
+</div>
+<div class="copyright"><span>© 2026 RushParcel. All rights reserved.</span><span>GBP (£) · Europe/London · UK English</span></div>
+</footer>
+
+<script>
+const slides = document.getElementById("slides");
+const dots = [...document.querySelectorAll(".dot")];
+let current = 0;
+const total = dots.length;
+const intervalTime = 6500;
+
+function renderSlide(){
+  slides.style.transform = `translateX(-${current * 100}%)`;
+  dots.forEach((dot,i)=>dot.classList.toggle("active",i===current));
+}
+
+/* Dots remain available as a visual indicator / optional direct selection.
+   No arrow controls are shown. */
+dots.forEach((dot,i)=>{
+  dot.addEventListener("click",()=>{
+    current=i;
+    renderSlide();
+    restartAutoplay();
+  });
+});
+
+let autoplay;
+
+function startAutoplay(){
+  autoplay=setInterval(()=>{
+    current=(current+1)%total;
+    renderSlide();
+  },intervalTime);
+}
+
+function restartAutoplay(){
+  clearInterval(autoplay);
+  startAutoplay();
+}
+
+startAutoplay();
+</script>
+
+</body>
+</html>
