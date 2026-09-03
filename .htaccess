@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Prevent access to dotfiles except .well-known
+    RewriteRule "(^|/)\.(?!well-known)" - [F]
+
+    # Forward all traffic to public directory
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Security Hardening: Block direct HTTP access to system folders & sensitive files
+<FilesMatch "\.(env|env\.example|json|lock|md|log|sql|sh|bat)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protect Storage & App directories
+RedirectMatch 404 ^/(app|config|database|storage|tests)/.*$

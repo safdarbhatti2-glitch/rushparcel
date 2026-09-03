@@ -1,0 +1,63 @@
+CREATE TABLE IF NOT EXISTS invoices (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    invoice_number VARCHAR(50) NOT NULL UNIQUE,
+    customer_id INT NOT NULL,
+    shipment_id INT NULL,
+    quote_id INT NULL,
+    issue_date DATE NOT NULL,
+    due_date DATE NOT NULL,
+    supplier_name VARCHAR(150) NOT NULL,
+    supplier_address TEXT NOT NULL,
+    supplier_vat_number VARCHAR(50) NULL,
+    customer_name VARCHAR(150) NOT NULL,
+    customer_address TEXT NOT NULL,
+    customer_vat_number VARCHAR(50) NULL,
+    subtotal DECIMAL(12,2) NOT NULL DEFAULT 0.00,
+    discount DECIMAL(12,2) NOT NULL DEFAULT 0.00,
+    vat_rate DECIMAL(5,2) NOT NULL DEFAULT 20.00,
+    vat_amount DECIMAL(12,2) NOT NULL DEFAULT 0.00,
+    total DECIMAL(12,2) NOT NULL DEFAULT 0.00,
+    currency VARCHAR(3) NOT NULL DEFAULT 'GBP',
+    status ENUM('draft', 'issued', 'sent', 'partially_paid', 'paid', 'overdue', 'void', 'cancelled') NOT NULL DEFAULT 'draft',
+    issued_at DATETIME NULL,
+    created_by INT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    voided_at DATETIME NULL,
+    INDEX idx_invoices_number (invoice_number),
+    INDEX idx_invoices_customer_status (customer_id, status),
+    CONSTRAINT fk_invoices_customer FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_invoices_shipment FOREIGN KEY (shipment_id) REFERENCES shipments(id) ON DELETE SET NULL,
+    CONSTRAINT fk_invoices_quote FOREIGN KEY (quote_id) REFERENCES quotes(id) ON DELETE SET NULL,
+    CONSTRAINT fk_invoices_creator FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS invoice_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    invoice_id INT NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    quantity INT NOT NULL DEFAULT 1,
+    unit_price DECIMAL(12,2) NOT NULL DEFAULT 0.00,
+    discount DECIMAL(12,2) NOT NULL DEFAULT 0.00,
+    vat_rate DECIMAL(5,2) NOT NULL DEFAULT 20.00,
+    vat_amount DECIMAL(12,2) NOT NULL DEFAULT 0.00,
+    line_total DECIMAL(12,2) NOT NULL DEFAULT 0.00,
+    reference_type VARCHAR(50) NULL,
+    reference_id INT NULL,
+    CONSTRAINT fk_invoice_items_invoice FOREIGN KEY (invoice_id) REFERENCES invoices(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS payments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    invoice_id INT NOT NULL,
+    amount DECIMAL(12,2) NOT NULL,
+    payment_method ENUM('card', 'bank_transfer', 'cash', 'credit_note') NOT NULL DEFAULT 'card',
+    transaction_reference VARCHAR(100) NOT NULL,
+    paid_at DATETIME NOT NULL,
+    recorded_by INT NULL,
+    notes TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_payments_invoice (invoice_id),
+    CONSTRAINT fk_payments_invoice FOREIGN KEY (invoice_id) REFERENCES invoices(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_payments_recorder FOREIGN KEY (recorded_by) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

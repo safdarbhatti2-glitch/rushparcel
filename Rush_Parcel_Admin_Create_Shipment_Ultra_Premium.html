@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rush Parcel — Create New Shipment</title>
+<style>
+:root{
+  --navy:#06101f;--navy2:#0a1a31;--blue:#079df2;--cyan:#2bdcff;
+  --ink:#102038;--muted:#71839a;--bg:#f3f7fb;--card:#fff;--line:#dfe8f0;
+  --green:#19bd91;--orange:#ff9847;--violet:#9561ff;
+  --shadow:0 20px 55px rgba(8,25,48,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{min-height:100vh}
+.sidebar{position:fixed;z-index:20;left:0;top:0;bottom:0;width:255px;background:linear-gradient(180deg,#050d1b,#07172b);border-right:1px solid #19334e;color:#93a8bf;display:flex;flex-direction:column}
+.brand{height:78px;padding:0 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ffffff0c;color:#fff;font-weight:950;letter-spacing:-.04em}
+.logo{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#12adff,#0759d5);display:grid;place-items:center;color:#fff;font-size:10px;box-shadow:0 0 28px #079df244}
+.brand small{display:block;color:#5d82a4;font-size:6px;letter-spacing:.15em;margin-top:2px}
+.nav{padding:20px 12px;display:grid;gap:6px}
+.nav a{padding:12px 12px;border-radius:10px;color:#91a6bd;text-decoration:none;font-size:10px;font-weight:750;display:flex;gap:11px;align-items:center}
+.nav a:hover{background:#ffffff08;color:#fff}
+.nav a.active{background:linear-gradient(90deg,#079df21b,#2bdcff08);color:#fff;border:1px solid #079df240;box-shadow:inset 3px 0 var(--blue)}
+.nav i{width:18px;text-align:center;color:#5c8eb8;font-style:normal}.nav .active i{color:var(--cyan)}
+.profile{margin-top:auto;padding:14px;border-top:1px solid #ffffff0c}.user{display:flex;gap:9px;align-items:center;padding:10px;background:#ffffff07;border-radius:10px}.avatar{width:32px;height:32px;border-radius:9px;background:#123454;display:grid;place-items:center;color:var(--cyan);font-size:9px;font-weight:900}.user b{font-size:8px;color:#fff}.user span{display:block;font-size:6px;color:#66819b;margin-top:2px}
+.main{margin-left:255px}
+.topbar{height:78px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:10}
+.title h1{font-size:19px;letter-spacing:-.04em}.title p{font-size:8px;color:var(--muted);margin-top:3px}
+.topright{display:flex;align-items:center;gap:9px}.search{width:210px;border:1px solid var(--line);background:#fafcfe;border-radius:9px;padding:10px 12px;font-size:8px;outline:none}.topbtn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;font-size:8px;font-weight:850}.topbtn.primary{border:0;color:#fff;background:linear-gradient(135deg,#0daafc,#0765d8);box-shadow:0 10px 25px #079df225}
+.content{padding:27px 32px 50px}
+.breadcrumb{font-size:8px;color:#7890a7;margin-bottom:9px}.breadcrumb span{color:#0795e7;font-weight:800}
+.heading{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:21px}.heading h2{font-size:22px;letter-spacing:-.05em}.heading p{font-size:8px;color:var(--muted);margin-top:5px}.secure{font-size:7px;color:#078fd8;background:#eaf8ff;border:1px solid #c9edff;border-radius:20px;padding:7px 10px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}
+.formShell{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.stepper{display:flex;background:linear-gradient(135deg,#07172c,#0a213b);padding:18px 24px;gap:5px}
+.step{flex:1;display:flex;align-items:center;gap:8px;color:#718aa2;font-size:7px;font-weight:850;position:relative}.step:not(:last-child):after{content:"";height:1px;background:#31506c;flex:1;margin-left:4px}.step.done,.step.current{color:#fff}.num{width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:#132c47;border:1px solid #31506c;color:#8ba5bc;font-size:8px;flex:none}.current .num{background:linear-gradient(135deg,#10adff,#075fd6);border-color:#2bdcff;box-shadow:0 0 20px #079df240;color:#fff}.done .num{background:#123e39;border-color:#20d0a4;color:#31e0b5}
+.formBody{padding:25px}
+.section{padding-bottom:27px;margin-bottom:25px;border-bottom:1px solid #edf1f5}.section:last-of-type{border-bottom:0;margin-bottom:0}.sectionHead{display:flex;gap:11px;align-items:flex-start;margin-bottom:17px}.sectionIcon{width:35px;height:35px;border-radius:10px;background:#edf8ff;color:#078fd9;display:grid;place-items:center;font-size:13px;font-weight:900;flex:none}.section:nth-of-type(2) .sectionIcon{background:#ecfbf6;color:#0cae87}.section:nth-of-type(3) .sectionIcon{background:#fff6e9;color:#e48727}.section:nth-of-type(4) .sectionIcon{background:#f3edff;color:#8051df}.sectionHead h3{font-size:13px;letter-spacing:-.02em}.sectionHead p{font-size:7px;color:var(--muted);margin-top:3px}
+.grid2,.grid3{display:grid;gap:12px}.grid2{grid-template-columns:1fr 1fr}.grid3{grid-template-columns:1fr 1fr 1fr}.field{display:grid;gap:6px;margin-bottom:11px}.field:last-child{margin-bottom:0}.field label{font-size:7px;font-weight:850;color:#24364d}.req{color:#078fd9}.field input,.field select,.field textarea{width:100%;border:1px solid #dbe5ee;border-radius:8px;background:#fbfdff;padding:11px 10px;color:#1a2c42;font-size:8px;outline:0;transition:.2s}.field textarea{min-height:84px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:#58c7fa;box-shadow:0 0 0 3px #079df20d;background:#fff}
+.inputPrefix{position:relative}.inputPrefix span{position:absolute;left:10px;top:10px;font-size:8px;color:#8292a5}.inputPrefix input{padding-left:24px}
+.serviceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.service{position:relative}.service input{position:absolute;opacity:0}.service label{display:block;border:1px solid #dfe7ee;border-radius:10px;padding:13px;cursor:pointer;height:100%;transition:.2s}.service label:hover{border-color:#74cafa}.service input:checked+label{border-color:#079df2;background:#edf9ff;box-shadow:inset 0 0 0 1px #079df2}.service strong{display:block;font-size:8px}.service small{display:block;color:#7d8da0;font-size:6px;line-height:1.5;margin-top:4px}.service b{display:block;color:#078fd9;font-size:9px;margin-top:9px}
+.checks{display:flex;gap:14px;margin-top:11px;flex-wrap:wrap}.check{display:flex;align-items:center;gap:6px;font-size:7px;color:#5f7287}.check input{accent-color:#079df2}
+.formFooter{padding:18px 25px;background:#fafcfe;border-top:1px solid #edf1f5;display:flex;justify-content:space-between;align-items:center}.draft{font-size:7px;color:#8292a4}.footerActions{display:flex;gap:8px}.btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:11px 15px;font-size:8px;font-weight:900}.btn.primary{border:0;background:linear-gradient(135deg,#0daafc,#0764d7);color:#fff;box-shadow:0 10px 25px #079df226}.btn:hover{transform:translateY(-1px)}
+.side{display:grid;gap:13px}.sideCard{background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow);padding:19px}.sideHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.sideHead h3{font-size:11px}.sideHead span{font-size:7px;color:#078fd9}.preview{border-radius:11px;background:linear-gradient(145deg,#061329,#0b2541);padding:16px;color:#fff;position:relative;overflow:hidden}.preview:after{content:"";position:absolute;width:100px;height:100px;right:-45px;top:-40px;border-radius:50%;background:#079df218}.preview .ref{font-size:7px;color:#68dfff;letter-spacing:.12em}.preview h4{font-size:14px;margin-top:5px}.route{display:flex;align-items:center;gap:6px;margin:16px 0 11px}.dot{width:7px;height:7px;border-radius:50%;background:#2bdcff;box-shadow:0 0 10px #2bdcff}.routeLine{height:1px;flex:1;background:linear-gradient(90deg,#2bdcff,#9561ff)}.preview small{color:#8298af;font-size:6px}.summary{display:grid;gap:10px}.sum{display:flex;justify-content:space-between;font-size:8px}.sum span{color:#77899c}.sum strong{font-size:8px}.total{padding-top:11px;border-top:1px solid #e9eef3;margin-top:2px}.total strong{font-size:17px;color:#078fd9}.tip{background:linear-gradient(135deg,#edf9ff,#f7f3ff);border:1px solid #d8eaf7;border-radius:12px;padding:14px}.tip b{font-size:8px}.tip p{font-size:7px;color:#71849a;line-height:1.6;margin-top:4px}.timeline{display:grid;gap:10px}.tl{display:grid;grid-template-columns:22px 1fr;gap:8px}.tlDot{width:19px;height:19px;border-radius:50%;display:grid;place-items:center;background:#eaf8ff;color:#078fd9;font-size:7px;font-weight:900}.tl b{font-size:7px}.tl span{display:block;font-size:6px;color:#8796a7;margin-top:2px}
+.toast{position:fixed;right:20px;bottom:20px;background:#06172b;color:#fff;border:1px solid #244e70;padding:12px 15px;border-radius:10px;font-size:8px;box-shadow:0 18px 45px #0008;transform:translateY(90px);opacity:0;transition:.3s;z-index:100}.toast.show{transform:none;opacity:1}
+@media(max-width:1050px){.sidebar{width:220px}.main{margin-left:220px}.layout{grid-template-columns:1fr}.side{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:780px){.sidebar{width:72px}.brand{justify-content:center;padding:0}.brand>div{display:none}.nav a{justify-content:center}.nav a span{display:none}.main{margin-left:72px}.topright .search,.topright .topbtn:first-of-type{display:none}.content{padding:20px 15px}.grid2,.grid3,.serviceGrid{grid-template-columns:1fr}.side{grid-template-columns:1fr}.stepper{overflow:auto}.step{min-width:125px}.step:not(:last-child):after{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+<div class="brand"><span class="logo">RP</span><div>RUSH PARCEL<small>ADMIN CONTROL CENTRE</small></div></div>
+<nav class="nav">
+<a href="admin.html"><i>⌂</i><span>Dashboard</span></a>
+<a class="active" href="#"><i>▣</i><span>Shipments</span></a>
+<a href="quotations.html"><i>◇</i><span>Quotations</span></a>
+<a href="invoices.html"><i>▤</i><span>Receipts &amp; Invoices</span></a>
+<a href="settings.html"><i>⚙</i><span>Settings</span></a>
+</nav>
+<div class="profile"><div class="user"><div class="avatar">SA</div><div><b>System Admin</b><span>Rush Parcel Operations</span></div></div></div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+<div class="title"><h1>Create New Shipment</h1><p>Schedule collection, capture parcel details and create your tracking record.</p></div>
+<div class="topright"><input class="search" placeholder="Search shipment, quote or invoice..."><button class="topbtn primary" onclick="saveDraft()">＋ Create Shipment</button><button class="topbtn">Logout</button></div>
+</header>
+
+<div class="content">
+<div class="breadcrumb">Shipments <b>›</b> <span>Create New Shipment</span></div>
+<div class="heading"><div><h2>New shipment workspace</h2><p>Complete the details below. Required fields are marked with an asterisk.</p></div><div class="secure">● Secure UK Operations</div></div>
+
+<div class="layout">
+<section class="formShell">
+<div class="stepper">
+<div class="step current"><span class="num">01</span>Sender</div>
+<div class="step"><span class="num">02</span>Receiver</div>
+<div class="step"><span class="num">03</span>Package</div>
+<div class="step"><span class="num">04</span>Service</div>
+<div class="step"><span class="num">05</span>Schedule</div>
+</div>
+
+<form id="shipmentForm">
+<div class="formBody">
+<section class="section">
+<div class="sectionHead"><div class="sectionIcon">01</div><div><h3>Sender details</h3><p>Pickup contact and collection address.</p></div></div>
+<div class="grid2">
+<div class="field"><label>Sender name <span class="req">*</span></label><input required id="senderName" placeholder="e.g. John Smith"></div>
+<div class="field"><label>Company</label><input placeholder="Company / organisation"></div>
+<div class="field"><label>Contact phone <span class="req">*</span></label><input required placeholder="e.g. 07700 900123"></div>
+<div class="field"><label>Email address</label><input type="email" placeholder="john@example.co.uk"></div>
+<div class="field"><label>Street / house number <span class="req">*</span></label><input required placeholder="e.g. 42 High Street"></div>
+<div class="field"><label>City / Town <span class="req">*</span></label><input required placeholder="e.g. London"></div>
+<div class="field"><label>UK postcode <span class="req">*</span></label><input required placeholder="e.g. SW1A 1AA"></div>
+<div class="field"><label>Collection reference</label><input placeholder="Optional internal reference"></div>
+</div>
+</section>
+
+<section class="section">
+<div class="sectionHead"><div class="sectionIcon">02</div><div><h3>Receiver details</h3><p>Delivery contact and destination address.</p></div></div>
+<div class="grid2">
+<div class="field"><label>Receiver name <span class="req">*</span></label><input required placeholder="e.g. Sarah Jenkins"></div>
+<div class="field"><label>Company</label><input placeholder="Company / organisation"></div>
+<div class="field"><label>Contact phone <span class="req">*</span></label><input required placeholder="e.g. 07700 900456"></div>
+<div class="field"><label>Email address</label><input type="email" placeholder="sarah@example.co.uk"></div>
+<div class="field"><label>Street / house number <span class="req">*</span></label><input required placeholder="e.g. 15 Park Lane"></div>
+<div class="field"><label>City / Town <span class="req">*</span></label><input required placeholder="e.g. Manchester"></div>
+<div class="field"><label>UK postcode <span class="req">*</span></label><input required placeholder="e.g. M1 1AE"></div>
+<div class="field"><label>Delivery instructions</label><input placeholder="Reception, safe place, etc."></div>
+</div>
+</section>
+
+<section class="section">
+<div class="sectionHead"><div class="sectionIcon">03</div><div><h3>Package &amp; item details</h3><p>Accurate dimensions help calculate the correct shipping charge.</p></div></div>
+<div class="grid2">
+<div class="field"><label>Item name / description <span class="req">*</span></label><input required id="item" placeholder="e.g. Electronics &amp; documents"></div>
+<div class="field"><label>Package type</label><select><option>Parcel / Box</option><option>Document</option><option>Crate</option><option>Pallet</option><option>Other</option></select></div>
+</div>
+<div class="grid3" style="margin-top:12px">
+<div class="field"><label>Weight (kg) <span class="req">*</span></label><input required id="weight" type="number" min="0.1" step="0.1" value="2.5"></div>
+<div class="field"><label>Length (cm)</label><input id="length" type="number" value="30"></div>
+<div class="field"><label>Width (cm)</label><input id="width" type="number" value="20"></div>
+</div>
+<div class="grid2" style="margin-top:12px">
+<div class="field"><label>Height (cm)</label><input id="height" type="number" value="15"></div>
+<div class="field"><label>Declared cargo value (GBP)</label><div class="inputPrefix"><span>£</span><input id="cargo" type="number" value="150" min="0" step="0.01"></div></div>
+</div>
+<div class="field" style="margin-top:12px"><label>Delivery notes / special instructions</label><textarea placeholder="Fragile handling, gate code, delivery restrictions, etc."></textarea></div>
+<div class="checks"><label class="check"><input type="checkbox"> Fragile handling</label><label class="check"><input type="checkbox"> Signature required</label><label class="check"><input type="checkbox"> Photo proof of delivery</label></div>
+</section>
+
+<section class="section">
+<div class="sectionHead"><div class="sectionIcon">04</div><div><h3>Courier service &amp; pricing</h3><p>Select a delivery service. Pricing can be calculated or manually overridden by an authorised admin.</p></div></div>
+<div class="serviceGrid">
+<div class="service"><input type="radio" name="service" id="s1" checked data-price="24.50"><label for="s1"><strong>Standard 48h</strong><small>Economy door-to-door UK delivery</small><b>£24.50</b></label></div>
+<div class="service"><input type="radio" name="service" id="s2" data-price="38.00"><label for="s2"><strong>Next-Day Express</strong><small>Priority nationwide delivery</small><b>£38.00</b></label></div>
+<div class="service"><input type="radio" name="service" id="s3" data-price="65.00"><label for="s3"><strong>Same-Day Rush</strong><small>Urgent direct courier service</small><b>£65.00</b></label></div>
+</div>
+<div class="grid2" style="margin-top:15px">
+<div class="field"><label>Manual shipping charge override (GBP)</label><div class="inputPrefix"><span>£</span><input id="override" type="number" min="0" step="0.01" placeholder="Leave blank for service price"></div></div>
+<div class="field"><label>VAT treatment</label><select><option>Standard VAT — 20%</option><option>VAT exempt</option><option>Zero rated</option></select></div>
+</div>
+</section>
+
+<section class="section">
+<div class="sectionHead"><div class="sectionIcon">05</div><div><h3>Schedule &amp; tracking events</h3><p>Set collection and delivery windows. The system can automatically create milestone events.</p></div></div>
+<div class="grid2">
+<div class="field"><label>Scheduled pickup <span class="req">*</span></label><input required type="datetime-local" id="pickup"></div>
+<div class="field"><label>Scheduled delivery <span class="req">*</span></label><input required type="datetime-local" id="delivery"></div>
+</div>
+<div class="field" style="margin-top:12px"><label>Initial shipment status</label><select><option>Booked</option><option>Picked Up</option><option>In Transit</option><option>Out for Delivery</option></select></div>
+<div class="tip"><b>✦ Automatic tracking timeline</b><p>When enabled, Rush Parcel will generate Booked → Picked Up → In Transit → Out for Delivery → Delivered milestones using the selected pickup and delivery window.</p></div>
+<div class="checks"><label class="check"><input type="checkbox" checked> Automatically generate 5 milestone events</label><label class="check"><input type="checkbox" checked> Send booking confirmation to customer</label></div>
+</section>
+</div>
+<div class="formFooter"><span class="draft">All monetary values are in GBP (£).</span><div class="footerActions"><button type="button" class="btn" onclick="saveDraft()">Save Draft</button><button type="submit" class="btn primary">Create Shipment &amp; Tracking →</button></div></div>
+</form>
+</section>
+
+<aside class="side">
+<div class="sideCard"><div class="sideHead"><h3>Shipment Preview</h3><span>LIVE</span></div>
+<div class="preview"><span class="ref">RUSH PARCEL</span><h4 id="previewName">New Shipment</h4><div class="route"><div class="dot"></div><div class="routeLine"></div><div class="dot" style="background:#9561ff;box-shadow:0 0 10px #9561ff"></div></div><small>UK PICKUP → UK DELIVERY</small></div>
+</div>
+<div class="sideCard"><div class="sideHead"><h3>Price Summary</h3><span>GBP</span></div><div class="summary"><div class="sum"><span>Service</span><strong id="sumService">Standard 48h</strong></div><div class="sum"><span>Shipping</span><strong id="sumShipping">£24.50</strong></div><div class="sum"><span>VAT estimate</span><strong id="sumVat">£4.90</strong></div><div class="sum total"><span>Estimated total</span><strong id="sumTotal">£29.40</strong></div></div></div>
+<div class="sideCard"><div class="sideHead"><h3>Automatic Events</h3><span>5 MILESTONES</span></div><div class="timeline"><div class="tl"><div class="tlDot">1</div><div><b>Booked</b><span>Shipment created</span></div></div><div class="tl"><div class="tlDot">2</div><div><b>Picked Up</b><span>Courier collects parcel</span></div></div><div class="tl"><div class="tlDot">3</div><div><b>In Transit</b><span>Shipment moving through network</span></div></div><div class="tl"><div class="tlDot">4</div><div><b>Out for Delivery</b><span>Final-mile delivery</span></div></div><div class="tl"><div class="tlDot">5</div><div><b>Delivered</b><span>Proof of delivery recorded</span></div></div></div></div>
+<div class="tip"><b>🔐 Admin control</b><p>Final pricing, invoice generation and tracking events should be validated server-side before being committed to MySQL.</p></div>
+</aside>
+</div>
+</div>
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+<script>
+const form=document.getElementById('shipmentForm');
+const toast=document.getElementById('toast');
+const nameInput=document.getElementById('senderName');
+const override=document.getElementById('override');
+const services=[...document.querySelectorAll('input[name="service"]')];
+
+function money(n){return '£'+Number(n).toFixed(2)}
+function selected(){return services.find(x=>x.checked)}
+function updateSummary(){
+ const s=selected(), base=override.value!==''?Number(override.value):Number(s.dataset.price);
+ const vat=base*.20;
+ document.getElementById('sumService').textContent=s.nextElementSibling.querySelector('strong').textContent;
+ document.getElementById('sumShipping').textContent=money(base);
+ document.getElementById('sumVat').textContent=money(vat);
+ document.getElementById('sumTotal').textContent=money(base+vat);
+ document.getElementById('previewName').textContent=nameInput.value.trim()||'New Shipment';
+}
+services.forEach(x=>x.addEventListener('change',updateSummary));
+override.addEventListener('input',updateSummary);
+nameInput.addEventListener('input',updateSummary);
+
+function notify(msg){
+ toast.textContent=msg;toast.classList.add('show');
+ setTimeout(()=>toast.classList.remove('show'),3000);
+}
+function saveDraft(){notify('Draft saved in this prototype. Connect this action to your PHP/MySQL endpoint.')}
+form.addEventListener('submit',e=>{
+ e.preventDefault();
+ if(!form.checkValidity()){form.reportValidity();return}
+ notify('Shipment ready — connect the Create Shipment action to your PHP/MySQL backend.');
+});
+updateSummary();
+</script>
+</body>
+</html>

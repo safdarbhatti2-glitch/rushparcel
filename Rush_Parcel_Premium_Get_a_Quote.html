@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Rush Parcel UK — instant freight and courier quote calculator.">
+<title>Get a Quote | Rush Parcel</title>
+<style>
+:root{--navy:#071225;--navy2:#0c1b33;--blue:#079af2;--cyan:#27d7ff;--purple:#8b5cf6;--ink:#071426;--muted:#718198;--line:#dfe7f0;--bg:#f5f8fc;--white:#fff;--green:#18c997;--shadow:0 22px 65px rgba(7,25,52,.12)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}a{text-decoration:none;color:inherit}button,input,select{font:inherit}.container{width:min(1160px,calc(100% - 38px));margin:auto}
+.top{height:30px;background:#020813;color:#8496ad;font-size:10px;display:flex;justify-content:center;align-items:center}.top b{color:#ff579e}.top span{margin:0 10px}
+.nav{height:69px;position:absolute;top:30px;left:0;right:0;z-index:30;background:rgba(6,18,37,.96);box-shadow:0 5px 20px #07152a22}.navin{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:900;font-size:16px;letter-spacing:-.035em}.logo{width:35px;height:35px;border-radius:10px;background:linear-gradient(135deg,#179fff,#075bd0);display:grid;place-items:center;font-size:11px;box-shadow:0 0 24px #149cff44}.links{display:flex;gap:25px;color:#c3cfdf;font-size:11px}.links a{transition:.2s}.links a:hover,.links .active{color:#2cd5ff}.links .active{position:relative}.links .active:after{content:"";position:absolute;left:0;right:0;bottom:-15px;height:2px;background:#21d0ff;box-shadow:0 0 10px #21d0ff}.actions{display:flex;gap:8px}.btn{border:0;border-radius:10px;padding:11px 17px;font-size:11px;font-weight:850;cursor:pointer;transition:.25s}.primary{color:#fff;background:linear-gradient(135deg,#12a5fa,#096bdc);box-shadow:0 12px 28px #078df344}.primary:hover{transform:translateY(-2px)}.outline{color:#fff;background:#ffffff04;border:1px solid #ffffff3a}
+.hero{padding-top:145px;padding-bottom:76px;position:relative;overflow:hidden;background:radial-gradient(circle at 70% 50%,#0ba7ff0e,transparent 30%),linear-gradient(#f8fbfe,#f5f8fc)}.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#0a74bc08 1px,transparent 1px),linear-gradient(90deg,#0a74bc08 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(#000,transparent 80%)}.heroHead{position:relative;text-align:center;z-index:2}.kicker{display:inline-flex;padding:7px 12px;border-radius:99px;background:#eaf8ff;color:#0794e9;border:1px solid #bde9ff;font-size:9px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.hero h1{font-size:40px;letter-spacing:-.055em;line-height:1.08;margin-top:12px}.heroHead p{font-size:12px;color:#71839a;max-width:650px;margin:7px auto 0;line-height:1.65}
+.quoteWrap{position:relative;z-index:3;width:min(900px,100%);margin:34px auto 0}.quoteCard{background:#fff;border:1px solid #dce6ef;border-radius:17px;box-shadow:var(--shadow);padding:28px 34px}.sectionTitle{font-size:16px;font-weight:900;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:17px}.sectionTitle span{color:#079af2;margin-right:7px}
+.formSection{margin-bottom:28px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field label{display:block;font-size:9px;font-weight:800;margin-bottom:7px;color:#14233a}.required{color:#ef476f}.field input,.field select{width:100%;height:43px;border:1px solid #dce5ee;border-radius:9px;background:#fff;color:#31425a;padding:0 13px;outline:none;font-size:10px;transition:.2s}.field input::placeholder{color:#9aa8b8}.field input:focus,.field select:focus{border-color:#0c9df3;box-shadow:0 0 0 3px #0c9df318}.serviceRow{display:grid;grid-template-columns:1fr 1fr;gap:15px;align-items:end}.options{height:43px;display:flex;align-items:center;gap:18px}.check{display:flex;align-items:center;gap:6px;font-size:10px;color:#34445a;cursor:pointer}.check input{width:14px;height:14px;accent-color:#0b9cf1}.calculate{width:100%;height:48px;border-radius:9px;font-size:12px;margin-top:2px;position:relative;overflow:hidden}.calculate:after{content:"";position:absolute;top:0;bottom:0;width:45%;left:-55%;background:linear-gradient(90deg,transparent,#ffffff44,transparent);transform:skewX(-20deg);animation:shine 3s infinite}@keyframes shine{0%,55%{left:-55%}100%{left:120%}}
+.result{display:none;margin-top:18px;border:1px solid #bfe8ff;border-radius:13px;background:linear-gradient(135deg,#f4fbff,#fff);padding:20px}.result.show{display:block;animation:rise .3s ease}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}.resultHead{display:flex;justify-content:space-between;align-items:center}.resultHead h3{font-size:15px}.price{font-size:28px;font-weight:950;color:#078fe9}.breakdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:15px}.breakdown div{background:#fff;border:1px solid #e1e9f1;border-radius:9px;padding:10px}.breakdown small{display:block;color:#8492a4;font-size:8px}.breakdown strong{display:block;font-size:11px;margin-top:3px}
+.trust{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.trustCard{background:#fff;border:1px solid #e3eaf1;border-radius:12px;padding:14px;text-align:center}.trustCard strong{display:block;font-size:12px}.trustCard small{color:#7c8b9e;font-size:9px}
+footer{background:#020813;color:#71839b;padding:50px 0 18px}.foot{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px}.foot p{font-size:9px;line-height:1.8;max-width:300px;margin-top:12px}.foot h4{font-size:10px;color:#fff;margin-bottom:13px}.foot ul{list-style:none;display:grid;gap:8px;font-size:9px}.foot li:hover{color:#fff}.bottom{border-top:1px solid #ffffff0c;margin-top:32px;padding-top:14px;display:flex;justify-content:space-between;font-size:8px}
+@media(max-width:900px){.links,.actions{display:none}.grid4{grid-template-columns:1fr 1fr}.foot{grid-template-columns:1fr 1fr}.hero h1{font-size:35px}}
+@media(max-width:600px){.container{width:calc(100% - 28px)}.hero{padding-top:125px}.hero h1{font-size:31px}.quoteCard{padding:22px 18px}.grid2,.serviceRow{grid-template-columns:1fr}.grid4{grid-template-columns:1fr 1fr}.options{height:auto;flex-wrap:wrap;padding:5px 0}.trust{grid-template-columns:1fr}.breakdown{grid-template-columns:1fr 1fr}.foot{grid-template-columns:1fr 1fr}.foot>div:first-child{grid-column:1/-1}.bottom{display:block;line-height:1.8}.bottom span{display:block;margin-top:5px}}
+</style>
+</head>
+<body>
+
+<div class="top"><b>✦</b><span>Rush Parcel — UK Same-Day & Next-Day Express Courier Coverage</span>• Customer Support: <strong>0800 123 4567</strong><span>•</span>✉ support@rushparcel.co.uk</div>
+
+<header class="nav"><div class="container navin">
+<a class="brand" href="index.html"><span class="logo">RP</span>RUSH PARCEL</a>
+<nav class="links"><a href="index.html">Home</a><a href="services.html">Services</a><a class="active" href="#">Get a Quote</a><a href="tracking.html">Track Parcel</a><a href="locations.html">Drop-off Locations</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></nav>
+<div class="actions"><a class="btn outline" href="login.html">Login</a><a class="btn primary" href="register.html">Register</a></div>
+</div></header>
+
+<main>
+<section class="hero">
+<div class="container">
+<div class="heroHead"><div class="kicker">Instant Quote Engine</div><h1>UK Freight & Courier Quote Calculator</h1><p>Enter collection and delivery UK postcodes, package measurements, and service speed to get an instant server-verified price breakdown.</p></div>
+
+<div class="quoteWrap">
+<form class="quoteCard" id="quoteForm">
+<div class="formSection">
+<div class="sectionTitle"><span>01</span>Route Details</div>
+<div class="grid2">
+<div class="field"><label>Collection UK Postcode <i class="required">*</i></label><input id="from" required placeholder="e.g. SW1A 1AA" maxlength="8" autocomplete="postal-code"></div>
+<div class="field"><label>Destination UK Postcode <i class="required">*</i></label><input id="to" required placeholder="e.g. EH1 1YZ or BT1 1AA" maxlength="8" autocomplete="postal-code"></div>
+</div>
+</div>
+
+<div class="formSection">
+<div class="sectionTitle"><span>02</span>Package Measurements</div>
+<div class="grid4">
+<div class="field"><label>Weight (kg) <i class="required">*</i></label><input id="weight" required type="number" min=".1" step=".1" value="2.5"></div>
+<div class="field"><label>Length (cm)</label><input id="length" type="number" min="1" value="30"></div>
+<div class="field"><label>Width (cm)</label><input id="width" type="number" min="1" value="20"></div>
+<div class="field"><label>Height (cm)</label><input id="height" type="number" min="1" value="15"></div>
+</div>
+</div>
+
+<div class="formSection">
+<div class="sectionTitle"><span>03</span>Select Courier Service & Options</div>
+<div class="serviceRow">
+<div class="field"><label>Courier Service Speed <i class="required">*</i></label>
+<select id="service">
+<option value="standard">Standard Parcel 48h — Economy door-to-door</option>
+<option value="nextday">Next Day Parcel — Priority delivery</option>
+<option value="sameday">Same-Day Courier — Time critical</option>
+<option value="express">Express Courier — Priority same-day</option>
+<option value="freight">UK Freight — Pallet / oversized</option>
+</select></div>
+<div class="field"><label>Special Options</label><div class="options">
+<label class="check"><input id="fragile" type="checkbox"> Fragile Handling (+£5.00)</label>
+<label class="check"><input id="signature" type="checkbox"> Signature (+£2.50)</label>
+</div></div>
+</div>
+</div>
+
+<button class="btn primary calculate" type="submit">Calculate Price Breakdown →</button>
+
+<div class="result" id="result">
+<div class="resultHead"><h3>Estimated Quote</h3><div class="price" id="price">£0.00</div></div>
+<div class="breakdown">
+<div><small>Base Service</small><strong id="base">£0.00</strong></div>
+<div><small>Distance</small><strong id="distance">£0.00</strong></div>
+<div><small>Options</small><strong id="options">£0.00</strong></div>
+<div><small>VAT (20%)</small><strong id="vat">£0.00</strong></div>
+</div>
+<p style="font-size:9px;color:#7d8da1;margin-top:12px">Indicative frontend calculation for demonstration. In production, price calculation should be performed and validated server-side by the Rush Parcel PHP/MySQL pricing engine.</p>
+</div>
+</form>
+
+<div class="trust">
+<div class="trustCard"><strong>✓ Transparent Pricing</strong><small>No hidden checkout surprises</small></div>
+<div class="trustCard"><strong>◈ Live Tracking</strong><small>Follow every shipment</small></div>
+<div class="trustCard"><strong>▣ VAT Ready</strong><small>UK GBP invoicing support</small></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container"><div class="foot">
+<div><a class="brand" href="index.html"><span class="logo">RP</span>RUSH PARCEL</a><p>Rush Parcel is a premium UK courier & logistics platform providing fast, secure and reliable nationwide same-day, next-day and European freight delivery solutions.</p></div>
+<div><h4>Services</h4><ul><li>Parcel Delivery</li><li>Business Logistics</li><li>Same-Day Delivery</li><li>International Shipping</li><li>UK & Europe Shipping</li><li>Customs Clearance</li></ul></div>
+<div><h4>Quick Links</h4><ul><li>Instant Quote Wizard</li><li>Track Your Parcel</li><li>Drop-off Locations</li><li>Corporate & Partners</li><li>Help & FAQ</li><li>Contact Support</li></ul></div>
+<div><h4>Legal & Compliance</h4><ul><li>Terms & Conditions</li><li>Privacy Policy & GDPR</li><li>Cookie Policy</li><li>Delivery & Claims Policy</li><li>Prohibited Items</li><li>VAT & Invoicing Info</li></ul></div>
+</div><div class="bottom"><span>© 2026 Rush Parcel. All rights reserved. UK logistics infrastructure.</span><span>GBP (£) | Europe/London | UK English</span></div></div>
+</footer>
+
+<script>
+const form=document.getElementById('quoteForm');
+form.addEventListener('submit',function(e){
+ e.preventDefault();
+ const weight=Math.max(.1,Number(document.getElementById('weight').value)||0);
+ const l=Number(document.getElementById('length').value)||0,w=Number(document.getElementById('width').value)||0,h=Number(document.getElementById('height').value)||0;
+ const service=document.getElementById('service').value;
+ const rates={standard:9.95,nextday:15.95,sameday:34.95,express:49.95,freight:69.95};
+ const multipliers={standard:1,nextday:1.18,sameday:1.65,express:1.9,freight:2.2};
+ let base=(rates[service]||rates.standard)+(Math.max(0,weight-2)*1.35);
+ base*=multipliers[service]||1;
+ const volume=(l*w*h)/5000;
+ const distance=Math.min(38,Math.max(4,volume*.35+weight*.75+7));
+ const options=(document.getElementById('fragile').checked?5:0)+(document.getElementById('signature').checked?2.5:0);
+ const subtotal=base+distance+options,vat=subtotal*.20,total=subtotal+vat;
+ const money=n=>new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP'}).format(n);
+ document.getElementById('base').textContent=money(base);
+ document.getElementById('distance').textContent=money(distance);
+ document.getElementById('options').textContent=money(options);
+ document.getElementById('vat').textContent=money(vat);
+ document.getElementById('price').textContent=money(total);
+ document.getElementById('result').classList.add('show');
+ document.getElementById('result').scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+</script>
+</body>
+</html>

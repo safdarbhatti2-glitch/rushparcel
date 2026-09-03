@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Find Rush Parcel drop-off locations, parcel shops, smart lockers and freight depots across the UK.">
+<title>Drop-off Network | Rush Parcel</title>
+<style>
+:root{
+ --ink:#071426;--muted:#71839a;--blue:#079df2;--cyan:#2bdcff;--violet:#9858ff;
+ --navy:#030914;--navy2:#07162a;--line:#dfe7ef;--bg:#f5f8fc;--white:#fff;
+ --green:#22c99b;--shadow:0 24px 70px rgba(7,24,48,.12)
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+a{text-decoration:none;color:inherit}button,input{font:inherit}.container{width:min(1200px,calc(100% - 40px));margin:auto}
+
+/* TOP + NAV */
+.top{height:29px;background:#01050c;color:#71849b;display:flex;align-items:center;justify-content:center;font-size:9px}.top b{color:#ff4e9a}.top span{margin:0 9px}.top strong{color:#d8e4ef}
+.nav{height:69px;position:absolute;top:29px;left:0;right:0;z-index:50;background:rgba(4,13,29,.9);border-bottom:1px solid #ffffff10;backdrop-filter:blur(20px);box-shadow:0 8px 28px #00102022}.navin{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:950;font-size:16px;letter-spacing:-.04em}.logo{width:35px;height:35px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#13aaff,#0757d4);box-shadow:0 0 28px #079fff55;font-size:10px}.links{display:flex;gap:24px;color:#b8c8da;font-size:10px}.links a{transition:.2s}.links a:hover,.links .active{color:var(--cyan)}.links .active{position:relative}.links .active:after{content:"";position:absolute;left:0;right:0;bottom:-16px;height:2px;background:var(--cyan);box-shadow:0 0 13px var(--cyan)}.actions{display:flex;gap:8px}.btn{border:1px solid transparent;border-radius:9px;padding:11px 17px;color:#fff;font-size:10px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:.25s}.primary{background:linear-gradient(135deg,#10a9fb,#075fd6);box-shadow:0 12px 30px #008fff3c}.primary:hover{transform:translateY(-2px);box-shadow:0 17px 40px #008fff55}.outline{background:#ffffff05;border-color:#ffffff38}.outline:hover{border-color:#2bdcff77}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;min-height:720px;padding:170px 0 72px;background:
+ radial-gradient(circle at 76% 43%,#0ca9ff16,transparent 23%),
+ radial-gradient(circle at 85% 70%,#995cff12,transparent 25%),
+ linear-gradient(135deg,#030914 0%,#06162b 60%,#071c34 100%);color:#fff}
+.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#239bd60b 1px,transparent 1px),linear-gradient(90deg,#239bd60b 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(#000,transparent 88%)}
+.hero:after{content:"";position:absolute;width:600px;height:600px;right:-250px;top:-120px;border-radius:50%;border:1px solid #28dfff0b;box-shadow:0 0 100px #079fff0a,inset 0 0 100px #079fff07}
+.heroGrid{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center}.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:99px;background:#06243a;border:1px solid #1aa8e950;color:#32dcff;font-size:8px;font-weight:950;letter-spacing:.15em;text-transform:uppercase}.eyebrow i{width:6px;height:6px;border-radius:50%;background:#2de0b2;box-shadow:0 0 10px #2de0b2;animation:pulse 1.5s infinite}@keyframes pulse{50%{opacity:.35}}
+.hero h1{font-size:57px;line-height:.96;letter-spacing:-.07em;margin-top:16px}.hero h1 span{color:#2bdcff}.heroCopy{font-size:12px;color:#879ab0;line-height:1.75;max-width:540px;margin-top:14px}.heroActions{display:flex;gap:9px;margin-top:22px}.stats{display:flex;gap:28px;margin-top:30px}.stat strong{display:block;font-size:20px}.stat small{display:block;color:#627c96;font-size:7px;letter-spacing:.1em;margin-top:3px}
+
+/* NETWORK SCULPTURE */
+.networkVisual{height:455px;position:relative;display:grid;place-items:center}.orb{width:330px;height:330px;border-radius:50%;position:relative;border:1px solid #27ddff39;box-shadow:0 0 70px #079fff16,inset 0 0 65px #079fff0d}.orb:before,.orb:after{content:"";position:absolute;border:1px solid #27ddff24;border-radius:50%;inset:25px;transform:rotate(48deg) scaleX(.52)}.orb:after{transform:rotate(-48deg) scaleX(.52)}
+.orbGrid{position:absolute;inset:48px;border:1px solid #9a5cff18;border-radius:50%;transform:rotate(60deg) scaleX(.55)}.orbCore{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:88px;height:88px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#20cfff2b,#0b294800 68%);border:1px solid #2bdcff55;box-shadow:0 0 50px #20d5ff2b;color:#2bdcff;font-size:32px}.orbit{position:absolute;inset:-16px;border:1px solid #2bdcff18;border-radius:50%;animation:spin 16s linear infinite}.orbit:before{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:#2bdcff;box-shadow:0 0 18px #2bdcff;left:50%;top:-5px}@keyframes spin{to{transform:rotate(360deg)}}
+.city{position:absolute;display:flex;align-items:center;gap:6px;color:#94abc2;font-size:8px}.city i{width:7px;height:7px;border-radius:50%;background:#0c2840;border:1px solid #2bdcff;box-shadow:0 0 12px #2bdcff}.city:nth-child(5){left:1%;top:27%}.city:nth-child(6){right:2%;top:34%}.city:nth-child(7){left:3%;bottom:25%}.city:nth-child(8){right:5%;bottom:21%}
+.floatCard{position:absolute;background:#071a30df;border:1px solid #1e4567;border-radius:10px;padding:10px 12px;backdrop-filter:blur(12px);box-shadow:0 15px 40px #0005}.floatCard small{display:block;color:#5f7c97;font-size:7px}.floatCard strong{display:block;font-size:12px;margin-top:3px}.fc1{right:0;top:16%}.fc2{left:-2%;top:61%;}.fc3{right:3%;bottom:5%}.fc2 strong{color:#2bdcff}.fc3 strong{color:#39dfb5}
+
+/* SEARCH */
+.searchSection{margin-top:-1px;background:#fff;color:var(--ink);padding:70px 0}.searchHead{text-align:center;max-width:680px;margin:auto}.searchHead .eyebrow{color:#078fdd;background:#edfaff;border-color:#c4edff}.searchHead h2{font-size:31px;letter-spacing:-.05em;margin-top:10px}.searchHead p{font-size:10px;color:#7b8a9c;margin-top:7px}
+.searchCard{width:min(940px,100%);margin:28px auto 0;padding:24px;border:1px solid #dce5ee;border-radius:16px;background:#fff;box-shadow:var(--shadow)}.searchForm{display:grid;grid-template-columns:1fr 155px;gap:9px}.searchInput{height:51px;border:1px solid #dbe4ed;border-radius:9px;display:flex;align-items:center;padding:0 14px;background:#f9fbfd}.searchInput span{color:#079df2;margin-right:8px}.searchInput input{width:100%;border:0;outline:0;background:transparent;color:var(--ink);font-size:11px}.searchInput input::placeholder{color:#8b99a9}.searchBtn{height:51px}.searchMeta{display:flex;justify-content:space-between;margin-top:9px;color:#8190a1;font-size:8px}.use{color:#078fdd;font-weight:850;cursor:pointer}
+
+/* HOW */
+.how{padding:82px 0;background:#f6f9fc}.sectionTitle{text-align:center;max-width:670px;margin:auto auto 38px}.sectionTitle .eyebrow{color:#078fdd;background:#edfaff;border-color:#c4edff}.sectionTitle h2{font-size:31px;letter-spacing:-.05em;margin-top:10px}.sectionTitle p{font-size:10px;color:#7c8c9e;margin-top:7px}.steps{display:grid;grid-template-columns:repeat(4,1fr);position:relative;gap:15px}.steps:before{content:"";position:absolute;top:23px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,#cbd9e5,#079fff,#cbd9e5)}.step{text-align:center;position:relative;z-index:2}.stepNum{width:47px;height:47px;margin:auto;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid #cfe0eb;color:#078fdd;font-size:11px;font-weight:950;box-shadow:0 0 0 7px #f6f9fc}.step h3{font-size:12px;margin-top:15px}.step p{font-size:8px;color:#7d8c9d;line-height:1.65;margin-top:5px}
+
+/* LOCATION NETWORK */
+.networkSection{padding:85px 0;background:#fff}.networkGrid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}.networkText .eyebrow{color:#078fdd;background:#edfaff;border-color:#c4edff}.networkText h2{font-size:35px;letter-spacing:-.055em;margin-top:11px;line-height:1.08}.networkText>p{font-size:10px;color:#7a899b;line-height:1.75;margin-top:9px;max-width:510px}.regions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}.region{padding:11px 13px;border:1px solid #e0e8ef;border-radius:9px;background:#fbfdff;font-size:8px;color:#53677d;transition:.2s}.region:hover{border-color:#9fdcff;transform:translateX(3px)}.region b{display:block;color:var(--ink);font-size:9px;margin-bottom:3px}.region b:before{content:"✓";color:#0cbb92;margin-right:5px}
+.ukMap{height:390px;position:relative;border-radius:17px;overflow:hidden;background:radial-gradient(circle at 50% 50%,#0ca9ff16,transparent 30%),linear-gradient(135deg,#041123,#071a30);border:1px solid #1a4263;box-shadow:0 20px 55px #03152b25}.ukMap:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#2bdcff09 1px,transparent 1px),linear-gradient(90deg,#2bdcff09 1px,transparent 1px);background-size:40px 40px}.mapShape{position:absolute;width:235px;height:285px;left:50%;top:50%;transform:translate(-50%,-50%) rotate(8deg);background:linear-gradient(145deg,#0c3554,#08243f);clip-path:polygon(49% 0,62% 7%,61% 15%,72% 22%,70% 30%,81% 39%,78% 47%,88% 54%,78% 61%,82% 72%,69% 75%,65% 89%,53% 100%,44% 91%,38% 83%,28% 82%,22% 72%,9% 69%,14% 58%,5% 48%,15% 38%,12% 28%,26% 23%,28% 13%,41% 12%);box-shadow:0 0 50px #079fff20}.mapShape:after{content:"";position:absolute;inset:12px;background-image:linear-gradient(35deg,transparent 47%,#2bdcff2a 48%,transparent 49%),linear-gradient(125deg,transparent 49%,#2bdcff20 50%,transparent 51%);clip-path:inherit}.mapPoint{position:absolute;width:9px;height:9px;border-radius:50%;background:#071b30;border:2px solid #2bdcff;box-shadow:0 0 16px #2bdcff;z-index:3}.mapPoint span{position:absolute;white-space:nowrap;color:#91a8be;font-size:7px;left:13px;top:-3px}.mp1{left:48%;top:61%}.mp2{left:51%;top:44%}.mp3{left:49%;top:28%}.mp4{left:58%;top:31%}.mp5{left:40%;top:66%}.mp6{left:46%;top:12%}.mapLine{position:absolute;height:1px;background:linear-gradient(90deg,transparent,#2bdcff,#9d5cff,#2bdcff,transparent);box-shadow:0 0 13px #2bdcff;z-index:2;transform-origin:left}.ml1{width:145px;left:40%;top:62%;transform:rotate(-34deg)}.ml2{width:125px;left:50%;top:45%;transform:rotate(17deg)}.ml3{width:140px;left:50%;top:30%;transform:rotate(73deg)}
+
+/* CTA + FOOTER */
+.cta{padding:65px 0;background:linear-gradient(135deg,#040d1d,#081d36);color:#fff}.ctaBox{border:1px solid #1c4b70;border-radius:17px;padding:30px 35px;display:flex;justify-content:space-between;align-items:center;background:radial-gradient(circle at 90% 50%,#0ca9ff14,transparent 25%),#071a30}.ctaBox h2{font-size:23px;letter-spacing:-.04em}.ctaBox p{font-size:9px;color:#8195ad;margin-top:5px}.ctaBox .btn{margin-top:14px}
+footer{background:#010711;padding:49px 0 17px;color:#647a94}.foot{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px}.foot p{font-size:8px;line-height:1.8;max-width:310px;margin-top:11px}.foot h4{font-size:9px;color:#fff;margin-bottom:13px}.foot ul{list-style:none;display:grid;gap:8px;font-size:8px}.bottom{border-top:1px solid #ffffff0c;margin-top:32px;padding-top:14px;display:flex;justify-content:space-between;font-size:7px}
+
+/* TOAST */
+.toast{position:fixed;right:20px;bottom:20px;z-index:100;padding:12px 15px;border:1px solid #245277;border-radius:10px;background:#071a30;color:#fff;font-size:9px;box-shadow:0 18px 45px #0008;transform:translateY(90px);opacity:0;transition:.3s}.toast.show{transform:none;opacity:1}
+
+@media(max-width:950px){.links,.actions{display:none}.heroGrid,.networkGrid{grid-template-columns:1fr}.networkVisual{order:-1;height:360px}.orb{width:270px;height:270px}.steps{grid-template-columns:1fr 1fr}.steps:before{display:none}.typeGrid{grid-template-columns:1fr 1fr}.foot{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.container{width:calc(100% - 26px)}.top{font-size:7px}.hero{padding-top:125px}.hero h1{font-size:40px}.heroGrid{gap:20px}.networkVisual{height:310px}.orb{width:225px;height:225px}.floatCard{display:none}.stats{gap:17px}.stat strong{font-size:16px}.searchForm{grid-template-columns:1fr}.searchBtn{width:100%}.searchMeta{display:block;line-height:1.8}.steps{grid-template-columns:1fr 1fr}.regions{grid-template-columns:1fr}.ukMap{height:340px}.ctaBox{display:block}.foot{grid-template-columns:1fr 1fr}.foot>div:first-child{grid-column:1/-1}.bottom{display:block;line-height:1.8}.bottom span{display:block;margin-top:5px}}
+</style>
+</head>
+<body>
+
+<div class="top"><b>✦</b><span>Rush Parcel — UK Same-Day & Next-Day Express Courier Coverage</span>• Customer Support: <strong>0800 123 4567</strong><span>•</span>✉ support@rushparcel.co.uk</div>
+
+<header class="nav"><div class="container navin">
+<a class="brand" href="index.html"><span class="logo">RP</span>RUSH PARCEL</a>
+<nav class="links"><a href="index.html">Home</a><a href="services.html">Services</a><a href="quote.html">Get a Quote</a><a href="tracking.html">Track Parcel</a><a class="active" href="#">Drop-off Locations</a><a href="about.html">About Us</a><a href="contact.html">Contact</a></nav>
+<div class="actions"><a class="btn outline" href="login.html">Login</a><a class="btn primary" href="register.html">Register</a></div>
+</div></header>
+
+<main>
+<section class="hero">
+<div class="container heroGrid">
+<div>
+<div class="eyebrow"><i></i> Rush Parcel Network</div>
+<h1>Your parcel's<br><span>next stop.</span></h1>
+<p class="heroCopy">Find a convenient Rush Parcel drop-off point anywhere across the UK. From local parcel shops to 24/7 smart lockers and commercial freight depots — your nearest handover point is never far away.</p>
+<div class="heroActions"><a class="btn primary" href="#finder">Find a Location →</a><a class="btn outline" href="#network">Explore Network</a></div>
+<div class="stats"><div class="stat"><strong>1,240+</strong><small>LOCATIONS</small></div><div class="stat"><strong>680+</strong><small>SMART LOCKERS</small></div><div class="stat"><strong>98%</strong><small>UK COVERAGE</small></div></div>
+</div>
+
+<div class="networkVisual">
+<div class="orb"><div class="orbit"></div><div class="orbGrid"></div><div class="orbCore">⌖</div></div>
+<div class="city"><i></i> Glasgow</div><div class="city"><i></i> Leeds</div><div class="city"><i></i> Bristol</div><div class="city"><i></i> London</div>
+<div class="floatCard fc1"><small>NETWORK STATUS</small><strong>● ONLINE</strong></div>
+<div class="floatCard fc2"><small>ACTIVE LOCATIONS</small><strong>1,240+</strong></div>
+<div class="floatCard fc3"><small>SMART ACCESS</small><strong>24 / 7</strong></div>
+</div>
+</div>
+</section>
+
+<section class="searchSection" id="finder">
+<div class="container">
+<div class="searchHead"><div class="eyebrow">Find Your Point</div><h2>One search. Your nearest location.</h2><p>Enter a UK postcode, town or city and discover Rush Parcel locations, opening hours and available services.</p></div>
+<div class="searchCard">
+<form class="searchForm" id="searchForm">
+<div class="searchInput"><span>⌖</span><input id="query" required placeholder="Enter postcode, town or city — e.g. M1 1AE"></div>
+<button class="btn primary searchBtn" type="submit">Find Locations →</button>
+</form>
+<div class="searchMeta"><span>Search across the Rush Parcel UK network · Locations shown by proximity</span><span class="use" id="useLocation">◎ Use my current location</span></div>
+</div>
+</div>
+</section>
+
+<section class="how">
+<div class="container">
+<div class="sectionTitle"><div class="eyebrow">Simple Drop-off</div><h2>Four steps. Zero friction.</h2><p>We designed the Rush Parcel drop-off experience to be quick, clear and convenient.</p></div>
+<div class="steps">
+<div class="step"><div class="stepNum">01</div><h3>Search</h3><p>Enter your postcode or town to find nearby points.</p></div>
+<div class="step"><div class="stepNum">02</div><h3>Choose</h3><p>Compare distance, opening hours and services.</p></div>
+<div class="step"><div class="stepNum">03</div><h3>Drop Off</h3><p>Hand over your labelled parcel securely.</p></div>
+<div class="step"><div class="stepNum">04</div><h3>Track</h3><p>Use your reference to follow the shipment.</p></div>
+</div>
+</div>
+</section>
+
+<section class="networkSection" id="network">
+<div class="container networkGrid">
+<div class="networkText"><div class="eyebrow">UK-Wide Infrastructure</div><h2>Connected across the UK.</h2><p>Our location network brings parcel shops, smart lockers and freight facilities together so customers can choose the handover option that works best for them.</p>
+<div class="regions">
+<div class="region"><b>London & South East</b>Extensive parcel shop coverage</div>
+<div class="region"><b>Midlands</b>Major hub & locker network</div>
+<div class="region"><b>North West</b>Dense urban coverage</div>
+<div class="region"><b>Yorkshire & North East</b>Regional drop-off network</div>
+<div class="region"><b>South West</b>Local partner locations</div>
+<div class="region"><b>Scotland & Wales</b>Connected regional routes</div>
+</div></div>
+<div class="ukMap"><div class="mapShape"></div><div class="mapLine ml1"></div><div class="mapLine ml2"></div><div class="mapLine ml3"></div><div class="mapPoint mp1"><span>London</span></div><div class="mapPoint mp2"><span>Birmingham</span></div><div class="mapPoint mp3"><span>Manchester</span></div><div class="mapPoint mp4"><span>Leeds</span></div><div class="mapPoint mp5"><span>Bristol</span></div><div class="mapPoint mp6"><span>Glasgow</span></div></div>
+</div>
+</section>
+
+<section class="cta"><div class="container"><div class="ctaBox"><div><h2>Need a commercial drop-off solution?</h2><p>Ask our logistics team about dedicated depot access, scheduled collections and business shipping support.</p><a class="btn primary" href="contact.html">Talk to Our Team →</a></div><div style="font-size:55px;color:#2bdcff;text-shadow:0 0 30px #2bdcff77">⌖</div></div></div></section>
+</main>
+
+<footer><div class="container"><div class="foot">
+<div><a class="brand" href="index.html"><span class="logo">RP</span>RUSH PARCEL</a><p>Rush Parcel is a premium UK courier & logistics platform providing fast, secure and reliable nationwide same-day, next-day and European freight delivery solutions.</p></div>
+<div><h4>Services</h4><ul><li>Parcel Delivery</li><li>Business Logistics</li><li>Same-Day Delivery</li><li>International Shipping</li><li>UK & Europe Shipping</li><li>Customs Clearance</li></ul></div>
+<div><h4>Quick Links</h4><ul><li>Instant Quote Wizard</li><li>Track Your Parcel</li><li>Drop-off Locations</li><li>Corporate & Partners</li><li>Help & FAQ</li><li>Contact Support</li></ul></div>
+<div><h4>Legal & Compliance</h4><ul><li>Terms & Conditions</li><li>Privacy Policy & GDPR</li><li>Cookie Policy</li><li>Delivery & Claims Policy</li><li>Prohibited Items</li><li>VAT & Invoicing Info</li></ul></div>
+</div><div class="bottom"><span>© 2026 Rush Parcel. All rights reserved. UK logistics infrastructure.</span><span>GBP (£) | Europe/London | UK English</span></div></div></footer>
+
+<div class="toast" id="toast"></div>
+<script>
+const form=document.getElementById('searchForm'),query=document.getElementById('query'),toast=document.getElementById('toast');
+function notify(msg){toast.textContent=msg;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2800)}
+form.addEventListener('submit',e=>{e.preventDefault();const q=query.value.trim();if(q)notify('Search ready — connect this form to the PHP/MySQL location service.')});
+document.getElementById('useLocation').addEventListener('click',()=>{
+ if(!navigator.geolocation){notify('Geolocation is not supported by this browser.');return}
+ navigator.geolocation.getCurrentPosition(()=>notify('Location detected — connect the backend to return nearby points.'),()=>notify('Location access unavailable. Please enter a postcode.'));
+});
+</script>
+</body>
+</html>

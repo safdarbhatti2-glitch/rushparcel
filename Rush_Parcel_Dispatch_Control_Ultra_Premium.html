@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rush Parcel — Dispatch Control Centre</title>
+<style>
+:root {
+  --navy: #040b18;
+  --navy2: #091a30;
+  --blue: #079df2;
+  --cyan: #2bdcff;
+  --ink: #0f1d31;
+  --muted: #6b7f96;
+  --bg: #f2f6fa;
+  --card: #ffffff;
+  --line: #e1e9f1;
+  --green: #10b981;
+  --orange: #f59e0b;
+  --violet: #8b5cf6;
+  --shadow: 0 15px 45px rgba(4, 11, 24, 0.06);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif; color: var(--ink); background: var(--bg); font-size: 12px; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+a { text-decoration: none; color: inherit; }
+
+.app { min-height: 100vh; }
+
+/* Fixed Admin Sidebar */
+.sidebar {
+  position: fixed; z-index: 20; left: 0; top: 0; bottom: 0; width: 255px;
+  background: linear-gradient(180deg, #040b18, #091a30);
+  border-right: 1px solid #19334e; color: #93a8bf; display: flex; flex-direction: column;
+}
+.brand {
+  height: 78px; padding: 0 20px; display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06); color: #fff; font-weight: 900; letter-spacing: -0.03em;
+}
+.logo {
+  width: 36px; height: 36px; border-radius: 11px;
+  background: linear-gradient(135deg, #12adff, #0759d5);
+  display: grid; place-items: center; color: #fff; font-size: 11px; font-weight: 900;
+  box-shadow: 0 0 28px rgba(7, 157, 242, 0.4);
+}
+.brand small { display: block; color: #5d82a4; font-size: 8px; letter-spacing: 0.15em; margin-top: 2px; }
+.nav { padding: 20px 12px; display: grid; gap: 6px; }
+.nav a {
+  padding: 12px 14px; border-radius: 10px; color: #91a6bd; font-size: 11px; font-weight: 750;
+  display: flex; gap: 11px; align-items: center; transition: 0.2s;
+}
+.nav a:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.nav a.active {
+  background: linear-gradient(90deg, rgba(7, 157, 242, 0.15), rgba(43, 220, 255, 0.05));
+  color: #fff; border: 1px solid rgba(7, 157, 242, 0.3); box-shadow: inset 3px 0 var(--blue);
+}
+.nav i { width: 18px; text-align: center; color: #5c8eb8; font-style: normal; }
+.nav .active i { color: var(--cyan); }
+
+.profile { margin-top: auto; padding: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.user { display: flex; gap: 9px; align-items: center; padding: 10px; background: rgba(255,255,255,0.04); border-radius: 10px; }
+.avatar { width: 32px; height: 32px; border-radius: 9px; background: #123454; display: grid; place-items: center; color: var(--cyan); font-size: 10px; font-weight: 900; }
+.user b { font-size: 10px; color: #fff; }
+.user span { display: block; font-size: 8px; color: #66819b; margin-top: 2px; }
+
+/* Sticky Topbar */
+.main { margin-left: 255px; }
+.topbar {
+  height: 78px; background: #fff; border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 32px;
+  position: sticky; top: 0; z-index: 10;
+}
+.title h1 { font-size: 20px; letter-spacing: -0.04em; color: var(--navy2); }
+.title p { font-size: 10px; color: var(--muted); margin-top: 3px; }
+.topright { display: flex; align-items: center; gap: 10px; }
+.search { width: 220px; border: 1px solid var(--line); background: #fafcfe; border-radius: 9px; padding: 10px 12px; font-size: 10px; outline: none; }
+.topbtn { border: 1px solid var(--line); background: #fff; border-radius: 9px; padding: 10px 14px; font-size: 10px; font-weight: 850; transition: 0.2s; }
+.topbtn.primary { border: 0; color: #fff; background: linear-gradient(135deg, #0daafc, #0765d8); box-shadow: 0 10px 25px rgba(7, 157, 242, 0.25); }
+
+/* Main Content Area */
+.content { padding: 28px 32px 60px; }
+
+/* Header Banner & Status Bar */
+.backLink { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 800; color: #078fd8; margin-bottom: 12px; }
+.dispatchHeader {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 20px 24px; box-shadow: var(--shadow); margin-bottom: 24px;
+}
+.shipInfo h2 { font-size: 22px; letter-spacing: -0.04em; color: var(--navy2); display: flex; align-items: center; gap: 10px; }
+.trackingTag { font-size: 10px; background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; padding: 4px 10px; border-radius: 20px; font-weight: 800; }
+.shipMeta { display: flex; gap: 16px; margin-top: 8px; font-size: 10px; color: var(--muted); }
+.shipMeta span b { color: var(--ink); }
+
+.statusPill {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 30px; font-size: 11px; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase;
+}
+.statusPill.booked { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.statusPill.collected { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+.statusPill.transit { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+.statusPill.delivered { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+
+.headerActions { display: flex; gap: 8px; }
+
+/* 2-Column Asymmetric Grid Layout */
+.grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+
+/* Control Cards */
+.card { background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; margin-bottom: 20px; }
+.cardHeader { padding: 18px 22px; border-bottom: 1px solid #eef3f8; display: flex; justify-content: space-between; align-items: center; background: #fafcfe; }
+.cardHeader h3 { font-size: 13px; font-weight: 900; color: var(--navy2); display: flex; align-items: center; gap: 9px; }
+.cardHeader .badge { font-size: 9px; font-weight: 800; background: #e2e8f0; color: #475569; padding: 3px 8px; border-radius: 12px; }
+
+.cardBody { padding: 22px; }
+
+/* Form Elements */
+.field { margin-bottom: 14px; }
+.field:last-child { margin-bottom: 0; }
+.field label { display: block; font-size: 10px; font-weight: 850; color: #24364d; margin-bottom: 6px; }
+.field input, .field select, .field textarea {
+  width: 100%; border: 1px solid #dbe5ee; border-radius: 9px; background: #fbfdff; padding: 11px 12px; color: #1a2c42; font-size: 11px; outline: 0; transition: 0.2s;
+}
+.field textarea { min-height: 75px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: #58c7fa; box-shadow: 0 0 0 3px rgba(7, 157, 242, 0.08); background: #fff; }
+
+.btn { border: 1px solid var(--line); background: #fff; border-radius: 9px; padding: 11px 16px; font-size: 11px; font-weight: 900; transition: 0.2s; }
+.btn.primary { border: 0; background: linear-gradient(135deg, #0daafc, #0764d7); color: #fff; box-shadow: 0 10px 25px rgba(7, 157, 242, 0.25); }
+.btn:hover { transform: translateY(-1px); }
+
+/* Quick Status Selector Pills */
+.statusSelector { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+.statusOpt { position: relative; }
+.statusOpt input { position: absolute; opacity: 0; }
+.statusOpt label {
+  display: block; border: 1px solid #dfe7ee; border-radius: 9px; padding: 10px; text-align: center; cursor: pointer; font-size: 10px; font-weight: 800; color: #475569; transition: 0.2s; background: #f8fafc;
+}
+.statusOpt input:checked + label { border-color: var(--blue); background: #edf9ff; color: #0369a1; box-shadow: inset 0 0 0 1px var(--blue); }
+
+/* Template Quick Pills */
+.templatePills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.tPill { font-size: 9px; background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; border-radius: 12px; padding: 3px 8px; cursor: pointer; transition: 0.2s; }
+.tPill:hover { background: #e2e8f0; color: #0f172a; }
+
+/* Driver Assigned Card */
+.driverInfo { display: flex; align-items: center; justify-content: space-between; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-top: 12px; }
+.driverLeft { display: flex; align-items: center; gap: 12px; }
+.driverAvatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #10adff, #075fd6); color: #fff; font-weight: 900; display: grid; place-items: center; font-size: 12px; }
+.driverDetails b { font-size: 11px; color: var(--navy2); }
+.driverDetails p { font-size: 9px; color: var(--muted); margin-top: 2px; }
+
+/* Addresses & Route Box */
+.routeCard { display: grid; gap: 16px; position: relative; }
+.addressBlock { padding: 16px; border-radius: 12px; background: #fafcfe; border: 1px solid #eef4fb; position: relative; }
+.addressBlock.pickup { border-left: 4px solid var(--blue); }
+.addressBlock.delivery { border-left: 4px solid var(--violet); }
+.addTag { font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+.addressBlock.pickup .addTag { color: #0284c7; }
+.addressBlock.delivery .addTag { color: #7c3aed; }
+.addName { font-size: 12px; font-weight: 900; color: var(--navy2); }
+.addPhone { font-size: 10px; color: #475569; margin-top: 2px; }
+.addText { font-size: 10px; color: #64748b; margin-top: 6px; line-height: 1.5; }
+.copyBtn { font-size: 9px; color: #078fd8; font-weight: 800; background: none; border: none; cursor: pointer; }
+
+/* Audit Timeline */
+.timeline { position: relative; padding-left: 20px; }
+.timeline:before { content: ""; position: absolute; left: 8px; top: 10px; bottom: 10px; width: 2px; background: #e2e8f0; }
+.tlItem { position: relative; margin-bottom: 20px; }
+.tlItem:last-child { margin-bottom: 0; }
+.tlDot { position: absolute; left: -20px; top: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 3px solid var(--blue); box-shadow: 0 0 10px rgba(7, 157, 242, 0.3); }
+.tlItem.done .tlDot { background: var(--green); border-color: var(--green); }
+.tlContent { background: #fafcfe; border: 1px solid #eef4fb; border-radius: 10px; padding: 12px 14px; }
+.tlHeader { display: flex; justify-content: space-between; align-items: center; font-size: 10px; margin-bottom: 4px; }
+.tlHeader b { color: var(--navy2); font-size: 11px; }
+.tlHeader time { color: var(--muted); font-size: 9px; }
+.tlMsg { font-size: 10px; color: #334155; line-height: 1.4; }
+.tlLoc { display: inline-block; font-size: 8px; font-weight: 800; background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 6px; margin-top: 6px; }
+.tlNote { font-size: 9px; color: #64748b; font-style: italic; margin-top: 4px; border-top: 1px dashed #e2e8f0; padding-top: 4px; }
+
+/* Specs Summary Table */
+.specList { display: grid; gap: 8px; }
+.specRow { display: flex; justify-content: space-between; font-size: 10px; padding-bottom: 6px; border-bottom: 1px solid #f1f5f9; }
+.specRow span { color: var(--muted); }
+.specRow b { color: var(--navy2); }
+.specTotal { padding-top: 8px; border-top: 2px solid #e2e8f0; }
+.specTotal b { font-size: 16px; color: var(--blue); font-weight: 950; }
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; }
+  .sidebar { width: 72px; }
+  .brand > div, .nav a span, .profile .user div { display: none; }
+  .nav a { justify-content: center; }
+  .main { margin-left: 72px; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- Fixed Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="logo">RP</span>
+      <div>RUSH PARCEL<small>ADMIN CONTROL CENTRE</small></div>
+    </div>
+    <nav class="nav">
+      <a href="#"><i>⌂</i><span>Dashboard</span></a>
+      <a class="active" href="#"><i>▣</i><span>Shipments</span></a>
+      <a href="#"><i>◇</i><span>Quotations</span></a>
+      <a href="#"><i>▤</i><span>Receipts &amp; Invoices</span></a>
+      <a href="#"><i>⚙</i><span>Settings</span></a>
+    </nav>
+    <div class="profile">
+      <div class="user">
+        <div class="avatar">SA</div>
+        <div><b>System Admin</b><span>Rush Parcel Operations</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Dispatch Workspace -->
+  <main class="main">
+    <header class="topbar">
+      <div class="title">
+        <h1>Dispatch Control: SH-2026-F4406B</h1>
+        <p>Manage tracking UK8025667958, driver assignment, and status updates.</p>
+      </div>
+      <div class="topright">
+        <input class="search" placeholder="Search shipment, quote or invoice...">
+        <button class="topbtn primary">＋ Create Shipment</button>
+        <button class="topbtn">Logout</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <a href="#" class="backLink">← Back to Shipments List</a>
+
+      <!-- Dispatch Header Banner -->
+      <div class="dispatchHeader">
+        <div class="shipInfo">
+          <h2>
+            SH-2026-F4406B
+            <span class="trackingTag">TRK: UK8025667958</span>
+          </h2>
+          <div class="shipMeta">
+            <span>Pickup: <b>02 Sep 2026, 10:00 AM</b></span>
+            <span>Service: <b>Next-Day Express (24h)</b></span>
+            <span>Customer: <b>Safdar Bhatti</b></span>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:16px;">
+          <div class="statusPill booked">
+            ● Booking Confirmed
+          </div>
+          <div class="headerActions">
+            <button class="topbtn" onclick="alert('Printing Shipping Label PDF...')">🖨 Label PDF</button>
+            <button class="topbtn" onclick="alert('Opening Live Customer Tracker...')">🔗 Live Tracker</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2-Column Dispatch Control Grid -->
+      <div class="grid">
+
+        <!-- LEFT COLUMN: Dispatch Controls & Audit Timeline -->
+        <div class="leftCol">
+
+          <!-- CARD 1: Fleet Driver Assignment -->
+          <div class="card">
+            <div class="cardHeader">
+              <h3><i>🚛</i> Fleet Driver Assignment</h3>
+              <span class="badge">DISPATCH CONTROL</span>
+            </div>
+            <div class="cardBody">
+              <form onsubmit="event.preventDefault(); alert('Driver Assigned Successfully!');">
+                <div class="field">
+                  <label for="driverSelect">Select Active Courier Driver *</label>
+                  <select id="driverSelect" required>
+                    <option value="">-- Select Active Driver --</option>
+                    <option value="1">Dave Miller — EMP-802 (Ford Transit / London Central)</option>
+                    <option value="2">Sarah Jenkins — EMP-809 (Mercedes Sprinter / Birmingham Hub)</option>
+                    <option value="3">Mark Roberts — EMP-815 (Peugeot Partner / Manchester West)</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn primary" style="width:100%;">Assign Driver to Job →</button>
+              </form>
+
+              <!-- Currently Assigned Driver Display -->
+              <div class="driverInfo">
+                <div class="driverLeft">
+                  <div class="driverAvatar">DM</div>
+                  <div class="driverDetails">
+                    <b>Dave Miller</b> (EMP-802)
+                    <p>Ford Transit &bull; 07700 900888 &bull; London Central Depot</p>
+                  </div>
+                </div>
+                <button class="btn" style="padding:6px 10px; font-size:9px;" onclick="alert('Calling driver...')">📞 Call</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 2: Update Shipment Milestone Status -->
+          <div class="card">
+            <div class="cardHeader">
+              <h3><i>📊</i> Update Milestone Status &amp; Live Tracking</h3>
+              <span class="badge">STATUS CONTROL</span>
+            </div>
+            <div class="cardBody">
+              <form onsubmit="event.preventDefault(); alert('Status milestone updated successfully!');">
+                <div class="field">
+                  <label>Select New Milestone Status *</label>
+                  <div class="statusSelector">
+                    <div class="statusOpt">
+                      <input type="radio" name="status" id="st1" value="booking_confirmed" checked>
+                      <label for="st1">Booked</label>
+                    </div>
+                    <div class="statusOpt">
+                      <input type="radio" name="status" id="st2" value="collected">
+                      <label for="st2">Picked Up</label>
+                    </div>
+                    <div class="statusOpt">
+                      <input type="radio" name="status" id="st3" value="in_transit">
+                      <label for="st3">In Transit</label>
+                    </div>
+                    <div class="statusOpt">
+                      <input type="radio" name="status" id="st4" value="out_for_delivery">
+                      <label for="st4">Out for Delivery</label>
+                    </div>
+                    <div class="statusOpt">
+                      <input type="radio" name="status" id="st5" value="delivered">
+                      <label for="st5">Delivered</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="pubMsg">Public Tracking Message *</label>
+                  <input id="pubMsg" placeholder="e.g. Parcel loaded on delivery van with driver Dave" required value="Parcel loaded on delivery van for morning route.">
+                  <div class="templatePills">
+                    <span class="tPill" onclick="document.getElementById('pubMsg').value=this.textContent">Parcel collected from sender address</span>
+                    <span class="tPill" onclick="document.getElementById('pubMsg').value=this.textContent">Arrived at Central UK Hub (Birmingham)</span>
+                    <span class="tPill" onclick="document.getElementById('pubMsg').value=this.textContent">Out for final delivery to recipient</span>
+                    <span class="tPill" onclick="document.getElementById('pubMsg').value=this.textContent">Delivered &amp; signed by recipient</span>
+                  </div>
+                </div>
+
+                <div class="grid" style="grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
+                  <div class="field" style="margin:0;">
+                    <label for="locLabel">Location Label</label>
+                    <input id="locLabel" placeholder="e.g. London Central Hub" value="NN4 8QF (London)">
+                  </div>
+                  <div class="field" style="margin:0;">
+                    <label for="internalNote">Internal Ops Note</label>
+                    <input id="internalNote" placeholder="Private dispatcher note" value="Driver confirmed collection window">
+                  </div>
+                </div>
+
+                <button type="submit" class="btn primary" style="width:100%;">Record Status Change &amp; Broadcast Update →</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- CARD 3: Full Milestone Audit Timeline -->
+          <div class="card">
+            <div class="cardHeader">
+              <h3><i>📜</i> Full Milestone Audit Timeline</h3>
+              <span class="badge">5 EVENTS</span>
+            </div>
+            <div class="cardBody">
+              <div class="timeline">
+                <div class="tlItem done">
+                  <div class="tlDot"></div>
+                  <div class="tlContent">
+                    <div class="tlHeader">
+                      <b>1. Booking Confirmed</b>
+                      <time>01 Sep 2026, 20:59</time>
+                    </div>
+                    <p class="tlMsg">Order details registered in Rush Parcel logistics network.</p>
+                    <span class="tlLoc">📍 NN4 8QF (London)</span>
+                    <p class="tlNote">Internal Note: Automated event milestone 1 generated by admin dispatcher</p>
+                  </div>
+                </div>
+
+                <div class="tlItem">
+                  <div class="tlDot" style="border-color:#f59e0b;"></div>
+                  <div class="tlContent">
+                    <div class="tlHeader">
+                      <b>2. Picked Up (Collection Scheduled)</b>
+                      <time>02 Sep 2026, 10:00 (Scheduled)</time>
+                    </div>
+                    <p class="tlMsg">Courier scheduled to collect parcel from sender address.</p>
+                    <span class="tlLoc">📍 London Central Hub</span>
+                  </div>
+                </div>
+
+                <div class="tlItem">
+                  <div class="tlDot" style="border-color:#cbd5e1;"></div>
+                  <div class="tlContent">
+                    <div class="tlHeader">
+                      <b style="color:#94a3b8;">3. In Transit</b>
+                      <time style="color:#cbd5e1;">Pending</time>
+                    </div>
+                    <p class="tlMsg" style="color:#94a3b8;">Shipment moving through sorting hub.</p>
+                  </div>
+                </div>
+
+                <div class="tlItem">
+                  <div class="tlDot" style="border-color:#cbd5e1;"></div>
+                  <div class="tlContent">
+                    <div class="tlHeader">
+                      <b style="color:#94a3b8;">4. Out for Delivery</b>
+                      <time style="color:#cbd5e1;">Pending</time>
+                    </div>
+                    <p class="tlMsg" style="color:#94a3b8;">Final mile delivery to recipient.</p>
+                  </div>
+                </div>
+
+                <div class="tlItem">
+                  <div class="tlDot" style="border-color:#cbd5e1;"></div>
+                  <div class="tlContent">
+                    <div class="tlHeader">
+                      <b style="color:#94a3b8;">5. Delivered</b>
+                      <time style="color:#cbd5e1;">Pending</time>
+                    </div>
+                    <p class="tlMsg" style="color:#94a3b8;">Proof of delivery verification.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Address Route Cards & Specifications -->
+        <div class="rightCol">
+
+          <!-- CARD 4: Pickup & Delivery Address Route -->
+          <div class="card">
+            <div class="cardHeader">
+              <h3><i>📍</i> Pickup &amp; Delivery Route</h3>
+              <span class="badge">UK DOMESTIC</span>
+            </div>
+            <div class="cardBody">
+              <div class="routeCard">
+                <!-- Pickup Block -->
+                <div class="addressBlock pickup">
+                  <div class="addTag">
+                    <span>📍 Sender Pickup</span>
+                    <button class="copyBtn" onclick="navigator.clipboard.writeText('Safdar Bhatti, 621 London NN4 8QF, 0325849482'); alert('Address copied!');">Copy</button>
+                  </div>
+                  <div class="addName">Safdar Bhatti</div>
+                  <div class="addPhone">📞 0325849482</div>
+                  <div class="addText">
+                    621 High Street<br>
+                    London, NN4 8QF<br>
+                    United Kingdom
+                  </div>
+                </div>
+
+                <!-- Delivery Block -->
+                <div class="addressBlock delivery">
+                  <div class="addTag">
+                    <span>🏁 Receiver Delivery</span>
+                    <button class="copyBtn" onclick="navigator.clipboard.writeText('Amazon Fulfillment Center, District Courts Bus Station Birmingham NN4 9QF, 0971562485791'); alert('Address copied!');">Copy</button>
+                  </div>
+                  <div class="addName">Amazon Fulfillment Center</div>
+                  <div class="addPhone">📞 0971562485791</div>
+                  <div class="addText">
+                    District Courts Bus Station<br>
+                    Birmingham, NN4 9QF<br>
+                    United Kingdom
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 5: Shipment Specifications & Commercial Summary -->
+          <div class="card">
+            <div class="cardHeader">
+              <h3><i>📦</i> Package Specs &amp; Charges</h3>
+              <span class="badge">GBP (£)</span>
+            </div>
+            <div class="cardBody">
+              <div class="specList">
+                <div class="specRow">
+                  <span>Item Description</span>
+                  <b>Electronics &amp; documents</b>
+                </div>
+                <div class="specRow">
+                  <span>Weight (kg)</span>
+                  <b>2.5 kg</b>
+                </div>
+                <div class="specRow">
+                  <span>Cargo Value</span>
+                  <b>£150.00</b>
+                </div>
+                <div class="specRow">
+                  <span>Courier Service</span>
+                  <b>Next-Day Express (24h)</b>
+                </div>
+                <div class="specRow">
+                  <span>Shipping Fee</span>
+                  <b>£38.50</b>
+                </div>
+                <div class="specRow">
+                  <span>VAT (20%)</span>
+                  <b>£7.70</b>
+                </div>
+                <div class="specRow specTotal">
+                  <span>Total Amount</span>
+                  <b>£46.20</b>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 6: Admin Ops Support Notes -->
+          <div class="card" style="background: linear-gradient(135deg, #edf9ff, #f7f3ff); border: 1px solid #cce5ff;">
+            <div class="cardBody">
+              <b style="color:var(--blue); font-size:11px;">🔐 Admin Operational Gate</b>
+              <p style="color:#64748b; font-size:10px; margin-top:4px; line-height:1.5;">
+                Changes made to driver assignment or status updates directly update the customer live tracking portal and send SMS/email notifications when configured.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

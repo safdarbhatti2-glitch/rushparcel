@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rush Parcel — Edit Shipment</title>
+<style>
+:root{
+  --navy:#06101f;--navy2:#0b1b31;--blue:#078ff0;--cyan:#24d9ff;
+  --ink:#10223a;--muted:#71849a;--bg:#f4f8fc;--card:#fff;--line:#dce7f0;
+  --green:#10b889;--orange:#ff9a45;--violet:#8758ed;--red:#df5e6b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.topbar{
+  height:72px;background:rgba(255,255,255,.94);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;padding:0 42px;
+  position:sticky;top:0;z-index:10;backdrop-filter:blur(16px)
+}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#13adff,#075bd4);
+  display:grid;place-items:center;color:#fff;font-size:10px;font-weight:950;box-shadow:0 9px 25px #078ff033}
+.brand b{font-size:13px;letter-spacing:-.03em}.brand small{display:block;font-size:6px;color:#8091a3;letter-spacing:.16em;margin-top:2px}
+.toplinks{display:flex;align-items:center;gap:9px}.toplinks a{font-size:8px;color:#65788d;text-decoration:none;padding:9px 10px;border-radius:8px}.toplinks a:hover{background:#eef6fb;color:#078ff0}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:10px 15px;font-size:8px;font-weight:900;transition:.2s}
+.btn:hover{transform:translateY(-1px)}.btn.primary{color:#fff;border:0;background:linear-gradient(135deg,#0daafc,#0764d7);box-shadow:0 10px 26px #078ff02b}
+.page{max-width:1320px;margin:auto;padding:30px 34px 70px}
+.crumb{font-size:8px;color:#7b8da0;margin-bottom:13px}.crumb a{color:#078ff0;font-weight:850}
+.hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-bottom:22px}
+.hero h1{margin:0;font-size:27px;letter-spacing:-.055em}.hero p{margin:6px 0 0;color:var(--muted);font-size:9px}
+.identity{display:flex;align-items:center;gap:8px}.ref{font-size:9px;font-weight:950;color:#078ff0;background:#eaf8ff;border:1px solid #c8ecfb;padding:9px 11px;border-radius:9px}
+.status{font-size:7px;font-weight:950;color:#078c6d;background:#e7faf4;border-radius:99px;padding:8px 10px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 55px rgba(10,35,65,.075);overflow:hidden}
+.notice{margin:20px 22px 0;padding:12px 14px;border:1px solid #cbe9f8;background:linear-gradient(90deg,#effaff,#f8fdff);border-radius:11px;font-size:7px;color:#587187}
+.notice b{color:#0789d5}
+.form{padding:24px}
+.section{padding:0 0 25px;margin:0 0 25px;border-bottom:1px solid #edf2f6}
+.section:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.sectionHead{display:flex;gap:11px;margin-bottom:16px}
+.badge{width:36px;height:36px;border-radius:11px;background:#eaf8ff;color:#078ff0;display:grid;place-items:center;font-size:8px;font-weight:950;flex:none}
+.section:nth-of-type(2) .badge{background:#eafaf5;color:#0baf84}
+.section:nth-of-type(3) .badge{background:#fff5e9;color:#e68629}
+.section:nth-of-type(4) .badge{background:#f2edff;color:#8055df}
+.sectionHead h2{font-size:13px;margin:1px 0 0}.sectionHead p{font-size:7px;color:var(--muted);margin:4px 0 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.address{padding:16px;border:1px solid #e3ebf2;border-radius:13px;background:linear-gradient(180deg,#fcfdff,#f9fbfd)}
+.addressTitle{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}
+.addressTitle strong{font-size:8px;letter-spacing:.09em}.addressTitle span{font-size:6px;color:#078ff0;font-weight:900;background:#eaf8ff;padding:6px 8px;border-radius:99px}
+.field{display:grid;gap:5px;margin-bottom:11px}.field label{font-size:7px;font-weight:850;color:#34475c}.field label em{font-style:normal;color:#078ff0}
+.field input,.field select,.field textarea{
+  width:100%;border:1px solid #dbe5ee;border-radius:8px;background:#fff;color:#172b42;
+  padding:11px 10px;font-size:8px;outline:0;transition:.18s
+}
+.field textarea{min-height:75px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:#4dc5fa;box-shadow:0 0 0 3px #078ff010}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.service{position:relative}.service input{position:absolute;opacity:0}
+.service label{display:block;padding:14px;border:1px solid #dce6ee;border-radius:12px;height:100%;cursor:pointer;transition:.2s}
+.service input:checked+label{border-color:#078ff0;background:#effaff;box-shadow:inset 0 0 0 1px #078ff0,0 8px 25px #078ff00e}
+.service strong{font-size:8px;display:block}.service small{font-size:6px;color:#77899a;display:block;line-height:1.5;margin-top:5px}.service b{font-size:11px;color:#078ff0;display:block;margin-top:10px}
+.options{display:flex;flex-wrap:wrap;gap:7px;margin-top:5px}.option{font-size:7px;color:#63778c;border:1px solid #dce6ee;padding:7px 9px;border-radius:99px;background:#fff}.option input{accent-color:#078ff0}
+.footer{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:17px 24px;background:#fafcfe;border-top:1px solid #edf2f6}.footerNote{font-size:7px;color:#8796a5}.actions{display:flex;gap:8px}
+.side{display:grid;gap:14px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 48px rgba(10,35,65,.06);padding:18px}
+.cardHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.cardHead h3{font-size:11px;margin:0}.cardHead span{font-size:6px;color:#078ff0;font-weight:950;letter-spacing:.08em}
+.statusCard{background:linear-gradient(135deg,#061329,#0a2644);color:#fff;border:0;overflow:hidden;position:relative}.statusCard:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;right:-85px;top:-90px;background:#24d9ff16}
+.tracking{font-size:7px;color:#7d9bb5}.statusText{font-size:18px;font-weight:950;margin:4px 0 13px;letter-spacing:-.04em}.bar{height:6px;background:#ffffff15;border-radius:99px;overflow:hidden}.bar span{display:block;width:67%;height:100%;background:linear-gradient(90deg,#079ff3,#24d9ff);box-shadow:0 0 15px #24d9ff}
+.route{display:flex;justify-content:space-between;margin-top:13px}.route div{width:9px;height:9px;border-radius:50%;background:#274862;border:2px solid #17354e}.route .done{background:#15bd90;border-color:#15bd90}.route .current{background:#24d9ff;border-color:#24d9ff}
+.kv{display:grid;gap:11px}.kv div{display:flex;justify-content:space-between;font-size:8px}.kv span{color:#7b8da0}.total{border-top:1px solid #edf2f6;padding-top:11px;margin-top:2px}.total b{font-size:19px;color:#078ff0}
+.audit{display:grid;gap:12px}.auditItem{display:grid;grid-template-columns:24px 1fr;gap:8px}.auditIcon{width:23px;height:23px;border-radius:7px;background:#eef8ff;color:#078ff0;display:grid;place-items:center;font-size:7px;font-weight:900}.auditItem b{font-size:7px}.auditItem span{display:block;color:#8997a5;font-size:6px;margin-top:2px}
+.danger{border-color:#efd9dc;background:#fffafb}.danger p{font-size:7px;line-height:1.6;color:#806f74;margin:0 0 12px}.danger .btn{color:#c94c5b;border-color:#efd9dc;background:#fff}
+.toast{position:fixed;right:22px;bottom:22px;background:#06172b;color:#fff;border:1px solid #315776;border-radius:10px;padding:12px 15px;font-size:8px;box-shadow:0 18px 50px #0007;opacity:0;transform:translateY(70px);transition:.25s;z-index:50}.toast.show{opacity:1;transform:none}
+@media(max-width:1050px){.toplinks{display:none}.layout{grid-template-columns:1fr}.side{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:720px){.topbar{padding:0 15px}.toplinks+div .btn.primary{display:none}.page{padding:20px 12px 45px}.hero{display:block}.identity{margin-top:12px}.grid2,.services{grid-template-columns:1fr}.side{grid-template-columns:1fr}.footer{display:block}.actions{margin-top:10px}.actions .btn{flex:1}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">RP</span><div><b>RUSH PARCEL</b><small>ADMIN CONTROL CENTRE</small></div></div>
+  <nav class="toplinks"><a href="#">Dashboard</a><a href="#">Shipments</a><a href="#">Quotations</a><a href="#">Receipts &amp; Invoices</a><a href="#">Settings</a></nav>
+  <div><button class="btn primary" onclick="toast('Create Shipment action ready for PHP integration.')">＋ Create Shipment</button></div>
+</header>
+
+<main class="page">
+  <div class="crumb"><a href="#">Shipments</a> › SH-2026-02173F › Edit</div>
+  <div class="hero">
+    <div><h1>Edit Shipment</h1><p>Update operational details while protecting shipment history and financial records.</p></div>
+    <div class="identity"><span class="ref">SH-2026-02173F</span><span class="status">● IN TRANSIT</span></div>
+  </div>
+
+  <div class="layout">
+    <section class="panel">
+      <div class="notice"><b>Tracking reference:</b> UK6326117766 &nbsp;·&nbsp; Changes made here should be recorded against the shipment audit log.</div>
+      <form id="editForm">
+      <div class="form">
+
+        <section class="section">
+          <div class="sectionHead"><div class="badge">01</div><div><h2>Sender &amp; Receiver</h2><p>Update pickup and delivery contacts and addresses.</p></div></div>
+          <div class="grid2">
+            <div class="address">
+              <div class="addressTitle"><strong>SENDER · PICKUP</strong><span>ORIGIN</span></div>
+              <div class="field"><label>Sender name <em>*</em></label><input required value="safdar bhatti"></div>
+              <div class="grid2"><div class="field"><label>Phone <em>*</em></label><input required value="0971562485791"></div><div class="field"><label>House / building</label><input></div></div>
+              <div class="field"><label>Street address</label><input value="District Courts Bus Station"></div>
+              <div class="grid2"><div class="field"><label>City / Town</label><input value="london"></div><div class="field"><label>UK postcode <em>*</em></label><input required value="NN4 8AG"></div></div>
+            </div>
+            <div class="address">
+              <div class="addressTitle"><strong>RECEIVER · DELIVERY</strong><span>DESTINATION</span></div>
+              <div class="field"><label>Receiver name <em>*</em></label><input required value="Amazon Fulfilment Center"></div>
+              <div class="grid2"><div class="field"><label>Phone <em>*</em></label><input required value="097156248548"></div><div class="field"><label>House / building</label><input></div></div>
+              <div class="field"><label>Street address</label><input value="District Courts Bus Station"></div>
+              <div class="grid2"><div class="field"><label>City / Town</label><input value="Manchester"></div><div class="field"><label>UK postcode <em>*</em></label><input required value="NN4 9QF"></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="sectionHead"><div class="badge">02</div><div><h2>Package &amp; Shipping</h2><p>Review package specifications and the selected courier service.</p></div></div>
+          <div class="grid2">
+            <div class="field"><label>Item / description <em>*</em></label><input required value="General parcel contents"></div>
+            <div class="field"><label>Package type</label><select><option>Parcel / Box</option><option>Document</option><option>Crate</option><option>Pallet</option></select></div>
+            <div class="field"><label>Weight (kg) <em>*</em></label><input type="number" value="3.5" step=".1"></div>
+            <div class="field"><label>Declared value (GBP)</label><input id="declared" type="number" value="150.00" step=".01"></div>
+          </div>
+          <div class="grid2">
+            <div class="field"><label>Dimensions (L × W × H cm)</label><input value="30 × 20 × 15"></div>
+            <div class="field"><label>Special handling</label><select><option>Standard</option><option>Fragile</option><option>Handle With Care</option><option>Oversized</option></select></div>
+          </div>
+          <div class="field"><label>Delivery notes / special instructions</label><textarea>Leave with reception if recipient is unavailable.</textarea></div>
+          <div class="options"><label class="option"><input type="checkbox" checked> Signature required</label><label class="option"><input type="checkbox" checked> Photo proof</label><label class="option"><input type="checkbox"> Fragile handling</label></div>
+        </section>
+
+        <section class="section">
+          <div class="sectionHead"><div class="badge">03</div><div><h2>Courier Service &amp; Charges</h2><p>Select the service and verify the GBP charge before saving.</p></div></div>
+          <div class="services">
+            <div class="service"><input id="standard" name="service" type="radio" data-price="24.50" checked><label for="standard"><strong>Standard Parcel 48h</strong><small>Economy door-to-door UK delivery</small><b>£24.50</b></label></div>
+            <div class="service"><input id="express" name="service" type="radio" data-price="38"><label for="express"><strong>Next-Day Express</strong><small>Priority nationwide delivery</small><b>£38.00</b></label></div>
+            <div class="service"><input id="same" name="service" type="radio" data-price="65"><label for="same"><strong>Same-Day Rush</strong><small>Urgent direct courier service</small><b>£65.00</b></label></div>
+          </div>
+          <div class="grid2" style="margin-top:14px">
+            <div class="field"><label>Manual charge override (GBP)</label><input id="override" type="number" step=".01" placeholder="Leave blank to use service price"></div>
+            <div class="field"><label>VAT treatment</label><select><option>Standard VAT — 20%</option><option>VAT exempt</option><option>Zero rated</option></select></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="sectionHead"><div class="badge">04</div><div><h2>Schedule &amp; Operational Status</h2><p>Update planned dates and the current shipment state.</p></div></div>
+          <div class="grid2">
+            <div class="field"><label>Scheduled pickup</label><input type="datetime-local" value="2026-09-01T21:39"></div>
+            <div class="field"><label>Scheduled delivery</label><input type="datetime-local" value="2026-09-02T21:39"></div>
+            <div class="field"><label>Current status</label><select><option>Booked</option><option>Picked Up</option><option selected>In Transit</option><option>Out for Delivery</option><option>Delivered</option><option>Exception</option></select></div>
+            <div class="field"><label>Current location</label><input value="Central Hub, London"></div>
+          </div>
+        </section>
+
+      </div>
+      <div class="footer"><span class="footerNote">Last updated 02 Sep 2026 · 16:42 · Changes will be audit logged.</span><div class="actions"><button type="button" class="btn" onclick="toast('No changes were discarded in this prototype.')">Cancel</button><button type="button" class="btn" onclick="toast('Draft saved — connect this action to PHP/MySQL.')">Save Draft</button><button class="btn primary" type="submit">Save Changes →</button></div></div>
+      </form>
+    </section>
+
+    <aside class="side">
+      <div class="card statusCard"><div class="cardHead"><h3>Shipment Status</h3><span style="color:#24d9ff">LIVE</span></div><div class="tracking">UK6326117766</div><div class="statusText">In Transit</div><div class="bar"><span></span></div><div class="route"><div class="done"></div><div class="done"></div><div class="current"></div><div></div><div></div></div></div>
+
+      <div class="card"><div class="cardHead"><h3>Charge Summary</h3><span>GBP (£)</span></div><div class="kv"><div><span>Service</span><b id="serviceName">Standard 48h</b></div><div><span>Shipping</span><b id="shipping">£24.50</b></div><div><span>VAT 20%</span><b id="vat">£4.90</b></div><div class="total"><span>Total</span><b id="total">£29.40</b></div></div></div>
+
+      <div class="card"><div class="cardHead"><h3>Audit Activity</h3><span>SECURE LOG</span></div><div class="audit">
+        <div class="auditItem"><div class="auditIcon">✓</div><div><b>Shipment created</b><span>01 Sep 2026 · System Admin</span></div></div>
+        <div class="auditItem"><div class="auditIcon">↻</div><div><b>Status changed to In Transit</b><span>02 Sep 2026 · Operations</span></div></div>
+        <div class="auditItem"><div class="auditIcon">●</div><div><b>Editing session active</b><span>Unsaved changes are not yet committed.</span></div></div>
+      </div></div>
+
+      <div class="card danger"><div class="cardHead"><h3>Danger Zone</h3><span style="color:#d35a67">RESTRICTED</span></div><p>Shipment deletion should require elevated permission. Financial and operational history should never be hard-deleted.</p><button class="btn" onclick="toast('Deletion is disabled in this UI prototype.')">Request Deletion</button></div>
+    </aside>
+  </div>
+</main>
+<div class="toast" id="toastBox"></div>
+<script>
+const toastBox=document.getElementById('toastBox');
+function toast(m){toastBox.textContent=m;toastBox.classList.add('show');setTimeout(()=>toastBox.classList.remove('show'),2800)}
+const radios=[...document.querySelectorAll('input[name="service"]')],override=document.getElementById('override');
+function updatePrice(){
+ const r=radios.find(x=>x.checked), base=override.value!==''?Number(override.value):Number(r.dataset.price), vat=base*.20;
+ document.getElementById('serviceName').textContent=r.nextElementSibling.querySelector('strong').textContent.replace(' Parcel','');
+ document.getElementById('shipping').textContent='£'+base.toFixed(2);
+ document.getElementById('vat').textContent='£'+vat.toFixed(2);
+ document.getElementById('total').textContent='£'+(base+vat).toFixed(2);
+}
+radios.forEach(r=>r.addEventListener('change',updatePrice));override.addEventListener('input',updatePrice);
+document.getElementById('editForm').addEventListener('submit',e=>{e.preventDefault();if(!e.currentTarget.checkValidity())return e.currentTarget.reportValidity();toast('Shipment validated. Connect Save Changes to your PHP/MySQL update endpoint.')});
+updatePrice();
+</script>
+</body>
+</html>
