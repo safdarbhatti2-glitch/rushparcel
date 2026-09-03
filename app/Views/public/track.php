@@ -1,451 +1,425 @@
 <?php ob_start(); ?>
 
 <style>
-.track-scope {
-  --bg:#F8FAFC;--panel:#FFFFFF;--panel2:#FFFFFF;--panel3:#F1F5F9;
-  --blue:#EA580C;--cyan:#EA580C;--violet:#0284C7;--green:#16A34A;
-  --white:#0F172A;--muted:#64748B;--line:#E2E8F0;--danger:#DC2626;
+.track-page {
+  --orange:#f45b0b;
+  --orange2:#ff7a18;
+  --orange-pale:#fff4ec;
+  --orange-border:#ffd9c2;
+  --ink:#172033;
+  --muted:#667085;
+  --soft:#f7f9fc;
+  --line:#e6ebf2;
+  --green:#16a05d;
+  --green-pale:#edf9f2;
+  --blue:#2185d0;
+  --blue-pale:#eff8ff;
+  --white:#fff;
+  --shadow:0 18px 55px rgba(23,32,51,.08);
   margin: -1.5rem -1.25rem -5rem -1.25rem;
-  background: var(--bg);
-  color: var(--white);
-  position: relative;
+  background: var(--soft);
+  color: var(--ink);
+  font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
 }
-.track-scope:before {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background-image: linear-gradient(rgba(234,88,12,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(234,88,12,.035) 1px,transparent 1px);
-  background-size: 50px 50px; mask-image: linear-gradient(#000,transparent 80%); z-index: 1;
-}
-.track-scope .container { width: min(1220px, calc(100% - 40px)); margin: auto; position: relative; z-index: 2; }
-.track-scope .hero {
-  min-height: 520px;
-  padding-top: 50px;
-  padding-bottom: 60px;
-  position: relative;
-  overflow: hidden;
+
+/* HERO */
+.track-page .hero {
   background:
-    radial-gradient(circle at 68% 40%,#EA580C10,transparent 27%),
-    radial-gradient(circle at 90% 65%,#0284C710,transparent 25%),
-    linear-gradient(180deg,#FFFFFF,#F8FAFC 65%,#FFF7ED);
-  border-bottom: 1px solid #E2E8F0;
+    radial-gradient(circle at 15% 0%,rgba(244,91,11,.10),transparent 28%),
+    radial-gradient(circle at 90% 20%,rgba(33,133,208,.07),transparent 28%),
+    #fff;
+  padding:54px 20px 112px;
+  text-align:center;
+  border-bottom:1px solid #eef2f6;
 }
-.track-scope .hero:after {
-  content: ""; position: absolute; width: 650px; height: 650px; right: -300px; top: 100px; border-radius: 50%; background: rgba(234,88,12,0.04); filter: blur(50px);
+.track-page .hero-inner{max-width:850px;margin:auto}
+.track-page .eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--orange-pale);border:1px solid var(--orange-border);color:#cc4b09;border-radius:999px;padding:7px 12px;font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
+.track-page .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px #dff5e8}
+.track-page .hero h1{font-size:clamp(36px,5vw,56px);line-height:1.03;letter-spacing:-2.5px;margin:17px 0 12px;color:var(--ink);font-weight:900}
+.track-page .hero h1 span{color:var(--orange)}
+.track-page .hero p{max-width:650px;margin:auto;color:var(--muted);font-size:14px;line-height:1.6}
+
+/* RESULT CONTAINER */
+.track-page .container{max-width:1080px;margin:-60px auto 0;padding:0 20px;position:relative;z-index:3}
+.track-page .result-card{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:26px}
+.track-page .search-row{display:flex;gap:10px}
+.track-page .search-box{flex:1;display:flex;border:1px solid #dce3eb;border-radius:13px;overflow:hidden;background:#fff;transition:.2s}
+.track-page .search-box:focus-within{border-color:var(--orange);box-shadow:0 0 0 3px rgba(244,91,11,.12)}
+.track-page .prefix{display:grid;place-items:center;padding:0 14px;border-right:1px solid var(--line);font-size:10px;font-weight:900;color:#68758a;background:#f8fafc}
+.track-page .search-box input{border:0;outline:0;flex:1;min-width:0;padding:15px;color:var(--ink);font-weight:700;font-size:13px;text-transform:uppercase}
+.track-page .search-box input::placeholder{text-transform:none;font-weight:400;color:#98a3b3}
+.track-page .track-btn{border:0;background:var(--orange);color:#fff;border-radius:13px;padding:0 24px;font-weight:850;font-size:13px;box-shadow:0 8px 18px rgba(244,91,11,.2);transition:.2s;cursor:pointer}
+.track-page .track-btn:hover{background:#e04f03;transform:translateY(-1px)}
+.track-page .helper{font-size:10px;color:#98a3b3;margin-top:8px;display:flex;justify-content:space-between}
+.track-page .demo-link{color:var(--orange);font-weight:800;cursor:pointer;text-decoration:underline}
+
+/* STATUS SECTION */
+.track-page .status{margin-top:24px;border-top:1px solid var(--line);padding-top:23px}
+.track-page .status-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+.track-page .status-kicker{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--orange);font-weight:900}
+.track-page .status-title{font-size:29px;line-height:1.1;letter-spacing:-1.2px;margin:4px 0;color:var(--ink);font-weight:950}
+.track-page .status-description{font-size:12px;color:var(--muted);max-width:610px;line-height:1.6}
+.track-page .network{display:inline-flex;align-items:center;gap:6px;background:var(--green-pale);border:1px solid #c9ecd8;color:#16834d;border-radius:999px;padding:8px 12px;font-size:10px;font-weight:850;white-space:nowrap}
+.track-page .network i{width:6px;height:6px;border-radius:50%;background:var(--green)}
+
+/* METRICS */
+.track-page .metrics{display:grid;grid-template-columns:1.35fr repeat(3,1fr);border:1px solid var(--line);border-radius:15px;overflow:hidden;margin-top:20px;background:#fff}
+.track-page .metric{padding:15px 17px;border-right:1px solid var(--line)}
+.track-page .metric:last-child{border-right:0}
+.track-page .metric label{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.7px;color:#98a3b3;font-weight:850}
+.track-page .metric b{display:block;color:var(--ink);font-size:13px;margin-top:4px;font-weight:800}
+.track-page .metric:first-child b{font-size:15px;color:var(--orange)}
+.track-page .metric span{font-size:10px;color:var(--muted)}
+
+/* 2-COLUMN LAYOUT */
+.track-page .grid{display:grid;grid-template-columns:1.3fr .8fr;gap:16px;margin-top:16px}
+.track-page .panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px}
+.track-page .panel h2{font-size:15px;margin:0;color:var(--ink);letter-spacing:-.3px;font-weight:800}
+.track-page .panel-sub{font-size:10px;color:#98a3b3;margin-top:3px}
+
+/* TIMELINE */
+.track-page .timeline{margin-top:22px}
+.track-page .event{display:grid;grid-template-columns:30px 1fr auto;gap:12px;position:relative;padding-bottom:23px}
+.track-page .event:last-child{padding-bottom:0}
+.track-page .event .rail{position:absolute;left:14px;top:29px;height:calc(100% - 4px);width:2px;background:#e1e7ee}
+.track-page .event.done .rail{background:#b9e7ca}
+.track-page .event-icon{width:30px;height:30px;border-radius:50%;border:2px solid #d7dfe8;background:#fff;display:grid;place-items:center;z-index:1;color:#97a2b2;font-size:11px;font-weight:900}
+.track-page .event.done .event-icon{background:var(--green);border-color:var(--green);color:#fff}
+.track-page .event.current .event-icon{background:var(--orange);border-color:var(--orange);color:#fff;box-shadow:0 0 0 5px var(--orange-pale)}
+.track-page .event b{font-size:12px;color:var(--ink);font-weight:800}
+.track-page .event p{margin:2px 0 0;font-size:10px;color:var(--muted)}
+.track-page .event time{font-size:9px;color:#98a3b3;white-space:nowrap;text-align:right}
+
+/* PROGRESS */
+.track-page .progress{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+.track-page .progress-head{display:flex;justify-content:space-between;font-size:11px;font-weight:850;color:var(--ink)}
+.track-page .progress-head span{color:var(--orange)}
+.track-page .bar{height:7px;background:#edf1f5;border-radius:99px;margin:13px 3px 8px;overflow:hidden}
+.track-page .fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--orange),var(--orange2));transition:width .4s ease}
+.track-page .labels{display:flex;justify-content:space-between}
+.track-page .labels span{font-size:8px;color:#8995a6;text-align:center}
+.track-page .labels b{display:block;color:var(--ink);font-size:9px;font-weight:800}
+
+/* DETAILS SIDEBAR */
+.track-page .details{margin-top:18px}
+.track-page .detail-row{display:flex;justify-content:space-between;gap:15px;padding:11px 0;border-bottom:1px solid #eef1f5}
+.track-page .detail-row:last-child{border-bottom:0}
+.track-page .detail-row span{font-size:10px;color:#98a3b3}
+.track-page .detail-row b{font-size:10px;color:var(--ink);text-align:right;font-weight:700}
+.track-page .route{margin-top:14px;background:#f8fafc;border:1px solid #edf1f5;border-radius:13px;padding:14px;display:flex;align-items:center;gap:10px;font-size:11px;font-weight:850}
+.track-page .route small{display:block;color:#98a3b3;font-size:8px;font-weight:600;margin-top:2px}
+.track-page .route-line{height:2px;background:#d6dee8;flex:1;position:relative}
+.track-page .route-line:after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:2px solid #9eabba;border-right:2px solid #9eabba;transform:rotate(45deg)}
+.track-page .notice{margin-top:13px;background:var(--orange-pale);border:1px solid #ffe0cb;border-radius:12px;padding:12px;color:#92501e;font-size:10px;line-height:1.5}
+.track-page .notice strong{color:#c44d0a}
+
+/* LOWER FEATURES SECTION */
+.track-page .lower{max-width:1080px;margin:60px auto 0;padding:0 20px 60px}
+.track-page .center{text-align:center}
+.track-page .center .eyebrow{background:var(--blue-pale);border-color:#d8edfb;color:#0876b8}
+.track-page .center h2{font-size:31px;letter-spacing:-1.4px;margin:12px 0 5px;color:var(--ink);font-weight:900}
+.track-page .center p{font-size:12px;color:var(--muted)}
+.track-page .features{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:25px}
+.track-page .feature{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;transition:.2s}
+.track-page .feature:hover{transform:translateY(-3px);box-shadow:0 13px 32px rgba(23,32,51,.07)}
+.track-page .feature-icon{width:34px;height:34px;border-radius:10px;background:var(--orange-pale);color:var(--orange);display:grid;place-items:center;font-weight:900;margin-bottom:13px;font-size:14px}
+.track-page .feature h3{font-size:12px;margin:0 0 5px;color:var(--ink);font-weight:800}
+.track-page .feature p{font-size:10px;color:var(--muted);margin:0;line-height:1.5}
+.track-page .help{margin-top:32px;background:#fff;border:1px solid var(--orange-border);border-radius:19px;padding:25px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;box-shadow:0 12px 35px rgba(244,91,11,.06)}
+.track-page .help h2{font-size:20px;margin:0 0 4px;color:var(--ink);font-weight:900}
+.track-page .help p{font-size:11px;color:var(--muted);margin:0}
+.track-page .help a.help-btn{border:0;background:var(--orange);color:#fff;padding:12px 20px;border-radius:10px;font-weight:850;font-size:12px;text-decoration:none;display:inline-block;transition:.2s}
+.track-page .help a.help-btn:hover{background:#e04f03;transform:translateY(-1px)}
+
+@media(max-width:850px){
+ .track-page .metrics{grid-template-columns:1fr 1fr}.track-page .metric:nth-child(2){border-right:0}.track-page .metric{border-bottom:1px solid var(--line)}
+ .track-page .grid{grid-template-columns:1fr}.track-page .features{grid-template-columns:1fr 1fr}
 }
-.track-scope .heroHead { position: relative; z-index: 3; text-align: center; }
-.track-scope .eyebrow {
-  display: inline-flex; align-items: center; gap: 7px; border: 1px solid #FFEDD5; background: #FFF7ED; border-radius: 99px;
-  padding: 7px 12px; color: #EA580C; font-size: 8px; font-weight: 950; letter-spacing: .15em; text-transform: uppercase;
-}
-.track-scope .eyebrow i { width: 6px; height: 6px; border-radius: 50%; background: #16A34A; box-shadow: 0 0 10px #16A34A; animation: pulse 1.6s infinite; }
-@keyframes pulse { 50% { opacity: .35; } }
-
-.track-scope .hero h1 { font-size: 48px; line-height: 1.02; letter-spacing: -.065em; margin-top: 15px; color: #0F172A; }
-.track-scope .hero h1 em { font-style: normal; color: #EA580C; }
-.track-scope .heroHead p { max-width: 650px; margin: 10px auto 0; color: #475569; font-size: 13px; line-height: 1.65; }
-
-.track-scope .command { position: relative; z-index: 5; width: min(1050px,100%); margin: 32px auto 0; }
-.track-scope .searchPanel { padding: 21px; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; box-shadow: 0 10px 35px rgba(15,23,42,0.06); }
-.track-scope .searchTop { display: flex; align-items: center; justify-content: space-between; }
-.track-scope .searchTitle { display: flex; gap: 10px; align-items: center; }
-.track-scope .searchIcon { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; color: #EA580C; border: 1px solid #FFEDD5; background: #FFF7ED; font-size: 18px; }
-.track-scope .searchTitle h2 { font-size: 16px; color: #0F172A; }
-.track-scope .searchTitle p { font-size: 9px; color: #64748B; margin-top: 2px; }
-.track-scope .network { display: flex; align-items: center; gap: 7px; color: #16A34A; font-size: 8px; font-weight: 900; }
-.track-scope .network i { width: 6px; height: 6px; border-radius: 50%; background: #16A34A; box-shadow: 0 0 12px #16A34A; }
-.track-scope .form { display: grid; grid-template-columns: 1fr 155px; gap: 9px; margin-top: 16px; }
-.track-scope .input { height: 51px; border: 1px solid #E2E8F0; background: #FFFFFF; border-radius: 9px; display: flex; align-items: center; padding: 0 14px; transition: .2s; box-shadow: var(--shadow-xs); }
-.track-scope .input:focus-within { border-color: #EA580C; box-shadow: 0 0 0 3px rgba(234,88,12,0.15); }
-.track-scope .input span { color: #64748B; font-size: 11px; margin-right: 8px; font-weight: 800; }
-.track-scope .input input { width: 100%; border: 0; outline: 0; background: transparent; color: #0F172A; font-size: 12px; font-weight: 700; text-transform: uppercase; }
-.track-scope .input input::placeholder { color: #94A3B8; text-transform: none; font-weight: 400; }
-.track-scope .trackBtn { height: 51px; font-size: 11px; border-radius: 9px; font-weight: 900; border: 0; cursor: pointer; color: #fff; background: linear-gradient(135deg,#EA580C,#C2410C); box-shadow: 0 4px 14px rgba(234,88,12,0.25); transition: .25s; }
-.track-scope .trackBtn:hover { transform: translateY(-2px); }
-.track-scope .helper { display: flex; justify-content: space-between; color: #657b94; font-size: 8px; margin-top: 9px; }
-.track-scope .demo { color: #32d8ff; cursor: pointer; font-weight: 850; }
-
-.track-scope .dashboard { margin-top: 18px; display: grid; grid-template-columns: 1fr 310px; gap: 12px; }
-.track-scope .map {
-  min-height: 400px; border: 1px solid #E2E8F0; border-radius: 15px; position: relative; overflow: hidden;
-  background: linear-gradient(135deg,#FFFFFF,#F8FAFC 55%,#FFF7ED);
-  box-shadow: 0 4px 15px rgba(15,23,42,0.05);
-}
-.track-scope .map:before {
-  content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(234,88,12,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(234,88,12,0.05) 1px,transparent 1px); background-size: 45px 45px;
-}
-.track-scope .mapLabel { position: absolute; left: 20px; top: 18px; z-index: 4; font-size: 8px; color: #64748B; letter-spacing: .15em; font-weight: 900; }
-.track-scope .mapLabel b { color: #EA580C; }
-.track-scope .uk {
-  position: absolute; width: 330px; height: 370px; left: 50%; top: 49%; transform: translate(-50%,-50%) rotate(8deg); filter: drop-shadow(0 4px 15px rgba(234,88,12,0.1));
-}
-.track-scope .uk:before {
-  content: ""; position: absolute; inset: 0; background: linear-gradient(135deg,#FFF7ED,#FFEDD5);
-  clip-path: polygon(49% 0,62% 7%,61% 15%,72% 22%,70% 30%,81% 39%,78% 47%,88% 54%,78% 61%,82% 72%,69% 75%,65% 89%,53% 100%,44% 91%,38% 83%,28% 82%,22% 72%,9% 69%,14% 58%,5% 48%,15% 38%,12% 28%,26% 23%,28% 13%,41% 12%);
-  border: 1px solid #FED7AA;
-}
-.track-scope .uk:after {
-  content: ""; position: absolute; inset: 14px; background-image: linear-gradient(35deg,transparent 47%,rgba(234,88,12,0.1) 48%,transparent 49%),linear-gradient(125deg,transparent 49%,rgba(234,88,12,0.08) 50%,transparent 51%); clip-path: inherit;
-}
-.track-scope .routeLine {
-  position: absolute; left: 23%; right: 22%; top: 54%; height: 2px; background: linear-gradient(90deg,transparent,#EA580C,#F97316,transparent); box-shadow: 0 0 12px rgba(234,88,12,0.3); transform: rotate(-12deg); z-index: 5;
-}
-.track-scope .routeLine:before {
-  content: ""; position: absolute; width: 9px; height: 9px; border-radius: 50%; background: #EA580C; box-shadow: 0 0 0 4px rgba(234,88,12,0.15),0 0 15px #EA580C; left: 47%; top: -4px;
-}
-.track-scope .routeLine:after {
-  content: ""; position: absolute; width: 70px; height: 2px; left: 0; top: 0; background: #EA580C; box-shadow: 0 0 10px #EA580C; animation: travel 2.4s linear infinite;
-}
-@keyframes travel { from { left: 0; } to { left: 100%; } }
-
-.track-scope .node { position: absolute; width: 9px; height: 9px; border-radius: 50%; background: #FFFFFF; border: 2px solid #EA580C; box-shadow: 0 0 10px rgba(234,88,12,0.3); z-index: 6; }
-.track-scope .node span { position: absolute; white-space: nowrap; color: #475569; font-size: 8px; left: 13px; top: -3px; font-weight: 800; }
-.track-scope .london { left: 47%; bottom: 20%; }
-.track-scope .birmingham { left: 51%; top: 48%; }
-.track-scope .manchester { left: 47%; top: 28%; }
-.track-scope .leeds { left: 57%; top: 30%; }
-.track-scope .bristol { left: 39%; top: 61%; }
-.track-scope .scotland { left: 46%; top: 11%; }
-.track-scope .pulseNode { animation: nodepulse 1.8s infinite; }
-@keyframes nodepulse { 50% { box-shadow: 0 0 0 7px rgba(234,88,12,0.12),0 0 18px #EA580C; } }
-
-.track-scope .mapControls { position: absolute; right: 16px; bottom: 16px; display: flex; gap: 5px; z-index: 7; }
-.track-scope .mapControls button { height: 29px; width: 29px; border: 1px solid #E2E8F0; background: #FFFFFF; color: #0F172A; border-radius: 7px; cursor: pointer; box-shadow: var(--shadow-xs); }
-.track-scope .mapLegend { position: absolute; left: 18px; bottom: 16px; color: #64748B; font-size: 8px; display: flex; gap: 13px; z-index: 7; }
-.track-scope .legend { display: flex; gap: 5px; align-items: center; }
-.track-scope .legend i { width: 6px; height: 6px; border-radius: 50%; background: #EA580C; }
-.track-scope .legend .violet { background: #0284C7; }
-
-/* Status Panel */
-.track-scope .statusPanel { border: 1px solid #E2E8F0; border-radius: 15px; background: #FFFFFF; overflow: hidden; box-shadow: 0 4px 20px rgba(15,23,42,0.05); }
-.track-scope .statusHead { padding: 18px; border-bottom: 1px solid #F1F5F9; display: flex; justify-content: space-between; }
-.track-scope .statusHead small { display: block; color: #64748B; font-size: 7px; letter-spacing: .13em; font-weight: 900; }
-.track-scope .statusHead strong { display: block; font-size: 14px; margin-top: 5px; color: #0F172A; }
-.track-scope .statusLive { font-size: 7px; color: #16A34A; font-weight: 900; }
-.track-scope .statusLive:before { content: "●"; margin-right: 5px; }
-
-.track-scope .statusBody { padding: 18px; }
-.track-scope .state { font-size: 10px; color: #EA580C; font-weight: 950; letter-spacing: .09em; }
-.track-scope .stateText { font-size: 22px; font-weight: 900; margin-top: 3px; letter-spacing: -.04em; color: #0F172A; }
-.track-scope .statusBody p { font-size: 9px; color: #475569; margin-top: 6px; line-height: 1.6; }
-
-.track-scope .statusMetric { border-top: 1px solid #F1F5F9; padding: 13px 0; display: flex; justify-content: space-between; }
-.track-scope .statusMetric small { font-size: 8px; color: #64748B; }
-.track-scope .statusMetric strong { font-size: 9px; text-align: right; color: #0F172A; }
-.track-scope .progress { height: 6px; background: #F1F5F9; border-radius: 99px; margin-top: 4px; overflow: hidden; }
-.track-scope .progress i { display: block; width: 75%; height: 100%; background: linear-gradient(90deg,#EA580C,#F97316); }
-
-/* Activity Timeline */
-.track-scope .activity { margin-top: 12px; border: 1px solid #E2E8F0; border-radius: 15px; background: #FFFFFF; padding: 22px; box-shadow: 0 4px 20px rgba(15,23,42,0.04); }
-.track-scope .activityHead { display: flex; justify-content: space-between; align-items: end; margin-bottom: 18px; }
-.track-scope .activityHead h2 { font-size: 15px; color: #0F172A; }
-.track-scope .activityHead p { font-size: 8px; color: #64748B; }
-.track-scope .events { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
-.track-scope .events:before { content: ""; position: absolute; left: 7%; right: 7%; top: 13px; height: 2px; background: #E2E8F0; }
-.track-scope .event { text-align: center; position: relative; z-index: 2; }
-.track-scope .eventDot { width: 27px; height: 27px; margin: auto; border-radius: 50%; border: 1px solid #CBD5E1; background: #F8FAFC; display: grid; place-items: center; color: #64748B; font-size: 9px; }
-.track-scope .event.done .eventDot { background: #16A34A; border-color: #16A34A; color: #fff; box-shadow: 0 0 0 4px rgba(22,163,74,0.15); }
-.track-scope .event.current .eventDot { background: #EA580C; border-color: #EA580C; color: #fff; box-shadow: 0 0 0 4px rgba(234,88,12,0.18); }
-.track-scope .event strong { display: block; font-size: 9px; margin-top: 9px; color: #0F172A; }
-.track-scope .event small { display: block; color: #64748B; font-size: 7px; margin-top: 4px; }
-
-/* Result Verification Bar */
-.track-scope .resultBar { padding: 15px 18px; border: 1px solid #E2E8F0; border-radius: 12px; background: #F8FAFC; display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
-.track-scope .resultBar strong { font-size: 12px; color: #0F172A; }
-.track-scope .resultBar small { display: block; color: #64748B; font-size: 8px; margin-top: 3px; }
-.track-scope .verified { color: #16A34A; font-size: 8px; font-weight: 900; }
-.track-scope .verified i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #16A34A; box-shadow: 0 0 8px #16A34A; margin-right: 5px; }
-
-/* Intelligence */
-.track-scope .intelligence { padding: 75px 0; background: #fff; color: #071426; margin-top: 40px; }
-.track-scope .sectionHead { text-align: center; max-width: 650px; margin: auto auto 34px; }
-.track-scope .sectionHead .eyebrow { color: #078fdd; background: #eefaff; border-color: #c4edff; }
-.track-scope .sectionHead h2 { font-size: 31px; letter-spacing: -.05em; margin-top: 10px; color: #071426; }
-.track-scope .sectionHead p { font-size: 11px; color: #7b899b; margin-top: 7px; }
-.track-scope .intelGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
-.track-scope .intel { padding: 20px; border: 1px solid #e0e8f0; border-radius: 13px; background: #fff; transition: .25s; }
-.track-scope .intel:hover { transform: translateY(-5px); box-shadow: 0 20px 45px rgba(8, 33, 58, 0.12); border-color: #b8e5fb; }
-.track-scope .intelIcon { width: 39px; height: 39px; border-radius: 10px; background: #edf9ff; color: #078fdd; display: grid; place-items: center; }
-.track-scope .intel:nth-child(2) .intelIcon { color: #8d52e9; background: #f6efff; }
-.track-scope .intel:nth-child(3) .intelIcon { color: #10af8a; background: #edfff9; }
-.track-scope .intel:nth-child(4) .intelIcon { color: #ed7b45; background: #fff5ee; }
-.track-scope .intel h3 { font-size: 13px; margin-top: 14px; color: #071426; }
-.track-scope .intel p { font-size: 10px; color: #7a899b; line-height: 1.65; margin-top: 5px; }
-
-@media(max-width:1000px){
-  .track-scope .dashboard { grid-template-columns: 1fr; }
-  .track-scope .intelGrid { grid-template-columns: 1fr 1fr; }
-  .track-scope .hero h1 { font-size: 41px; }
-}
-@media(max-width:650px){
-  .track-scope .hero { padding-top: 30px; min-height: auto; }
-  .track-scope .hero h1 { font-size: 34px; }
-  .track-scope .searchTop { align-items: flex-start; }
-  .track-scope .network { display: none; }
-  .track-scope .form { grid-template-columns: 1fr; }
-  .track-scope .map { min-height: 350px; }
-  .track-scope .uk { transform: translate(-50%,-50%) scale(.85) rotate(8deg); }
-  .track-scope .events { grid-template-columns: 1fr 1fr; gap: 20px; }
-  .track-scope .events:before { display: none; }
-  .track-scope .intelGrid { grid-template-columns: 1fr; }
+@media(max-width:560px){
+ .track-page .hero{padding:43px 16px 88px}.track-page .hero h1{font-size:36px;letter-spacing:-1.5px}
+ .track-page .container{padding:0 12px}.track-page .result-card{padding:16px;border-radius:18px}
+ .track-page .search-row{flex-direction:column}.track-page .search-box{height:48px}.track-page .track-btn{height:48px}
+ .track-page .status-head{flex-direction:column}.track-page .network{align-self:flex-start}
+ .track-page .metrics{grid-template-columns:1fr}.track-page .metric{border-right:0!important}
+ .track-page .event{grid-template-columns:30px 1fr}.track-page .event time{grid-column:2;text-align:left;margin-top:-7px}
+ .track-page .features{grid-template-columns:1fr}.track-page .help{flex-direction:column;align-items:flex-start}.track-page .help a.help-btn{width:100%;text-align:center}
 }
 </style>
 
-<div class="track-scope">
-    <section class="hero">
-        <div class="container">
-            <div class="heroHead">
-                <div class="eyebrow"><i></i> Mission Control · Live Network</div>
-                <h1>Track Your UK Shipment<br><em>In Real Time.</em></h1>
-                <p>Enter your Rush Parcel reference to access live shipment intelligence, route visibility, milestone progress and delivery estimates.</p>
-            </div>
+<?php
+  // Dynamic Calculation Logic
+  $isDelivered = (!empty($shipment['status']) && $shipment['status'] === 'delivered') ||
+                 (!empty($shipment['scheduled_delivery_at']) && strtotime($shipment['scheduled_delivery_at']) <= time() && !in_array($shipment['status'] ?? '', ['cancelled', 'on_hold']));
 
-            <?php if (!empty($error_message)): ?>
-                <div class="alert alert-error" style="max-width: 1050px; margin: 1.5rem auto 0 auto;">
-                    <span>⚠️</span>
-                    <div><?= e($error_message) ?></div>
-                </div>
-            <?php endif; ?>
+  if (!empty($history)) {
+      foreach ($history as $h) {
+          if (($h['new_status'] ?? '') === 'delivered') {
+              $isDelivered = true;
+              break;
+          }
+      }
+  }
 
-            <div class="command">
-                <div class="searchPanel">
-                    <div class="searchTop">
-                        <div class="searchTitle">
-                            <div class="searchIcon">⌁</div>
-                            <div>
-                                <h2>Shipment Command Centre</h2>
-                                <p>Securely query your live UK delivery record.</p>
-                            </div>
-                        </div>
-                        <div class="network"><i></i> NETWORK ONLINE</div>
-                    </div>
+  $effectiveStatus = $isDelivered ? 'delivered' : ($shipment['status'] ?? 'in_transit');
 
-                    <form class="form" action="<?= url('/track') ?>" method="GET">
-                        <div class="input">
-                            <span>RP / UK</span>
-                            <input type="text" id="tracking_number" name="tracking_number" maxlength="25" autocomplete="off" placeholder="Enter tracking reference — e.g. UK9823410574" value="<?= e($search_tracking ?? '') ?>" required>
-                        </div>
-                        <button class="trackBtn" type="submit">Track Shipment &rarr;</button>
-                    </form>
+  $senderCity = !empty($shipment['pickup_address']['city']) ? $shipment['pickup_address']['city'] : (!empty($shipment['pickup_address']['town']) ? $shipment['pickup_address']['town'] : 'London');
+  $senderPostcode = !empty($shipment['pickup_address']['postcode']) ? $shipment['pickup_address']['postcode'] : 'SW1A 1AA';
 
-                    <div class="helper">
-                        <span>Tracking references are case-insensitive · 12–20 characters</span>
-                        <span class="demo" id="demoBtn">Load demo shipment</span>
-                    </div>
+  $receiverCity = !empty($shipment['delivery_address']['city']) ? $shipment['delivery_address']['city'] : (!empty($shipment['delivery_address']['town']) ? $shipment['delivery_address']['town'] : 'Manchester');
+  $receiverPostcode = !empty($shipment['delivery_address']['postcode']) ? $shipment['delivery_address']['postcode'] : 'M1 1AE';
 
-                    <div class="dashboard">
-                        <!-- Interactive Map Graphic -->
-                        <div class="map">
-                            <div class="mapLabel">UK NETWORK / <b>LIVE ROUTE</b></div>
-                            <div class="uk"></div>
-                            <div class="routeLine"></div>
-                            <div class="node scotland"><span>SCOTLAND</span></div>
-                            <div class="node manchester pulseNode"><span>MANCHESTER</span></div>
-                            <div class="node leeds"><span>LEEDS</span></div>
-                            <div class="node birmingham pulseNode"><span>BIRMINGHAM</span></div>
-                            <div class="node bristol"><span>BRISTOL</span></div>
-                            <div class="node london pulseNode"><span>LONDON</span></div>
-                            <div class="mapLegend">
-                                <div class="legend"><i></i> Active network</div>
-                                <div class="legend"><i class="violet"></i> Route</div>
-                            </div>
-                            <div class="mapControls">
-                                <button type="button" onclick="zoomMap(1.02)">+</button>
-                                <button type="button" onclick="zoomMap(0.98)">−</button>
-                                <button type="button" onclick="zoomMap(1)">⌖</button>
-                            </div>
-                        </div>
+  $bookedEventDate = null;
+  if (!empty($history)) {
+      foreach ($history as $h) {
+          if (($h['new_status'] ?? '') === 'booking_confirmed') {
+              $bookedEventDate = $h['created_at'];
+              break;
+          }
+      }
+      if (!$bookedEventDate && !empty($history)) {
+          $earliest = end($history);
+          if (!empty($earliest['created_at'])) {
+              $bookedEventDate = $earliest['created_at'];
+          }
+      }
+  }
+  if (!$bookedEventDate && !empty($shipment['scheduled_pickup_at'])) {
+      $bookedEventDate = date('Y-m-d H:i:s', strtotime($shipment['scheduled_pickup_at'] . ' -2 hours'));
+  }
+  if (!$bookedEventDate && !empty($shipment['created_at'])) {
+      $bookedEventDate = $shipment['created_at'];
+  }
 
-                        <!-- Live Status Panel -->
-                        <aside class="statusPanel">
-                            <div class="statusHead">
-                                <div>
-                                    <small>SHIPMENT REFERENCE</small>
-                                    <strong><?= !empty($shipment) ? e($shipment['tracking_number']) : 'UK9823410574' ?></strong>
-                                </div>
-                                <div class="statusLive">LIVE</div>
-                            </div>
-                            <div class="statusBody">
-                                <?php
-                                  $isDelivered = (!empty($shipment['status']) && $shipment['status'] === 'delivered') ||
-                                                 (!empty($shipment['scheduled_delivery_at']) && strtotime($shipment['scheduled_delivery_at']) <= time() && !in_array($shipment['status'] ?? '', ['cancelled', 'on_hold']));
+  $progressPercent = '72%';
+  $progressMilestones = '3 of 4 milestones';
+  if ($isDelivered) {
+      $progressPercent = '100%';
+      $progressMilestones = '4 of 4 milestones';
+  } else if ($effectiveStatus === 'booking_confirmed') {
+      $progressPercent = '25%';
+      $progressMilestones = '1 of 4 milestones';
+  } else if ($effectiveStatus === 'collection_scheduled' || $effectiveStatus === 'collected') {
+      $progressPercent = '50%';
+      $progressMilestones = '2 of 4 milestones';
+  }
+?>
 
-                                  if (!empty($history)) {
-                                      foreach ($history as $h) {
-                                          if (($h['new_status'] ?? '') === 'delivered') {
-                                              $isDelivered = true;
-                                              break;
-                                          }
-                                      }
-                                  }
+<div class="track-page">
+ <section class="hero">
+  <div class="hero-inner">
+   <div class="eyebrow"><span class="live-dot"></span> Live shipment visibility</div>
+   <h1>Track Your UK Shipment — <span>Your parcel is on the move.</span></h1>
+   <p>Track your shipment in one simple view — from collection to delivery, with the latest status and estimated arrival.</p>
+  </div>
+ </section>
 
-                                  $effectiveStatus = $isDelivered ? 'delivered' : ($shipment['status'] ?? 'in_transit');
-                                ?>
-                                <div class="state">● CURRENT STATUS</div>
-                                <div class="stateText"><?= !empty($shipment) ? e(ucwords(str_replace('_', ' ', $effectiveStatus))) : 'In Transit' ?></div>
-                                <p><?= $isDelivered ? 'Shipment has been successfully delivered to the recipient address.' : 'Your parcel is moving through the Rush Parcel network toward its destination.' ?></p>
-                                
-                                <div class="statusMetric">
-                                    <small>Service Speed</small>
-                                    <strong><?= !empty($shipment) ? e($shipment['service_name']) : 'Next Day Parcel' ?></strong>
-                                </div>
+ <main class="container">
+  <section class="result-card">
+   <?php if (!empty($error_message)): ?>
+       <div style="background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; padding: 12px 16px; border-radius: 12px; margin-bottom: 20px; font-weight: 700; font-size: 13px;">
+           ⚠️ <?= e($error_message) ?>
+       </div>
+   <?php endif; ?>
 
-                                <?php
-                                  $senderName = !empty($shipment['pickup_address']['name']) ? $shipment['pickup_address']['name'] : ($shipment['customer_name'] ?? 'Alice Sender');
-                                  $senderLoc = trim(($shipment['pickup_address']['city'] ?? $shipment['pickup_address']['town'] ?? 'London') . ' ' . ($shipment['pickup_address']['postcode'] ?? 'SW1A 1AA'));
-                                  
-                                  $receiverName = !empty($shipment['delivery_address']['name']) ? $shipment['delivery_address']['name'] : 'Amazon Fulfillment Center';
-                                  $receiverLoc = trim(($shipment['delivery_address']['city'] ?? $shipment['delivery_address']['town'] ?? 'Manchester') . ' ' . ($shipment['delivery_address']['postcode'] ?? 'M1 1AE'));
+   <form action="<?= url('/track') ?>" method="GET" class="search-row">
+    <div class="search-box">
+     <span class="prefix">RP / UK</span>
+     <input id="tracking" name="tracking_number" value="<?= e($search_tracking ?? 'UK9823410574') ?>" aria-label="Tracking reference" placeholder="Enter tracking reference — e.g. UK9823410574" required>
+    </div>
+    <button class="track-btn" type="submit">Track Shipment →</button>
+   </form>
 
-                                  $bookedEventDate = null;
-                                  if (!empty($history)) {
-                                      foreach ($history as $h) {
-                                          if (($h['new_status'] ?? '') === 'booking_confirmed') {
-                                              $bookedEventDate = $h['created_at'];
-                                              break;
-                                          }
-                                      }
-                                      if (!$bookedEventDate && !empty($history)) {
-                                          $earliest = end($history);
-                                          if (!empty($earliest['created_at'])) {
-                                              $bookedEventDate = $earliest['created_at'];
-                                          }
-                                      }
-                                  }
-                                  if (!$bookedEventDate && !empty($shipment['scheduled_pickup_at'])) {
-                                      $bookedEventDate = date('Y-m-d H:i:s', strtotime($shipment['scheduled_pickup_at'] . ' -2 hours'));
-                                  }
-                                  if (!$bookedEventDate && !empty($shipment['created_at'])) {
-                                      $bookedEventDate = $shipment['created_at'];
-                                  }
-                                ?>
-                                <div class="statusMetric" style="display:block; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px; margin-top: 8px;">
-                                    <small style="color: #38c8ff; font-weight: 850; letter-spacing: 0.08em;">SENDER (PICKUP)</small>
-                                    <strong style="display: block; font-size: 13px; color: #fff; margin-top: 3px; font-weight: 900; text-align: left;">
-                                        <?= e($senderName) ?>
-                                    </strong>
-                                    <span style="display: block; font-size: 10px; color: #7f97b2; margin-top: 2px;">
-                                        📍 <?= e($senderLoc) ?>
-                                    </span>
-                                </div>
+   <div class="helper">
+    <span>Tracking references are case-insensitive · Your tracking information is updated as new scans are received.</span>
+    <span class="demo-link" id="demoBtn">Load demo shipment</span>
+   </div>
 
-                                <div class="statusMetric" style="display:block; padding-top: 10px; margin-top: 4px;">
-                                    <small style="color: #38e0b8; font-weight: 850; letter-spacing: 0.08em;">RECEIVER (DELIVERY)</small>
-                                    <strong style="display: block; font-size: 13px; color: #fff; margin-top: 3px; font-weight: 900; text-align: left;">
-                                        <?= e($receiverName) ?>
-                                    </strong>
-                                    <span style="display: block; font-size: 10px; color: #7f97b2; margin-top: 2px;">
-                                        🏁 <?= e($receiverLoc) ?>
-                                    </span>
-                                </div>
+   <div class="status">
+    <div class="status-head">
+     <div>
+      <div class="status-kicker">Current shipment status</div>
+      <div class="status-title"><?= !empty($shipment) ? e(ucwords(str_replace('_', ' ', $effectiveStatus))) : 'In Transit' ?></div>
+      <div class="status-description">
+       <?= $isDelivered 
+           ? 'Your parcel has been successfully delivered and signed for at the destination address.' 
+           : 'Your parcel is moving through the RushParcel network and is currently on schedule for delivery.' ?>
+      </div>
+     </div>
+     <div class="network"><i></i> Network active</div>
+    </div>
 
-                                <div class="statusMetric">
-                                    <small>Booked Date</small>
-                                    <strong><?= !empty($bookedEventDate) ? date('d M Y, H:i', strtotime($bookedEventDate)) : '01 Sep · 08:10' ?></strong>
-                                </div>
-                                <div class="statusMetric">
-                                    <small>Estimated Arrival</small>
-                                    <strong><?= !empty($shipment) && !empty($shipment['scheduled_delivery_at']) ? date('d M Y, H:i', strtotime($shipment['scheduled_delivery_at'])) : 'Today · 14:00–18:00' ?></strong>
-                                </div>
-                                <div class="statusMetric" style="display:block">
-                                    <small>Delivery Progress <b style="float:right;color:#2bdcff"><?= $isDelivered ? '100%' : '75%' ?></b></small>
-                                    <div class="progress"><i style="width: <?= $isDelivered ? '100%' : '75%' ?>;"></i></div>
-                                </div>
-                            </div>
-                        </aside>
-                    </div>
+    <div class="metrics">
+     <div class="metric">
+      <label>Tracking reference</label>
+      <b id="ref"><?= !empty($shipment) ? e($shipment['tracking_number']) : 'UK9823410574' ?></b>
+      <span>Updated just now</span>
+     </div>
+     <div class="metric">
+      <label>Service</label>
+      <b><?= !empty($shipment['service_name']) ? e($shipment['service_name']) : 'Next-Day' ?></b>
+      <span>Express delivery</span>
+     </div>
+     <div class="metric">
+      <label>Estimated arrival</label>
+      <b><?= !empty($shipment['scheduled_delivery_at']) ? date('d M Y', strtotime($shipment['scheduled_delivery_at'])) : 'Today' ?></b>
+      <span><?= !empty($shipment['scheduled_delivery_at']) ? date('H:i', strtotime($shipment['scheduled_delivery_at'])) : '14:00 – 18:00' ?></span>
+     </div>
+     <div class="metric">
+      <label>Progress</label>
+      <b><?= $progressPercent ?></b>
+      <span><?= $progressMilestones ?></span>
+     </div>
+    </div>
 
-                    <?php if (!empty($shipment)): ?>
-                        <div class="resultBar">
-                            <div>
-                                <strong>✓ Tracking record verified in database</strong>
-                                <small>Latest shipment information loaded for reference <span><?= e($shipment['tracking_number']) ?></span>.</small>
-                            </div>
-                            <div class="verified"><i></i> SECURE RECORD</div>
-                        </div>
-                    <?php endif; ?>
+    <div class="grid">
+     <section class="panel">
+      <h2>Shipment journey</h2>
+      <div class="panel-sub">A clear view of where your parcel has been and what happens next.</div>
 
-                    <!-- Activity Journey Milestones -->
-                    <div class="activity">
-                        <div class="activityHead">
-                            <div>
-                                <h2>Shipment Journey</h2>
-                                <p>Milestone progress & history log</p>
-                            </div>
-                            <p>Updated just now</p>
-                        </div>
-                        
-                        <div class="events">
-                            <div class="event done">
-                                <div class="eventDot">✓</div>
-                                <strong>Booked</strong>
-                                <small><?= !empty($bookedEventDate) ? date('d M · H:i', strtotime($bookedEventDate)) : '01 Sep · 08:10' ?></small>
-                            </div>
-                            <div class="event <?= ($isDelivered || (!empty($effectiveStatus) && in_array($effectiveStatus, ['collected', 'in_transit', 'out_for_delivery', 'delivered']))) ? 'done' : 'current' ?>">
-                                <div class="eventDot"><?= ($isDelivered || (!empty($effectiveStatus) && in_array($effectiveStatus, ['collected', 'in_transit', 'out_for_delivery', 'delivered']))) ? '✓' : '●' ?></div>
-                                <strong>Collected</strong>
-                                <small>Courier Dispatch</small>
-                            </div>
-                            <div class="event <?= ($isDelivered || (!empty($effectiveStatus) && in_array($effectiveStatus, ['in_transit', 'out_for_delivery', 'delivered']))) ? 'done' : ((!empty($effectiveStatus) && $effectiveStatus === 'collected') ? 'current' : '') ?>">
-                                <div class="eventDot"><?= ($isDelivered || (!empty($effectiveStatus) && in_array($effectiveStatus, ['in_transit', 'out_for_delivery', 'delivered']))) ? '✓' : '3' ?></div>
-                                <strong>In Transit</strong>
-                                <small>Fleet Routing</small>
-                            </div>
-                            <div class="event <?= $isDelivered ? 'done' : '' ?>">
-                                <div class="eventDot"><?= $isDelivered ? '✓' : '4' ?></div>
-                                <strong>Delivered</strong>
-                                <small>POD Confirmed</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="timeline">
+       <div class="event done">
+        <span class="event-icon">✓</span><span class="rail"></span>
+        <div>
+         <b>Booked</b>
+         <p>Shipment created and confirmed</p>
         </div>
-    </section>
+        <time><?= !empty($bookedEventDate) ? date('d M · H:i', strtotime($bookedEventDate)) : '01 Sep · 08:10' ?></time>
+       </div>
 
-    <!-- Shipment Intelligence Grid -->
-    <section class="intelligence">
-        <div class="container">
-            <div class="sectionHead">
-                <div class="eyebrow">Shipment Intelligence</div>
-                <h2>Everything important. One screen.</h2>
-                <p>A premium tracking experience built for customers who need fast answers without unnecessary clicks.</p>
-            </div>
-            <div class="intelGrid">
-                <div class="intel">
-                    <div class="intelIcon">◈</div>
-                    <h3>Live Milestones</h3>
-                    <p>See every important shipment event from booking through final delivery.</p>
-                </div>
-                <div class="intel">
-                    <div class="intelIcon">⌖</div>
-                    <h3>Route Visibility</h3>
-                    <p>Understand where your shipment is travelling across the UK network.</p>
-                </div>
-                <div class="intel">
-                    <div class="intelIcon">✓</div>
-                    <h3>Proof of Delivery</h3>
-                    <p>Secure delivery confirmation can be made available after completion.</p>
-                </div>
-                <div class="intel">
-                    <div class="intelIcon">ϟ</div>
-                    <h3>Fast Updates</h3>
-                    <p>Latest carrier scans and delivery information presented clearly.</p>
-                </div>
-            </div>
+       <div class="event <?= ($isDelivered || in_array($effectiveStatus, ['collected', 'in_transit', 'out_for_delivery', 'delivered'])) ? 'done' : 'current' ?>">
+        <span class="event-icon"><?= ($isDelivered || in_array($effectiveStatus, ['collected', 'in_transit', 'out_for_delivery', 'delivered'])) ? '✓' : '→' ?></span>
+        <span class="rail"></span>
+        <div>
+         <b>Collected</b>
+         <p><?= e($senderCity) ?> Hub Dispatch</p>
         </div>
-    </section>
+        <time><?= !empty($bookedEventDate) ? date('d M · H:i', strtotime($bookedEventDate . ' +2 hours')) : '01 Sep · 10:42' ?></time>
+       </div>
+
+       <div class="event <?= $isDelivered ? 'done' : (($effectiveStatus === 'in_transit' || $effectiveStatus === 'out_for_delivery') ? 'current' : '') ?>">
+        <span class="event-icon"><?= $isDelivered ? '✓' : (($effectiveStatus === 'in_transit' || $effectiveStatus === 'out_for_delivery') ? '→' : '3') ?></span>
+        <span class="rail"></span>
+        <div>
+         <b>In Transit</b>
+         <p><?= e($receiverCity) ?> Regional Hub Scan</p>
+        </div>
+        <time><?= !empty($bookedEventDate) ? date('d M · H:i', strtotime($bookedEventDate . ' +5 hours')) : 'Today · 12:18' ?></time>
+       </div>
+
+       <div class="event <?= $isDelivered ? 'done' : '' ?>">
+        <span class="event-icon"><?= $isDelivered ? '✓' : '4' ?></span>
+        <div>
+         <b>Delivered</b>
+         <p><?= $isDelivered ? 'Signed and delivered at recipient address' : 'Awaiting final delivery' ?></p>
+        </div>
+        <time><?= $isDelivered ? 'Completed' : 'Estimated today' ?></time>
+       </div>
+      </div>
+
+      <div class="progress">
+       <div class="progress-head">
+        <span>Delivery progress</span>
+        <span><?= $progressPercent ?></span>
+       </div>
+       <div class="bar">
+        <div class="fill" style="width: <?= $progressPercent ?>;"></div>
+       </div>
+       <div class="labels">
+        <span><b>Booked</b>Confirmed</span>
+        <span><b>Collected</b>Picked up</span>
+        <span><b>In Transit</b>Moving</span>
+        <span><b>Delivered</b>Complete</span>
+       </div>
+      </div>
+     </section>
+
+     <aside class="panel">
+      <h2>Shipment details</h2>
+      <div class="panel-sub">The key information for this delivery.</div>
+      
+      <div class="details">
+       <div class="detail-row">
+        <span>Sender</span>
+        <b><?= e($senderCity . ' (' . $senderPostcode . ')') ?></b>
+       </div>
+       <div class="detail-row">
+        <span>Destination</span>
+        <b><?= e($receiverCity . ' (' . $receiverPostcode . ')') ?></b>
+       </div>
+       <div class="detail-row">
+        <span>Service</span>
+        <b><?= !empty($shipment['service_name']) ? e($shipment['service_name']) : 'Next-Day Express' ?></b>
+       </div>
+       <div class="detail-row">
+        <span>Booked</span>
+        <b><?= !empty($bookedEventDate) ? date('d M · H:i', strtotime($bookedEventDate)) : '01 Sep · 08:10' ?></b>
+       </div>
+       <div class="detail-row">
+        <span>Estimated arrival</span>
+        <b><?= !empty($shipment['scheduled_delivery_at']) ? date('d M · H:i', strtotime($shipment['scheduled_delivery_at'])) : 'Today · 14:00–18:00' ?></b>
+       </div>
+      </div>
+
+      <div class="route">
+       <span><?= e($senderCity) ?><small>Origin</small></span>
+       <span class="route-line"></span>
+       <span><?= e($receiverCity) ?><small>Destination</small></span>
+      </div>
+
+      <div class="notice">
+       <strong><?= $isDelivered ? 'Delivered successfully.' : 'On schedule.' ?></strong> 
+       <?= $isDelivered ? 'Proof of delivery recorded in system.' : 'Your parcel is progressing normally toward its destination.' ?>
+      </div>
+     </aside>
+    </div>
+   </div>
+  </section>
+ </main>
+
+ <section class="lower">
+  <div class="center">
+   <div class="eyebrow">Simple shipment visibility</div>
+   <h2>Everything important, without the clutter.</h2>
+   <p>Designed so customers can understand their delivery status at a glance.</p>
+  </div>
+
+  <div class="features">
+   <article class="feature">
+    <div class="feature-icon">✓</div>
+    <h3>Live milestones</h3>
+    <p>Follow the important events from booking through final delivery.</p>
+   </article>
+   <article class="feature">
+    <div class="feature-icon">↗</div>
+    <h3>Route visibility</h3>
+    <p>See the journey between collection and destination.</p>
+   </article>
+   <article class="feature">
+    <div class="feature-icon">◆</div>
+    <h3>Proof of delivery</h3>
+    <p>Delivery confirmation becomes available after completion.</p>
+   </article>
+   <article class="feature">
+    <div class="feature-icon">⚡</div>
+    <h3>Fast updates</h3>
+    <p>Latest scans and delivery information are easy to find.</p>
+   </article>
+  </div>
+
+  <div class="help">
+   <div>
+    <h2>Need help with your parcel?</h2>
+    <p>Our support team can help with tracking and delivery questions.</p>
+   </div>
+   <a href="<?= url('/contact') ?>" class="help-btn">Contact Support →</a>
+  </div>
+ </section>
 </div>
 
 <script>
 document.getElementById('demoBtn').addEventListener('click', function() {
-    document.getElementById('tracking_number').value = 'UK9823410574';
+    document.getElementById('tracking').value = 'UK9823410574';
 });
-
-function zoomMap(scale) {
-    const map = document.querySelector('.track-scope .map');
-    if (map) {
-        map.style.transform = scale === 1 ? 'none' : `scale(${scale})`;
-    }
-}
 </script>
 
 <?php $content = ob_get_clean(); ?>

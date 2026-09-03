@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RushParcel — Tracking Result</title>
+<style>
+:root{
+  --orange:#f45b0b;
+  --orange2:#ff7a18;
+  --orange-pale:#fff4ec;
+  --orange-border:#ffd9c2;
+  --ink:#172033;
+  --muted:#667085;
+  --soft:#f7f9fc;
+  --line:#e6ebf2;
+  --green:#16a05d;
+  --green-pale:#edf9f2;
+  --blue:#2185d0;
+  --blue-pale:#eff8ff;
+  --white:#fff;
+  --shadow:0 18px 55px rgba(23,32,51,.08);
+}
+*{box-sizing:border-box}
+body{margin:0;background:#f7f9fc;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+/* HEADER */
+.topbar{height:30px;background:#fff;border-bottom:1px solid var(--line);font-size:10px;color:#738096}
+.topbar-inner{max-width:1180px;height:100%;margin:auto;padding:0 22px;display:flex;align-items:center;justify-content:space-between}
+.topbar strong{color:var(--orange)}
+.header{height:74px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.nav{max-width:1180px;height:100%;margin:auto;padding:0 22px;display:flex;align-items:center;gap:46px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.5px;color:var(--ink);white-space:nowrap}
+.logo-mark{width:38px;height:38px;border-radius:11px;background:var(--orange);color:#fff;display:grid;place-items:center;font-size:11px;box-shadow:0 8px 18px rgba(244,91,11,.2)}
+.links{display:flex;align-items:center;gap:26px;flex:1;font-size:12px;font-weight:700;color:#667085}
+.links a:hover,.links .active{color:var(--orange)}
+.portal{border:0;background:var(--orange);color:#fff;padding:11px 18px;border-radius:11px;font-size:11px;font-weight:850;box-shadow:0 8px 20px rgba(244,91,11,.18)}
+
+/* HERO */
+.hero{
+  background:
+    radial-gradient(circle at 15% 0%,rgba(244,91,11,.10),transparent 28%),
+    radial-gradient(circle at 90% 20%,rgba(33,133,208,.07),transparent 28%),
+    #fff;
+  padding:54px 20px 112px;
+  text-align:center;
+  border-bottom:1px solid #eef2f6;
+}
+.hero-inner{max-width:850px;margin:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--orange-pale);border:1px solid var(--orange-border);color:#cc4b09;border-radius:999px;padding:7px 12px;font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px #dff5e8}
+.hero h1{font-size:clamp(38px,5vw,58px);line-height:1.03;letter-spacing:-2.8px;margin:17px 0 12px}
+.hero h1 span{color:var(--orange)}
+.hero p{max-width:650px;margin:auto;color:var(--muted);font-size:14px}
+
+/* RESULT */
+.container{max-width:1080px;margin:-60px auto 0;padding:0 20px;position:relative;z-index:3}
+.result-card{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:22px}
+.search-row{display:flex;gap:10px}
+.search-box{flex:1;display:flex;border:1px solid #dce3eb;border-radius:13px;overflow:hidden;background:#fff}
+.prefix{display:grid;place-items:center;padding:0 14px;border-right:1px solid var(--line);font-size:10px;font-weight:900;color:#68758a}
+.search-box input{border:0;outline:0;flex:1;min-width:0;padding:15px;color:var(--ink)}
+.search-box input:focus{box-shadow:inset 0 0 0 2px rgba(244,91,11,.12)}
+.track-btn{border:0;background:var(--orange);color:#fff;border-radius:13px;padding:0 24px;font-weight:850;box-shadow:0 8px 18px rgba(244,91,11,.2)}
+.helper{font-size:10px;color:#98a3b3;margin-top:8px}
+
+/* STATUS */
+.status{margin-top:24px;border-top:1px solid var(--line);padding-top:23px}
+.status-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+.status-kicker{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--orange);font-weight:900}
+.status-title{font-size:29px;line-height:1.1;letter-spacing:-1.2px;margin:4px 0;color:var(--ink);font-weight:950}
+.status-description{font-size:12px;color:var(--muted);max-width:610px}
+.network{display:inline-flex;align-items:center;gap:6px;background:var(--green-pale);border:1px solid #c9ecd8;color:#16834d;border-radius:999px;padding:8px 12px;font-size:10px;font-weight:850;white-space:nowrap}
+.network i{width:6px;height:6px;border-radius:50%;background:var(--green)}
+
+.metrics{display:grid;grid-template-columns:1.35fr repeat(3,1fr);border:1px solid var(--line);border-radius:15px;overflow:hidden;margin-top:20px}
+.metric{padding:15px 17px;border-right:1px solid var(--line)}
+.metric:last-child{border-right:0}
+.metric label{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.7px;color:#98a3b3;font-weight:850}
+.metric b{display:block;color:var(--ink);font-size:13px;margin-top:4px}
+.metric:first-child b{font-size:16px}
+.metric span{font-size:10px;color:var(--muted)}
+
+.grid{display:grid;grid-template-columns:1.3fr .8fr;gap:16px;margin-top:16px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+.panel h2{font-size:15px;margin:0;color:var(--ink);letter-spacing:-.3px}
+.panel-sub{font-size:10px;color:#98a3b3;margin-top:3px}
+
+/* TIMELINE */
+.timeline{margin-top:22px}
+.event{display:grid;grid-template-columns:30px 1fr auto;gap:12px;position:relative;padding-bottom:23px}
+.event:last-child{padding-bottom:0}
+.event .rail{position:absolute;left:14px;top:29px;height:calc(100% - 4px);width:2px;background:#e1e7ee}
+.event.done .rail{background:#b9e7ca}
+.event-icon{width:30px;height:30px;border-radius:50%;border:2px solid #d7dfe8;background:#fff;display:grid;place-items:center;z-index:1;color:#97a2b2;font-size:11px;font-weight:900}
+.event.done .event-icon{background:var(--green);border-color:var(--green);color:#fff}
+.event.current .event-icon{background:var(--orange);border-color:var(--orange);color:#fff;box-shadow:0 0 0 5px var(--orange-pale)}
+.event b{font-size:12px;color:var(--ink)}
+.event p{margin:1px 0 0;font-size:10px;color:var(--muted)}
+.event time{font-size:9px;color:#98a3b3;white-space:nowrap;text-align:right}
+
+/* PROGRESS */
+.progress{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+.progress-head{display:flex;justify-content:space-between;font-size:11px;font-weight:850;color:var(--ink)}
+.progress-head span{color:var(--orange)}
+.bar{height:7px;background:#edf1f5;border-radius:99px;margin:13px 3px 8px;overflow:hidden}
+.fill{height:100%;width:72%;border-radius:99px;background:linear-gradient(90deg,var(--orange),var(--orange2))}
+.labels{display:flex;justify-content:space-between}
+.labels span{font-size:8px;color:#8995a6;text-align:center}
+.labels b{display:block;color:var(--ink);font-size:9px}
+
+/* DETAILS */
+.details{margin-top:18px}
+.detail-row{display:flex;justify-content:space-between;gap:15px;padding:11px 0;border-bottom:1px solid #eef1f5}
+.detail-row:last-child{border-bottom:0}
+.detail-row span{font-size:10px;color:#98a3b3}
+.detail-row b{font-size:10px;color:var(--ink);text-align:right}
+.route{margin-top:14px;background:#f8fafc;border:1px solid #edf1f5;border-radius:13px;padding:14px;display:flex;align-items:center;gap:10px;font-size:11px;font-weight:850}
+.route small{display:block;color:#98a3b3;font-size:8px;font-weight:600;margin-top:2px}
+.route-line{height:2px;background:#d6dee8;flex:1;position:relative}
+.route-line:after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:2px solid #9eabba;border-right:2px solid #9eabba;transform:rotate(45deg)}
+.notice{margin-top:13px;background:var(--orange-pale);border:1px solid #ffe0cb;border-radius:12px;padding:12px;color:#92501e;font-size:10px}
+.notice strong{color:#c44d0a}
+
+/* LOWER SECTION */
+.lower{max-width:1080px;margin:60px auto 0;padding:0 20px 60px}
+.center{text-align:center}
+.center .eyebrow{background:var(--blue-pale);border-color:#d8edfb;color:#0876b8}
+.center h2{font-size:31px;letter-spacing:-1.4px;margin:12px 0 5px;color:var(--ink)}
+.center p{font-size:12px;color:var(--muted)}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:25px}
+.feature{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;transition:.2s}
+.feature:hover{transform:translateY(-3px);box-shadow:0 13px 32px rgba(23,32,51,.07)}
+.feature-icon{width:34px;height:34px;border-radius:10px;background:var(--orange-pale);color:var(--orange);display:grid;place-items:center;font-weight:900;margin-bottom:13px}
+.feature h3{font-size:12px;margin:0 0 5px}.feature p{font-size:10px;color:var(--muted);margin:0}
+.help{margin-top:32px;background:#fff;border:1px solid var(--orange-border);border-radius:19px;padding:25px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;box-shadow:0 12px 35px rgba(244,91,11,.06)}
+.help h2{font-size:20px;margin:0 0 4px}.help p{font-size:11px;color:var(--muted);margin:0}
+.help button{border:0;background:var(--orange);color:#fff;padding:12px 17px;border-radius:10px;font-weight:850}
+
+/* FOOTER */
+footer{background:#fff;border-top:1px solid var(--line);padding:38px 20px 22px}
+.footer{max-width:1080px;margin:auto;display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:30px}
+.footer p{font-size:10px;color:var(--muted);max-width:270px}
+.footer h4{font-size:10px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 12px}
+.footer a{display:block;font-size:10px;color:#68758a;margin:7px 0}.footer a:hover{color:var(--orange)}
+.copyright{max-width:1080px;margin:25px auto 0;padding-top:15px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:#98a3b3;font-size:9px}
+
+/* TOAST */
+.toast{position:fixed;right:18px;bottom:18px;background:var(--ink);color:#fff;border-radius:11px;padding:12px 15px;font-size:11px;opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s;z-index:50}
+.toast.show{opacity:1;transform:none}
+
+@media(max-width:850px){
+ .links{display:none}.nav{justify-content:space-between}
+ .metrics{grid-template-columns:1fr 1fr}.metric:nth-child(2){border-right:0}.metric{border-bottom:1px solid var(--line)}
+ .grid{grid-template-columns:1fr}.features{grid-template-columns:1fr 1fr}.footer{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+ .topbar-inner{justify-content:center}.topbar-inner span:last-child{display:none}
+ .hero{padding:43px 16px 88px}.hero h1{font-size:40px;letter-spacing:-2px}
+ .container{padding:0 12px}.result-card{padding:15px;border-radius:18px}
+ .search-row{flex-direction:column}.search-box{height:48px}.track-btn{height:48px}
+ .status-head{flex-direction:column}.network{align-self:flex-start}
+ .metrics{grid-template-columns:1fr}.metric{border-right:0!important}
+ .event{grid-template-columns:30px 1fr}.event time{grid-column:2;text-align:left;margin-top:-7px}
+ .features{grid-template-columns:1fr}.help{flex-direction:column;align-items:flex-start}.help button{width:100%}
+ .footer{grid-template-columns:1fr}.copyright{flex-direction:column;gap:6px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+ <div class="topbar-inner">
+  <span>✦ RushParcel — UK Same-Day & Next-Day Express Courier Coverage</span>
+  <span>Customer Support: <strong>0800 123 4567</strong> · support@rushparcel.co.uk</span>
+ </div>
+</div>
+
+<header class="header">
+ <nav class="nav">
+  <a class="logo" href="#"><span class="logo-mark">RP</span>RUSHPARCEL</a>
+  <div class="links">
+   <a href="#">Home</a><a href="#">Services</a><a href="#">Get a Quote</a>
+   <a class="active" href="#">Track Parcel</a><a href="#">Drop-off Locations</a>
+   <a href="#">About Us</a><a href="#">Contact</a>
+  </div>
+  <button class="portal" type="button" onclick="toast('My Portal selected')">My Portal</button>
+ </nav>
+</header>
+
+<section class="hero">
+ <div class="hero-inner">
+  <div class="eyebrow"><span class="live-dot"></span> Live shipment visibility</div>
+  <h1>Your parcel is <span>on the move.</span></h1>
+  <p>Track your shipment in one simple view — from collection to delivery, with the latest status and estimated arrival.</p>
+ </div>
+</section>
+
+<main class="container">
+ <section class="result-card">
+  <div class="search-row">
+   <div class="search-box">
+    <span class="prefix">RP / UK</span>
+    <input id="tracking" value="UK9823410574" aria-label="Tracking reference" placeholder="Enter tracking reference">
+   </div>
+   <button class="track-btn" type="button" onclick="track()">Track Shipment →</button>
+  </div>
+  <div class="helper">Tracking references are case-insensitive · Your tracking information is updated as new scans are received.</div>
+
+  <div class="status">
+   <div class="status-head">
+    <div>
+     <div class="status-kicker">Current shipment status</div>
+     <div class="status-title">In Transit</div>
+     <div class="status-description">Your parcel is moving through the RushParcel network and is currently on schedule for delivery.</div>
+    </div>
+    <div class="network"><i></i> Network active</div>
+   </div>
+
+   <div class="metrics">
+    <div class="metric"><label>Tracking reference</label><b id="ref">UK9823410574</b><span>Updated just now</span></div>
+    <div class="metric"><label>Service</label><b>Next-Day</b><span>Express delivery</span></div>
+    <div class="metric"><label>Estimated arrival</label><b>Today</b><span>14:00 – 18:00</span></div>
+    <div class="metric"><label>Progress</label><b>72%</b><span>3 of 4 milestones</span></div>
+   </div>
+
+   <div class="grid">
+    <section class="panel">
+     <h2>Shipment journey</h2>
+     <div class="panel-sub">A clear view of where your parcel has been and what happens next.</div>
+
+     <div class="timeline">
+      <div class="event done">
+       <span class="event-icon">✓</span><span class="rail"></span>
+       <div><b>Booked</b><p>Shipment created and confirmed</p></div><time>01 Sep · 08:10</time>
+      </div>
+      <div class="event done">
+       <span class="event-icon">✓</span><span class="rail"></span>
+       <div><b>Collected</b><p>London SWA Depot</p></div><time>01 Sep · 10:42</time>
+      </div>
+      <div class="event current">
+       <span class="event-icon">→</span><span class="rail"></span>
+       <div><b>In Transit</b><p>Manchester Hub · Latest scan</p></div><time>Today · 12:18</time>
+      </div>
+      <div class="event">
+       <span class="event-icon">4</span>
+       <div><b>Delivered</b><p>Awaiting final delivery</p></div><time>Estimated today</time>
+      </div>
+     </div>
+
+     <div class="progress">
+      <div class="progress-head"><span>Delivery progress</span><span>72%</span></div>
+      <div class="bar"><div class="fill"></div></div>
+      <div class="labels">
+       <span><b>Booked</b>Confirmed</span><span><b>Collected</b>Picked up</span>
+       <span><b>In Transit</b>Moving</span><span><b>Delivered</b>Complete</span>
+      </div>
+     </div>
+    </section>
+
+    <aside class="panel">
+     <h2>Shipment details</h2>
+     <div class="panel-sub">The key information for this delivery.</div>
+     <div class="details">
+      <div class="detail-row"><span>Sender</span><b>London SWA</b></div>
+      <div class="detail-row"><span>Destination</span><b>Manchester M1</b></div>
+      <div class="detail-row"><span>Service</span><b>Next-Day Express</b></div>
+      <div class="detail-row"><span>Booked</span><b>01 Sep · 08:10</b></div>
+      <div class="detail-row"><span>Estimated arrival</span><b>Today · 14:00–18:00</b></div>
+     </div>
+     <div class="route">
+      <span>London<small>Origin</small></span><span class="route-line"></span><span>Manchester<small>Destination</small></span>
+     </div>
+     <div class="notice"><strong>On schedule.</strong> Your parcel is progressing normally toward its destination.</div>
+    </aside>
+   </div>
+  </div>
+ </section>
+</main>
+
+<section class="lower">
+ <div class="center">
+  <div class="eyebrow">Simple shipment visibility</div>
+  <h2>Everything important, without the clutter.</h2>
+  <p>Designed so customers can understand their delivery status at a glance.</p>
+ </div>
+ <div class="features">
+  <article class="feature"><div class="feature-icon">✓</div><h3>Live milestones</h3><p>Follow the important events from booking through final delivery.</p></article>
+  <article class="feature"><div class="feature-icon">↗</div><h3>Route visibility</h3><p>See the journey between collection and destination.</p></article>
+  <article class="feature"><div class="feature-icon">◆</div><h3>Proof of delivery</h3><p>Delivery confirmation becomes available after completion.</p></article>
+  <article class="feature"><div class="feature-icon">⚡</div><h3>Fast updates</h3><p>Latest scans and delivery information are easy to find.</p></article>
+ </div>
+ <div class="help">
+  <div><h2>Need help with your parcel?</h2><p>Our support team can help with tracking and delivery questions.</p></div>
+  <button type="button" onclick="toast('Support request selected')">Contact Support →</button>
+ </div>
+</section>
+
+<footer>
+ <div class="footer">
+  <div><a class="logo" href="#"><span class="logo-mark">RP</span>RUSHPARCEL</a><p>Premium UK courier and logistics services providing fast, secure and reliable delivery nationwide.</p></div>
+  <div><h4>Services</h4><a href="#">Parcel Delivery</a><a href="#">Business Logistics</a><a href="#">Same-Day Delivery</a><a href="#">International Shipping</a></div>
+  <div><h4>Quick Links</h4><a href="#">Get a Quote</a><a href="#">Track Your Parcel</a><a href="#">Drop-off Locations</a><a href="#">Help & FAQ</a></div>
+  <div><h4>Information</h4><a href="#">Terms & Conditions</a><a href="#">Privacy Policy</a><a href="#">Delivery & Claims</a><a href="#">Contact Support</a></div>
+ </div>
+ <div class="copyright"><span>© 2026 RushParcel. All rights reserved.</span><span>GBP (£) · Europe/London · UK English</span></div>
+</footer>
+
+<div class="toast" id="toast"></div>
+<script>
+function track(){
+ const input=document.getElementById('tracking');
+ const value=input.value.trim().toUpperCase();
+ if(!value){input.focus();toast('Please enter a tracking reference.');return;}
+ if(value.length<6){input.focus();toast('Please enter a valid tracking reference.');return;}
+ document.getElementById('ref').textContent=value;
+ toast('Shipment details refreshed');
+}
+function toast(message){
+ const el=document.getElementById('toast');
+ el.textContent=message;
+ el.classList.add('show');
+ clearTimeout(window.__toast);
+ window.__toast=setTimeout(()=>el.classList.remove('show'),2200);
+}
+document.getElementById('tracking').addEventListener('keydown',e=>{if(e.key==='Enter')track()});
+</script>
+</body>
+</html>
