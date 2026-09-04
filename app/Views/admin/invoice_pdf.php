@@ -240,7 +240,6 @@ body {
       <div class="meta-list">
         <div class="inv-no"><?= e($invoice['invoice_number']) ?></div>
         <div><span>Invoice Date:</span> <b><?= $issueDateFormatted ?></b></div>
-        <div><span>Billed Weight:</span> <b style="color: #EA580C; font-weight: 900;"><?= number_format($shipmentWeightKg, 2) ?> kg</b></div>
         <div><span>Currency:</span> <b>Pound Sterling (GBP)</b></div>
         <div><span>Tracking:</span> <b><?= e($invoice['tracking_number'] ?? $shipment['tracking_number'] ?? 'UK8025667958') ?></b></div>
       </div>
