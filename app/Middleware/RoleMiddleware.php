@@ -10,7 +10,7 @@ class RoleMiddleware implements MiddlewareInterface
 {
     protected array $allowedRoles;
 
-    public function __construct(array $allowedRoles = ['admin', 'super_admin', 'operations'])
+    public function __construct(array $allowedRoles = ['admin', 'super_admin', 'operations', 'dispatcher', 'finance', 'support'])
     {
         $this->allowedRoles = $allowedRoles;
     }
@@ -21,7 +21,7 @@ class RoleMiddleware implements MiddlewareInterface
             if ($request->isAjax()) {
                 return Response::json(['error' => 'Unauthenticated'], 401);
             }
-            Session::flash('error', 'Please login to access this operational area.');
+            Session::flash('error', 'Please login to access the Admin Control Centre.');
             return Response::redirect('/login');
         }
 
@@ -30,7 +30,8 @@ class RoleMiddleware implements MiddlewareInterface
             if ($request->isAjax()) {
                 return Response::json(['error' => 'Forbidden: Insufficient Permissions'], 403);
             }
-            return Response::make("403 Forbidden — You do not have authorization to access this area.", 403);
+            Session::flash('error', 'Administrator access required. Please login with your admin account credentials (admin@rushparcel.co.uk).');
+            return Response::redirect('/login');
         }
 
         return null;
