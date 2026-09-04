@@ -320,14 +320,14 @@ body {
   <table class="items-table">
     <thead>
       <tr>
-        <th style="width:30px;">#</th>
+        <th style="width:30px; text-align:center;">#</th>
         <th>Service Description</th>
-        <th class="center">Weight</th>
-        <th class="center">Qty</th>
-        <th class="right">Unit Price</th>
-        <th class="center">Discount</th>
-        <th class="right">VAT (20%)</th>
-        <th class="right">Total (GBP)</th>
+        <th class="center" style="width:95px; text-align:center;">Weight</th>
+        <th class="center" style="width:45px; text-align:center;">Qty</th>
+        <th class="right" style="width:85px; text-align:right;">Unit Price</th>
+        <th class="center" style="width:70px; text-align:center;">Discount</th>
+        <th class="right" style="width:85px; text-align:right;">VAT (20%)</th>
+        <th class="right" style="width:95px; text-align:right;">Total (GBP)</th>
       </tr>
     </thead>
     <tbody>
@@ -340,17 +340,21 @@ body {
         $deliveryCity = $shipment['delivery_address']['city'] ?? 'Manchester';
       ?>
       <tr>
-        <td>1</td>
-        <td class="item-desc">
+        <td style="text-align:center; vertical-align:middle;">1</td>
+        <td class="item-desc" style="vertical-align:middle;">
           <b><?= e(ucwords(strtolower($serviceName))) ?> — <?= e($pickupCity) ?> to <?= e($deliveryCity) ?></b>
           <span>Door-to-door carriage</span>
         </td>
-        <td class="center"><b style="background:#FFF7ED; border:1px solid #FFEDD5; padding:3px 8px; border-radius:6px; font-size:10px; color:#EA580C; font-weight:900;"><?= number_format($shipmentWeightKg, 2) ?> kg</b></td>
-        <td class="center">1</td>
-        <td class="right">£<?= number_format($subtotal, 2) ?></td>
-        <td class="center">&mdash;</td>
-        <td class="right">£<?= number_format($vatAmount, 2) ?></td>
-        <td class="right"><b>£<?= number_format($total, 2) ?></b></td>
+        <td class="center" style="text-align:center; vertical-align:middle;">
+          <span style="display:inline-block; white-space:nowrap; background:#FFF7ED; border:1px solid #FFEDD5; padding:4px 10px; border-radius:6px; font-size:11px; color:#EA580C; font-weight:900; text-align:center;">
+            <?= number_format($shipmentWeightKg, 2) ?> kg
+          </span>
+        </td>
+        <td class="center" style="text-align:center; vertical-align:middle;">1</td>
+        <td class="right" style="text-align:right; vertical-align:middle;">£<?= number_format($subtotal, 2) ?></td>
+        <td class="center" style="text-align:center; vertical-align:middle;">&mdash;</td>
+        <td class="right" style="text-align:right; vertical-align:middle;">£<?= number_format($vatAmount, 2) ?></td>
+        <td class="right" style="text-align:right; vertical-align:middle;"><b>£<?= number_format($total, 2) ?></b></td>
       </tr>
     </tbody>
   </table>
