@@ -343,7 +343,7 @@ body {
         <td>1</td>
         <td class="item-desc">
           <b><?= e(ucwords(strtolower($serviceName))) ?> — <?= e($pickupCity) ?> to <?= e($deliveryCity) ?></b>
-          <span>Door-to-door carriage &middot; Billed Weight: <b><?= number_format($shipmentWeightKg, 2) ?> kg</b> &middot; Ref: <?= e($invoice['shipment_number'] ?? 'SH-2026') ?></span>
+          <span>Door-to-door carriage</span>
         </td>
         <td class="center"><b style="background:#FFF7ED; border:1px solid #FFEDD5; padding:3px 8px; border-radius:6px; font-size:10px; color:#EA580C; font-weight:900;"><?= number_format($shipmentWeightKg, 2) ?> kg</b></td>
         <td class="center">1</td>
