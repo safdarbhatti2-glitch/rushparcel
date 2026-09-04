@@ -13,6 +13,12 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="<?= url() ?>">
     
+    <!-- Favicons & Brand Icons -->
+    <link rel="icon" type="image/x-icon" href="<?= asset('favicon.ico') ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= asset('brand/favicon-32x32.png') ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= asset('brand/favicon-16x16.png') ?>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= asset('brand/apple-touch-icon.png') ?>">
+
     <!-- CSS Design System -->
     <link rel="stylesheet" href="<?= asset('css/main.css') ?>">
 </head>

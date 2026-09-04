@@ -177,18 +177,20 @@
             .tablepanel { overflow: auto; }
             .table { min-width: 650px; }
         }
-    </style>
+    <!-- Favicons & Brand Icons -->
+    <link rel="icon" type="image/x-icon" href="<?= asset('favicon.ico') ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= asset('brand/favicon-32x32.png') ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= asset('brand/favicon-16x16.png') ?>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= asset('brand/apple-touch-icon.png') ?>">
 </head>
 <body>
 <div class="app">
     <!-- Fixed Sidebar Navigation -->
     <aside class="side">
         <div class="brand">
-            <span class="logo">RP</span>
-            <div class="brandtext">
-                RUSH PARCEL
-                <small>ADMIN CONTROL CENTRE</small>
-            </div>
+            <a href="<?= url('/admin') ?>" style="display: block; width: 100%;">
+                <img src="<?= asset('brand/rushparcel-logo-dark.png') ?>" alt="Rush Parcel Admin" style="height: 38px; width: auto; max-width: 195px; object-fit: contain; display: block;">
+            </a>
         </div>
 
         <nav class="nav">

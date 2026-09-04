@@ -6,8 +6,11 @@
 
 <header class="nav">
     <div class="container navin">
-        <a class="brand" href="<?= url('/') ?>">
-            <span class="logo">RP</span> RUSH PARCEL
+        <a class="brand" href="<?= url('/') ?>" aria-label="Rush Parcel Home">
+            <picture>
+                <source media="(max-width: 640px)" srcset="<?= asset('brand/rushparcel-logo-compact.png') ?>">
+                <img src="<?= asset('brand/rushparcel-logo-primary.png') ?>" alt="Rush Parcel" class="header-logo-img">
+            </picture>
         </a>
         <nav class="links">
             <a href="<?= url('/') ?>" class="<?= ($active_page ?? '') === 'home' ? 'active' : '' ?>">Home</a>

@@ -2,8 +2,8 @@
     <div class="container">
         <div class="foot">
             <div>
-                <a class="brand" href="<?= url('/') ?>">
-                    <span class="logo">RP</span> RUSH PARCEL
+                <a class="brand-foot" href="<?= url('/') ?>" aria-label="Rush Parcel Home">
+                    <img src="<?= asset('brand/rushparcel-logo-dark.png') ?>" alt="Rush Parcel" class="footer-logo-img">
                 </a>
                 <p>Rush Parcel is a premium UK courier & logistics platform providing fast, secure, and reliable nationwide same-day, next-day, and European freight delivery solutions for B2C & B2B customers.</p>
             </div>

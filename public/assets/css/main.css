@@ -501,3 +501,35 @@ tr:hover td {
   .bottom span { display: block; margin-top: 5px; }
 }
 
+
+/* Brand Logo & Assets Styling */
+.header-logo-img {
+  height: 44px;
+  width: auto;
+  max-width: 240px;
+  display: block;
+  object-fit: contain;
+  transition: height 0.2s ease;
+}
+.footer-logo-img {
+  width: 200px;
+  height: auto;
+  display: block;
+  margin-bottom: 16px;
+  object-fit: contain;
+}
+@media (max-width: 768px) {
+  .header-logo-img {
+    height: 38px;
+    max-width: 190px;
+  }
+  .footer-logo-img {
+    width: 170px;
+  }
+}
+@media (max-width: 480px) {
+  .header-logo-img {
+    height: 34px;
+    max-width: 160px;
+  }
+}

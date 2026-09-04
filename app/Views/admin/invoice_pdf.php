@@ -51,10 +51,9 @@ body {
   border-bottom: 2px solid #f1f5f9;
 }
 
-.company-brand { display: flex; gap: 14px; align-items: flex-start; }
-.logo-icon {
-  width: 46px; height: 46px; border-radius: 12px; background: var(--blue-gradient);
-  color: #fff; font-weight: 900; font-size: 17px; display: grid; place-items: center; box-shadow: 0 10px 25px rgba(7, 157, 242, 0.3);
+.company-brand { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.invoice-logo-img {
+  width: 215px; height: auto; display: block; margin-bottom: 6px; object-fit: contain;
 }
 
 .company-details h2 { font-size: 18px; font-weight: 900; color: var(--navy2); letter-spacing: -0.02em; }
@@ -201,7 +200,7 @@ body {
   <!-- 1. Header Section -->
   <div class="header-grid">
     <div class="company-brand">
-      <div class="logo-icon">RP</div>
+      <img src="<?= asset('brand/rushparcel-logo-invoice.png') ?>" alt="Rush Parcel" class="invoice-logo-img">
       <div class="company-details">
         <h2>Rush Parcel Logistics Ltd</h2>
         <div class="sub">UK's Premier Courier &amp; Logistics Partner</div>
