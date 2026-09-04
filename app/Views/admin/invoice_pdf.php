@@ -225,11 +225,22 @@ body {
           : (!empty($invoice['issue_date']) ? $invoice['issue_date'] : $invoice['created_at']);
         
         $issueDateFormatted = date('d M Y', strtotime($rawIssue));
+
+        $shipmentWeightKg = 0.0;
+        if (!empty($shipment['items'])) {
+            foreach ($shipment['items'] as $it) {
+                $shipmentWeightKg += ((float)($it['weight_kg'] ?? 0) * (int)($it['quantity'] ?? 1));
+            }
+        }
+        if ($shipmentWeightKg <= 0.0) {
+            $shipmentWeightKg = !empty($invoice['weight_kg']) ? (float)$invoice['weight_kg'] : 2.50;
+        }
       ?>
 
       <div class="meta-list">
         <div class="inv-no"><?= e($invoice['invoice_number']) ?></div>
         <div><span>Invoice Date:</span> <b><?= $issueDateFormatted ?></b></div>
+        <div><span>Billed Weight:</span> <b style="color: #EA580C; font-weight: 900;"><?= number_format($shipmentWeightKg, 2) ?> kg</b></div>
         <div><span>Currency:</span> <b>Pound Sterling (GBP)</b></div>
         <div><span>Tracking:</span> <b><?= e($invoice['tracking_number'] ?? $shipment['tracking_number'] ?? 'UK8025667958') ?></b></div>
       </div>
@@ -286,9 +297,9 @@ body {
       <div class="phone">📞 <?= e($receiverPhone) ?></div>
     </div>
 
-    <!-- Col 3: PAYMENT INFORMATION -->
+    <!-- Col 3: PAYMENT & SPECS INFORMATION -->
     <div class="info-box">
-      <div class="info-box-label">💳 PAYMENT INFORMATION</div>
+      <div class="info-box-label">💳 PAYMENT &amp; SPECS</div>
       <?php $isPaid = ($invoice['status'] === 'paid'); ?>
       <div class="pay-badge" style="<?= $isPaid ? '' : 'background:#fef3c7; color:#b45309; border-color:#fde68a;' ?>">
         <?= $isPaid ? 'Payment Received ✓' : 'Payment Outstanding' ?>
@@ -299,6 +310,9 @@ body {
         <b>Date:</b> <?= $issueDateFormatted ?><br>
         <b>Status:</b> <b><?= $isPaid ? 'Paid in Full' : 'Issued &amp; Outstanding' ?></b>
       </p>
+      <div style="margin-top: 8px; padding-top: 6px; border-top: 1px dashed #cbd5e1; font-size: 10px; color: #475569;">
+        📦 <b>Shipment Weight:</b> <b style="color: #EA580C; font-size: 11px; font-weight: 900;"><?= number_format($shipmentWeightKg, 2) ?> kg</b>
+      </div>
     </div>
   </div>
 
@@ -308,6 +322,7 @@ body {
       <tr>
         <th style="width:30px;">#</th>
         <th>Service Description</th>
+        <th class="center">Weight</th>
         <th class="center">Qty</th>
         <th class="right">Unit Price</th>
         <th class="center">Discount</th>
@@ -323,14 +338,14 @@ body {
         $serviceName = $shipment['service_name'] ?? 'Next-Day Express Courier Service';
         $pickupCity = $shipment['pickup_address']['city'] ?? 'London';
         $deliveryCity = $shipment['delivery_address']['city'] ?? 'Manchester';
-        $weightKg = $shipment['items'][0]['weight_kg'] ?? '2.5';
       ?>
       <tr>
         <td>1</td>
         <td class="item-desc">
-          <b><?= e(strtolower($serviceName)) ?> — <?= e($pickupCity) ?> to <?= e($deliveryCity) ?></b>
-          <span>Door-to-door carriage &middot; Chargeable Weight: <?= e($weightKg) ?> kg &middot; Ref: <?= e($invoice['shipment_number'] ?? 'SH-2026') ?></span>
+          <b><?= e(ucwords(strtolower($serviceName))) ?> — <?= e($pickupCity) ?> to <?= e($deliveryCity) ?></b>
+          <span>Door-to-door carriage &middot; Billed Weight: <b><?= number_format($shipmentWeightKg, 2) ?> kg</b> &middot; Ref: <?= e($invoice['shipment_number'] ?? 'SH-2026') ?></span>
         </td>
+        <td class="center"><b style="background:#FFF7ED; border:1px solid #FFEDD5; padding:3px 8px; border-radius:6px; font-size:10px; color:#EA580C; font-weight:900;"><?= number_format($shipmentWeightKg, 2) ?> kg</b></td>
         <td class="center">1</td>
         <td class="right">£<?= number_format($subtotal, 2) ?></td>
         <td class="center">&mdash;</td>
